@@ -1,0 +1,777 @@
+.name {
+	width : 100%;
+}
+.name input,
+.name span.o_form_field {
+    background-color: #d9edf6;
+    border-radius: 4px;
+    display: block;
+    padding: 8px;
+    color: #0baddc !important;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.name span.o_form_field {
+	background-color: #d9edf6;
+	display: block !important;
+	border: 1px solid #ccc;
+}
+
+.page1 {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+
+
+
+.rut {
+	width: 25.5%;
+	float: left;
+	margin-right: 1%;
+	position: relative;
+}
+.rut button {
+	position: absolute;
+	top: 19px;
+	right: 1px;
+}
+.rut input,
+.rut span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+    
+}
+
+.rut span.o_form_field  {
+
+	width: 100%;
+    border: 1px solid #ccc;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.custom_butt .btn {
+    padding: 8.5px 17px;
+    margin: -65px -21px -1px 352px;
+    line-height: 1;
+    outline: none;
+    border-radius: 0px 3px 3px 0px;
+}
+.custom_butt .btn i {
+	right: 4px !important;
+	top: 0px !important;
+}
+
+.business {
+	width: 45%;
+	float: left;
+	margin-left: 1%;
+	margin-right: 1%;
+	
+}
+
+.business input,
+.business span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+    
+}
+
+.business span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+	
+
+.state {
+	width: 25.5%;
+	float: left;
+	margin-left: 1%;
+}
+
+.state select,
+.state span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+
+}
+
+.state span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.page2 {
+	width: 100%;
+	float: left;
+	margin-top: 5px;
+}
+
+.commerical {
+	width: 49%;
+	float: left;
+	margin-left: 1%;
+	
+}
+
+.commerical .o_form_field_many2one,
+.commerical .o_form_field_many2one .o_form_input_dropdown {
+	width: 100%;
+    
+}
+.commerical a.o_form_uri,
+.commerical input.o_form_input  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.street {
+	width: 49%;
+	float: left;
+	margin-right: 1%;
+	
+}
+
+.street input,
+.street span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+    
+}
+
+.street span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.page3 {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+
+.leftaligned {
+	width: 70%;
+	float: left;
+}
+
+.uperleft {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+
+.comuna {
+	width: 30%;
+	float: left;
+	margin-right: 3%;
+	
+}
+
+.comuna input,
+.comuna span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+    
+}
+.comuna span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.street2 {
+	width: 30%;
+	float: left;
+	margin-right: 3%;
+	
+}
+
+.street2 input,
+.street2 span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+    
+}
+
+.street2 span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.city {
+	width: 30%;
+	float: left;
+	margin-right: 1%;
+	
+}
+
+.city input,
+.city span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;
+    
+}
+
+.city span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.rightaligned {
+	width: 30%;
+	float: left;
+	border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+.rightaligned h3 {
+	margin: 0px !important;
+}
+.bools {
+	width: 100%;
+	margin: 5px 0px 0px 10px;
+	
+}
+
+.bools input,
+.bools span.o_form_view .o_form_field_empty {
+    border-radius: 4px;
+    
+}
+
+.page4 {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+
+.payment {
+	width: 22%;
+	float: left;
+	margin: 0px 1.8%;
+	
+}
+.payment .o_form_field_many2one,
+.payment .o_form_field_many2one .o_form_input_dropdown {
+	width: 103%;
+}
+.payment input,
+.payment span.o_form_view .o_form_field_empty {
+    width: 100% !important;
+	height: 34px;
+    border-radius: 4px;
+}
+
+.payment a.o_form_uri {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.fstpayment {
+	width: 22%;
+	float: left;
+	margin-right: 1.8%;
+	
+}
+.fstpayment .o_form_field_many2one,
+.fstpayment .o_form_field_many2one .o_form_input_dropdown {
+	width: 103%;
+}
+.fstpayment input,
+.fstpayment span.o_form_view .o_form_field_empty {
+    width: 100% !important;
+	height: 34px;
+    border-radius: 4px;
+}
+
+.fstpayment a.o_form_uri {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.sndpayment {
+	width: 22%;
+	float: left;
+	margin-left: 1.8%;
+	
+}
+.sndpayment .o_form_field_many2one,
+.sndpayment .o_form_field_many2one .o_form_input_dropdown {
+	width: 103%;
+}
+.sndpayment input,
+.sndpayment span.o_form_view .o_form_field_empty {
+    width: 100% !important;
+	height: 34px;
+    border-radius: 4px;
+}
+
+.sndpayment a.o_form_uri {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.page5 {
+	width: 100%;
+	float: left;
+	margin-top: 10px;
+}
+
+.mte {
+	width: 50%;
+	float: left;
+	margin-right: 1%;
+	
+}
+
+
+
+.mte input,
+.mte span.o_form_view .o_form_field_empty {
+	height: 34px;
+    border-radius: 4px;  
+}
+
+.mte span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.page6 {
+	width: 100%;
+	float: left;
+	margin-top: 5px;
+}
+
+.page6 textarea {
+	height: 80px !important;
+}
+
+.page6 span.o_form_textarea {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 80px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.page7 {
+	width: 50%;
+	float: right;
+	margin-top: 13px;
+}
+
+.datefrom {
+	width: 40%;
+	float: left;
+	margin-right: 3%;
+	
+}
+.datefrom .o_datepicker,
+.datefrom .o_datepicker .o_datepicker_input {
+	width: 100%;
+	height: 34px;
+}
+
+.datefrom span.o_form_field_date {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.dateto {
+	width: 40%;
+	float: left;
+	margin-right: 3%;
+	
+}
+
+.dateto .o_datepicker,
+.dateto .o_datepicker .o_datepicker_input {
+	width: 100%;
+	height: 34px;
+}
+
+.dateto span.o_form_field_date {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.buttonsale {
+	width: 12%;
+	float: left;
+	margin-top: 17px;
+	
+}
+
+.buttonsale .btn,
+.buttonsale .oe_highlight{
+	width: 109px;
+	background-color: #6EE1F6;
+	height: 34px;
+
+}
+.tabalos {
+    width: 1200px;
+    display: block;
+    margin: 20px auto 0px;
+    position: relative;
+}
+.tabalos div table tr th.o_column_sortable {
+	display: none;
+}
+.tabalos div table tr td {
+	max-width: 300px;
+	min-width: 300px;
+	width: 300px;
+}
+.tabalos .treeview {
+	margin: 0px;
+}
+.thesuperwrapper {
+	width: 100%;
+	position: relative;
+}
+.thesuperclass {
+	width: 100%;
+	margin: 0px 0px 0px;
+	z-index: 9999;
+    height: 34px;
+    overflow: hidden;
+}
+.tabalos .thesuperclass .saleamount span {
+    position: relative;
+    height: 35px !important;
+    border-right: 1px solid #ddd !important;
+}
+.thesuperclass div select,
+.thesuperclass div input,
+.thesuperclass div span {
+    margin: 0px !important;
+    border-radius: 0px !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    border-top: 1px solid #ddd !important;
+    border-left: 1px solid #ddd !important;
+}
+.thesuperclassone div span {
+	border-top: 1px solid #ddd !important;
+	border-left: 1px solid #ddd !important;
+	display: block;
+	padding: 10px;
+	font-weight: bold;
+}
+.thesuperclass div {
+	margin: 0px !important;
+}
+.clearfloat {
+	width: 1px;
+	height: 1px;
+	float: none;
+	clear: both;
+	display: block;
+}
+.salestate {
+	width: 300px;
+	float: left;
+}
+.salename {
+	width: 300px;
+	float: left;
+}
+.saledate {
+	width: 300px;
+	float: left;
+}
+.saleamount {
+	width: 300px;
+	float: left;
+}
+.salestate select,
+.salestate span.o_form_input .o_form_field {
+	height: 34px;
+}
+.salestate span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+.salename input,
+.salename span.o_form_input .o_form_field{
+	height: 34px;
+}
+.salename span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+.saledate .o_datepicker,
+.saledate .o_datepicker .o_datepicker_input {
+	width: 100%;
+	height: 34px;
+}
+.saledate span.o_form_field_date  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+.saleamount input,
+.saleamount span.o_form_input .o_form_field .o_form_field_number{
+	height: 34px;
+}
+.saleamount span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+.invoicestate select,
+.invoicestate span.o_form_input .o_form_field{
+	height: 34px;
+}
+
+.invoicestate span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.invoicedate .o_datepicker,
+.invoicedate .o_datepicker .o_datepicker_input {
+	width: 100%;
+	height: 34px;
+}
+
+.invoicedate span.o_form_field_date  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.invoicename input,
+.invoicename span.o_form_input .o_form_field{
+	height: 34px;
+}
+
+.invoicename span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+.invamount input,
+.invamount span.o_form_input .o_form_field .o_form_field_number{
+	height: 34px;
+}
+
+.invamount span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+
+.invamt input,
+.invamt span.o_form_input .o_form_field .o_form_field_number{
+	height: 34px;
+}
+
+.invamt span.o_form_field  {
+
+	border: 1px solid #ccc;
+    width: 100%;
+    height: 34px;
+    border-radius: 4px;
+    padding: 8px;
+    display: block !important;
+}
+
+
+.tree_view {
+	margin: 0px 0px 0px;
+}
+.tree_view table {
+	border-collapse: unset !important;
+}
+.tree_view table tr th {
+	background: none !important;
+	background-color: #FFF !important;
+	padding: 8px;
+	font-size: 14px;
+	border-top: 1px solid #DDD !important;
+}
+.tree_view table tr td {
+	padding: 8px;
+	font-size: 14px;
+	border-left: 1px solid #ddd !important;
+}
+.tree_view table tr td:last-child,
+.tree_view table tr th:last-child {
+	border-right: 1px solid #ddd !important;
+}
+.pagingclass {
+    width: 1200px;
+    margin: 20px auto 0px;
+}
+.pagingclass div table tr th {
+	display: none;
+}
+.pagingclass div table tr td {
+	max-width: 240px;
+	min-width: 240px;
+	width: 240px;
+}
+.invoicestate {
+	width: 240px;
+	float: left;
+}
+.invoicedate {
+	width: 240px;
+	float: left;
+}
+.invoicename {
+	width: 240px;
+	float: left;
+}
+.invamount {
+	width: 240px;
+	float: left;
+}
+.invamt {
+	width: 240px;
+	float: left;
+}
+.pagingclass .sub-pages .invamt span {
+	border-right: 1px solid #ddd !important;
+}
+.pagingclass div {
+	margin: 0px !important;
+	padding-bottom: 0px; 
+}
+.pagingclass div select,
+.pagingclass div input,
+.pagingclass div span {
+    margin: 0px !important;
+    border-radius: 0px !important;
+    border-bottom: none !important;
+    border-right: none !important;
+    border-top: 1px solid #ddd !important;
+    border-left: 1px solid #ddd !important;
+}
+.sub-pages-one div span {
+	display: block !important;
+	padding: 10px !important;
+	font-weight: bold;
+}

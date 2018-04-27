@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+
+            id="product_profile" 
+            model="product.product"
+            name="product_profile.profile_product"
+            file="product_profile.profile_product"
+            report_type="qweb-html"
+            string="Finacial Report"/>
+
+        <record id="product_profile_wizard" model="ir.ui.view">
+            <field name="name">product_profile_wizard</field>
+            <field name="model">product.profile.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="product"/>
+                            <field name="date"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(product_profile)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="product_profile_wizard_action" model="ir.actions.act_window">
+            <field name="name">Product Profile</field>
+            <field name="res_model">product.profile.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_profile_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="product_profile_menu" name="Product Profile" parent="customer_profile.customer_wise_item" action="product_profile_wizard_action" sequence="16"/>
+        
+    </data>
+</openerp>

@@ -1,0 +1,120 @@
+<openerp>
+    <data>
+
+
+        <record id = "stock_opening_form_view" model = "ir.ui.view">
+            
+                <field name="name">stock_opening_form_view</field>
+        
+                <field name="model">stock.open</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false">
+                    <header>
+                        <button name="update_stock" type="object" string="Update Stock" class = "oe_highlight"/>
+                        <!-- <button name="reset_draft" type="object" string="Reset to Draft" class = "oe_highlight" attrs="{'invisible':[('stages','=','draft')]}"/> -->
+                        <!-- <field name="stages" widget="statusbar" statusbar_visible="draft,posted"/> -->
+                    </header>
+
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="date"/>
+                                <!-- <field name="transaction_type"/>
+                                <field name="party"/>
+                                <field name="mill" />
+                                <field name="qty" /> -->
+                        
+                            </group>
+                            <group name="group_right">
+                                <field name="description"/>
+                            <!--     <field name="total"/>
+                                <field name="commission_agent"/>
+                                <field name="comm_type"/>
+                                <field name="comm_amount"/>
+                                <field name="comm_rate"/>
+                                <field name="sale_id"/>
+ -->
+                            </group>
+
+                        </group>
+
+                        <field name="stock_open_lines"  >
+
+                            <tree editable="bottom">
+                                <field name="date" />
+                                <field name="types"/>
+                                <field name="party" />
+                                <field name="mill" />
+
+                                <field name="qty" />
+                                <field name="opening_id" invisible = "1"/>
+                                
+
+
+                            </tree>
+                        </field>
+                        
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "stock_opening_tree_view" model = "ir.ui.view">
+            
+                <field name="name">stock_opening_tree_view</field>
+        
+                <field name="model">stock.open</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false">
+                                <field name="date"/>
+                                
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="stock_opening_action" model="ir.actions.act_window">
+            <field name="name">Stock Opening</field>
+            <field name="res_model">stock.open</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            
+           
+        </record>
+
+
+
+        <menuitem id="openings" name="Openings" parent="sales_sugar.admin_configuration" sequence="2"/>
+
+        <menuitem   id="stock_opening" 
+            name="Stock Opening"
+            parent="sales_sugar.openings" 
+            action="stock_opening_action" 
+        />
+
+
+        <record id="opening_journal"   model="account.journal"> 
+                <field name="name">Opening</field> 
+                <field name="type">general</field> 
+                <field name="code">OP</field> 
+            </record>
+
+
+    </data>
+</openerp>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_recipts">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+                
+                        <div class="page">
+                            
+                            <style>
+                                .container {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading{
+                                    width: 1000px;
+                                    margin: 0px auto
+                                }
+                                .heading h3{
+                                    text-align: center;
+                                    margin: 0px;
+                                    font-size: 22px;
+                                }
+                                .heading p{
+                                    text-align: center;
+                                    margin: 0px;
+                                }           
+                                .head-info {
+                                    width: 100%;
+                                    float: left;
+                                    margin: 10px 0px;
+                                }
+                                .info-col-01,
+                                .info-col-02 {
+                                    width: 50%;
+                                    float: left;
+                                }
+                                .info-col-02 {
+                                    text-align: right;
+                                }
+                                .head-info p {
+                                    width: 50%;
+                                    float: left;
+                                    margin: 5px 0px;
+                                    font-size: 14px;
+                                }
+                                .head-info p span.solid {
+                                    font-weight: 700;
+                                }
+                                .info-col-02 p {
+                                    width: 100%;
+                                    float: none;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                }
+                                table tr th {
+                                    text-align: left;
+                                    border-bottom: 2px solid #666;
+                                    padding: 5px 0px;
+                                    font-size: 15px;
+                                    text-transform: capitalize;
+                                }
+                                table tr td {
+                                    text-align: left;
+                                    padding: 5px 0px;
+                                    font-size: 15px;
+                                    text-transform: capitalize;
+                                }
+                                table tr.subtotal td {
+                                    border-top: 1px solid #000;
+                                    border-bottom: 1px solid #000;
+                                    font-weight: bold;
+                                    padding: 5px 0px;
+                                }
+                                table tr.subtotal td.space {
+                                    text-align: center;
+                                }
+                                table tr.total td:first-child {
+                                    border: none;
+                                    text-align: right;
+                                    padding: 0px 40px 0px 0px;
+                                }
+                            </style>
+
+                            <div class="container">
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESORIES</h3>
+                                        <p>Day Books: Customers Receipt (Summary) User Wise</p>
+                                    </div>
+                                    
+                                    <div class="head-info">
+
+                                        <div class="info-col-01">
+
+                                            <!-- <p>
+                                                <span class="solid">Customer From:</span>
+                                                <span class="liquid" t-esc="customer('first')"></span>
+                                            </p>
+
+                                            <p>
+                                                <span class="solid">To:</span> 
+                                                <span class="liquid" t-esc="customer('last')"></span>
+                                            </p> -->
+
+                                            <p>
+                                                <span class="solid">Date From:</span>
+                                                <span class="liquid" t-esc="form"></span>
+                                            </p>
+
+                                            <p>
+                                                <span class="solid">To:</span> 
+                                                <span class="liquid" t-esc="to"></span>
+                                            </p>
+                                        </div>
+
+                                        <div class="info-col-02">
+
+                                            <p>
+                                                <span class="solid">Date:</span> 
+                                                <span class="liquid" t-esc="date"></span>
+                                            </p>
+
+                                            <p>
+                                                <span class="solid">Time:</span> 
+                                                <span class="liquid" t-esc="get_time()"></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <br class="clearfloat" />
+                                    
+                                    <table>
+
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Type</th>
+                                            <th>Bank</th>
+                                            <th>G/L Account</th>
+                                            <th>Date</th>
+                                            <th>Ref</th>
+                                            <th>Details</th>
+                                            <th>Net</th>
+                                            <th>Tax</th>
+                                            <th>Gross</th>
+                                        </tr>
+
+                                        <t t-set="total_net" t-value="0" />
+                                        <t t-set="total_tax" t-value="0" />
+                                        <t t-set="total_gross" t-value="0" />
+
+                                        <t t-foreach="users_list" t-as="o">
+
+                                            <span t-esc="getrecipts(o)"></span>
+
+                                            <tr>
+                                                <td colspan="10"><span t-esc="o.name"></span></td>
+                                            </tr>
+
+                                            <t t-set="user_net" t-value="0" />
+                                            <t t-set="user_tax" t-value="0" />
+                                            <t t-set="user_gross" t-value="0" />
+
+                                            <t t-set="loop" t-value="getloop(o)" />
+                                            <t t-if="loop != 0">
+
+                                                <t t-foreach="user_recipts" t-as="data">
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <span t-esc="data.number"></span>
+                                                        </td>
+                                                        
+                                                        <td>sa</td>
+                                                        
+                                                        <td>
+                                                            <span t-esc="data.journal_id.code"></span>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <span t-esc="data.partner_id.name"></span>
+                                                        </td>
+                                                        
+                                                        <td>
+                                                            <span t-esc="data.date"></span>
+                                                        </td>
+                                                        
+                                                        <td></td>
+                                                        
+                                                        <td></td>
+
+                                                        <td>
+                                                            <!-- <span t-esc="data.total"></span> -->
+
+                                                            <span t-esc="'{:0,}'.format(int(float(data.total)))"></span>
+
+                                                            <t t-set="net" t-value="data.total" />
+                                                            <t t-set="user_net" t-value="user_net + net" />
+                                                        </td>
+
+                                                        <td>
+                                                            <!-- <span t-esc="data.t_total"></span> -->
+
+                                                            <span t-esc="'{:0,}'.format(int(float(data.t_total)))"></span>
+                                                            <t t-set="tax" t-value="data.t_total" />
+                                                            <t t-set="user_tax" t-value="user_tax + tax" />
+                                                        </td>
+
+                                                        <td>
+                                                            <t t-set="gross" t-value="net - tax" />
+                                                            <t t-set="user_gross" t-value="user_gross + gross" />
+                                                            <!-- <span t-esc="gross"></span> -->
+                                                             <span t-esc="'{:0,}'.format(int(float(gross)))"></span>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </t>
+                                            </t>
+
+                                            <t t-if="loop == 0">
+                                                <tr>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                </tr>
+                                            </t>
+                                            
+                                            <tr class="subtotal">
+                                                <td class="space" colspan="7">User's Receipt Total</td>
+                                                <td>
+                                                    <!-- <span t-esc="user_net"></span> -->
+                                                    <span t-esc="'{:0,}'.format(int(float(user_net)))"></span>
+                                                    <t t-set="total_net" t-value="total_net + user_net" />
+                                                </td>
+
+                                                <td>
+                                                    <!-- <span t-esc="user_tax"></span> -->
+                                                    <span t-esc="'{:0,}'.format(int(float(user_tax)))"></span>
+                                                    <t t-set="total_tax" t-value="total_tax + user_tax" />
+                                                </td>
+
+                                                <td>
+                                                    <!-- <span t-esc="user_gross"></span> -->
+                                                    <span t-esc="'{:0,}'.format(int(float(user_gross)))"></span>
+                                                    <t t-set="total_gross" t-value="total_gross + user_gross" />
+                                                </td>
+
+                                            </tr>
+
+                                        </t>
+
+                                        <tr>
+                                            <td colspan="10"></td>
+                                        </tr>
+
+                                        <tr class="subtotal total">
+                                            <td class="space" colspan="7">Total</td>
+                                            <td>
+                                                <!-- <span t-esc="total_net"></span> -->
+                                                <span t-esc="'{:0,}'.format(int(float(total_net)))"></span>
+                                            </td>
+                                            <td>
+                                                <!-- <span t-esc="total_tax"></span> -->
+                                                <span t-esc="'{:0,}'.format(int(float(total_tax)))"></span>
+                                            </td>
+                                            <td>
+                                                <!-- <span t-esc="total_gross"></span> -->
+                                                <span t-esc="'{:0,}'.format(int(float(total_gross)))"></span>
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

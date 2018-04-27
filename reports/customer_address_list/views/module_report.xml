@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+
+
+                        <div class="page">
+
+                            <style>
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    margin-bottom: 50px;
+                                }
+                                .heading h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .heading p{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .account{
+                                    width: 40%;
+                                    float: left;
+                                }
+                                .account p1 {
+                                    width: 38%;
+                                    float: left;
+                                }
+                                .account p2 {
+                                    width: 60%;
+                                    float: left;
+                                }
+                                .account p3 {
+                                    width: 10%;
+                                    float: left;
+                                }
+                                .invoice{
+                                    width: 40%;
+                                    float: left;
+                                }
+                                .invoice p1 {
+                                    width: 10%;
+                                    float: left;
+                                }
+                                .time{
+                                    width: 15%;
+                                    float: right;
+                                    margin-bottom: 20px;
+                                }
+                                .time p {
+                                    margin: 0px auto;
+
+                                }
+                                .side{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                table, th, td{
+                                    border: 1px solid;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    margin-top: 135px;
+                                    padding: 4px;
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESORIES</h3>
+                                        <P> Customer Address List</P>
+                                    </div>
+                                    <div class="account">
+                                        <P1><b>Cusotmer From:</b></P1>
+                                         <p2>AFG-QADIR</p2>
+                                    </div>
+                                    <div class="invoice">
+                                        <p1><b>To:</b></p1>
+                                        <p2>UNKNOWN</p2>
+                                    </div>
+                                    <div class="time">
+                                        <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></p>
+
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></p>
+
+                                    </div>
+                                    
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>Serial No.</th>
+                                            <th>Customer ID.</th>
+                                            <th>Company</th>
+                                            <th>Address</th>
+                                            <th>City</th>
+                                            <th>Contact</th>
+                                            <th>Phone</th>
+                                            <th>Mobile</th>
+                                        
+                                        </tr>
+
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="docs" t-as="o">
+
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="i"></span>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.id"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.name"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.street"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.city"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.contact_person"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.phone"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="o.mobile1"></span>
+                                                </td>
+
+                                                
+                                            </tr>
+
+                                        </t>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

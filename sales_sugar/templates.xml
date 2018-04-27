@@ -1,0 +1,1824 @@
+<openerp>
+    <data>
+
+<!-- Sales Booking Module Sugar Industry -->
+
+     		<record id = "sales_booking_form_view" model = "ir.ui.view">
+    		
+    		    <field name="name">sales_booking_form_view</field>
+	    
+	    	    <field name="model">sales.booking</field>
+	    
+	            <field name="type">form</field>
+	    
+	            <field name="arch" type="xml">
+	    
+	            <form delete ="false">
+                  <sheet>                  
+                        <group name="group_top">
+                        	<group name="group_left">
+                            <field name="date"/>
+                            <field name="user_id" invisible = "1"/>
+                            <field name="name" invisible = "1"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="total"/>
+                                <field name="total_qty"/>
+                                <field name="avg"/>
+                                <field name="check"/>
+                                <field name="mills" widget = "many2many_tags"/>
+
+                            </group>
+
+                        </group>
+
+                        <notebook>
+                            <page string = "Paid" name = "paid">
+                        <field name="order_line"  >
+
+                            <tree editable="bottom">
+                                <field name="customer" options="{'no_create': True}"/>
+                                <field name="mill" options="{'no_create': True}"/>
+                                <field name="available_sale" />
+
+                                <field name="status" />
+                                <field name="maturity_date"/>
+                                <field name="qty" sum="Total" />
+                                <field name="rate" sum="Total"/>
+                                <field name="total" sum="Total"/>
+                                <field name="commission_agent" options="{'no_create': True}"/>
+                                <field name="com_type"/>
+                                <field name="comm_rate"/>
+                                <field name="comm_amount"/>
+                                <field name="sales_booking_id" invisible = "1" />
+                                <field name="date" invisible = "1"/>
+
+
+                            </tree>
+                        </field>
+                    </page>
+
+
+                    <page string = "Unpaid" name = "un_paid">
+                        <field name="order_line1">
+
+                            <tree editable="bottom">
+                                <field name="customer" options="{'no_create': True}"/>
+                                <field name="mill"  options="{'no_create': True}"/>
+                                <field name="status" />
+                                <field name="maturity_date"/>
+                                <field name="qty" sum="Total" />
+                                <field name="rate" sum="Total"/>
+                                <field name="total" sum="Total"/>
+                                <field name="rate_mp"/>
+                                <field name="byana_unit"/>
+                                <field name="commission_agent" options="{'no_create': True}"/>
+                                <field name="com_type"/>
+                                <field name="comm_rate"/>
+                                <field name="comm_amount"/>
+                                <field name="date" invisible = "1"/>
+                                <field name="unpaid"  invisible = "1"/>
+
+
+                            </tree>
+                        </field>
+                    </page>
+
+                </notebook>
+                   </sheet>                              
+	           </form>      
+	           	</field>
+    	</record>
+
+
+
+
+       <record id = "sales_booking_tree_view1" model = "ir.ui.view">
+            
+                <field name="name">sales_booking_tree_view</field>
+        
+                <field name="model">sales.booking</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false">
+                       <field name="date"/>
+                        <field name="total"/>
+                        <field name="total_qty"/>
+                        <field name="avg"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+    	 <record id="sales_booking_tree_view_action" model="ir.actions.act_window">
+            <field name="name">Sales Booking</field>
+            <field name="res_model">sales.booking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+<!--             <field name="context">{'default_check': True}</field> -->
+        </record>
+
+
+
+<!-- Sales Delivery Module Sugar Industry-->
+
+
+            <record id = "sales_delivery_form_view" model = "ir.ui.view">
+            
+                <field name="name">sales_delivery_form_view</field>
+        
+                <field name="model">sales.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+
+                  <sheet>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="order_no" string="Order No"/>
+                        <h1><field name="order_no" placeholder="Order No"/></h1>
+                        
+                    </div>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="customer"/>
+                            <field name="mill"/>
+                            <field name="rate"/>
+                            <field name="qty"/>
+                            <field name="status"/>     
+                            <field name="total"/>
+                            </group>
+                            <group name="group_right">
+                            <field name="date"/>
+               <!--              <field name="delivered"/>
+                            <field name="remaining"/> -->
+                            <field name="booking_id" invisible = "1"/>
+
+
+                            </group>
+                        </group>
+                        
+                        <!-- <field name="order_line">
+
+                            <tree editable="bottom">
+                                <field name="delivery_from"/>
+                                <field name="qty_del" sum="Total" />
+                                <field name="date"/>
+                                <field name="loading_id"/>
+                                <field name="adda"/>
+                            </tree>
+                        </field> -->
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+        <record id = "sales_delivery_tree_view1" model = "ir.ui.view">
+            
+                <field name="name">sales_delivery_tree_view1</field>
+        
+                <field name="model">sales.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+
+                    <tree delete ="false" create = "false" edit ="false">
+                            <field name="order_no"/>
+                            <field name="date"/>
+                            <field name="customer"/>
+                            <field name="mill"/>
+                            <field name="qty"/>
+                            <field name="rate"/>     
+                            <field name="status"/>     
+                            <field name="total"/>                        
+                    </tree>    
+                                   
+                </field>
+        </record>
+
+        <record id="sales_sugar_sequence" model="ir.sequence">
+            <field name="name">sales_sugar_sequence</field>
+            <field name="code">sales.sugar</field>
+            <field name="prefix">S-</field>
+            <field name="padding">0</field>
+             
+        </record>
+
+
+
+
+
+         <record id="sales_delivery_tree_view" model="ir.actions.act_window">
+            <field name="name">Sales</field>
+            <field name="res_model">sales.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+
+
+
+
+<!-- Purchase Booking Module Sugar Industry -->
+
+        <record id = "purchase_booking_form_view" model = "ir.ui.view">            
+                <field name="name">purchase_booking_form_view</field>
+                <field name="model">purchase.booking</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                <form delete ="false">
+                  <sheet>  
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                            <field name="user_id" invisible = "1"/>
+                            <field name="name" invisible = "1"/>
+                            </group>
+                            <group name="group_right">
+                            <field name="total"/>
+                            <field name="total_qty"/>
+                            <field name="avg"/>
+                        </group>
+                        </group>
+                        <notebook>
+                            <page string ="Paid" name="paid">
+                        
+                        <field name="order_line">
+
+                            <tree editable="bottom">
+                                <field name="supplier" options="{'no_create': True}"/>
+                                <!-- <field name="type_transaction"/> -->
+                                <field name="mill" options="{'no_create': True}"/>
+                                <field name="status" />
+                                <field name="maturity_date" />
+                                <field name="qty" sum="Total" />
+                                <field name="rate" sum="Total"/>
+                                <field name="total" sum="Total"/>
+
+                                <field name="commission_agent" options="{'no_create': True}"/>
+                                <field name="com_type" />
+                                <field name="comm_rate" />
+                                <field name="comm_amount" />
+                                <field name="purchase_booking_id" invisible= "1" />
+                                <field name="date" invisible= "1" />
+
+                            </tree>
+                        </field>
+                    </page>
+
+
+                    <page string ="Un Paid" name="un_paid">
+                        
+                        <field name="order_line1">
+
+                            <tree editable="bottom">
+                                <field name="supplier" options="{'no_create': True}"/>
+                                <!-- <field name="type_transaction"/> -->
+                                <field name="mill" options="{'no_create': True}"/>
+                                <field name="status" />
+                                <field name="maturity_date" />
+                                <field name="qty" sum="Total" />
+                                <field name="rate" sum="Total"/>
+                                <field name="total" sum="Total"/>
+                                <field name="rate_mp"/>
+                                <field name="byana_unit"/>
+                                <field name="commission_agent" options="{'no_create': True}"/>
+                                <field name="com_type" />
+                                <field name="comm_rate" />
+                                <field name="comm_amount" />
+                                <field name="purchase_booking_id" invisible= "1" />
+                                <field name="date" invisible= "1" />
+
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+        <record id = "purchase_booking_tree_view1" model = "ir.ui.view">
+            
+                <field name="name">purchase_booking_tree_view</field>
+        
+                <field name="model">purchase.booking</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                 <tree delete ="false">                     
+                    <field name="date"/>
+                    <field name="total"/>
+                    <field name="total_qty"/>
+                    <field name="avg"/>
+                </tree>      
+                </field>
+        </record>
+
+
+
+
+
+         
+
+        
+
+
+
+
+
+<!-- Purchase Delivery Module Sugar Industry-->
+
+
+            <record id = "purchase_delivery_form_view" model = "ir.ui.view">
+            
+                <field name="name">purchase_delivery_form_view</field>
+        
+                <field name="model">purchase.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+                  <sheet>
+                    <div class="oe_title">
+                        <label class="oe_edit_only" for="order_no" string="Order No"/>
+                        <h1><field name="order_no" placeholder="Order No"/></h1>
+                        
+                    </div>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="supplier"/>
+                            <field name="mill"/>
+                            <field name="rate"/>
+                            <field name="qty"/>
+                            </group>
+                            <group name="group_right">
+                            <field name="date"/>
+                            <field name="total"/>
+                            <field name="status"/>
+<!--                             <field name="delivered"/>
+                            <field name="remaining"/> -->
+                            <field name="p_booking_id" invisible = "1" />
+
+
+                            </group>
+                        </group>
+                        <!-- <notebook>
+                            <page string="Delivery" name="delivery">
+                                <field name="purchase_tree_loading">
+
+                                    <tree editable="bottom">
+                                        <field name="delivered_to"/>
+                                        <field name="qty" />
+                                        <field name="adda"/>
+                                        <field name="date" />
+                                        <field name="loading_id"/>
+                                        
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Adda" name="adda">
+                                <field name="adda_tree">
+
+                                    <tree editable="bottom">
+                                        <field name="adda"/>
+                                        <field name="qty" />
+                                        <field name="delivered" />
+                                        <field name="remaining"/>
+                                        <field name="date"/>
+                                        <field name="supplier"/>
+                                        <field name="loading_id"/>
+                                        <field name="purchase_id"/>
+                                        
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook> -->
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+            <record id = "purchase_delivery_tree_view_1" model = "ir.ui.view">
+            
+                <field name="name">purchase_delivery_tree_view_1</field>
+        
+                <field name="model">purchase.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+
+                    <tree delete ="false" create = "false" edit ="false">
+
+
+                            <field name="order_no"/>
+                            <field name="date"/>
+                            <field name="supplier"/>
+                            <field name="mill"/>
+                            <field name="rate"/>
+                            <field name="qty"/>
+                            <field name="status"/>
+                            <field name="total"/>
+                    </tree>
+                </field>
+        </record>
+
+        <record id="purchase_sugar_sequence" model="ir.sequence">
+            <field name="name">purchase_sugar_sequence</field>
+            <field name="code">purchase.sugar</field>
+             <field name="prefix">P-</field>
+            <field name="padding">0</field>
+        </record>
+
+
+
+
+
+
+<!-- Loading Module Sugar Industry-->
+
+
+            <record id = "loading_sugar_form_view" model = "ir.ui.view">
+            
+                <field name="name">loading_sugar_form_view</field>
+        
+                <field name="model">loading.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false">
+
+                  <sheet>
+                    <!-- <div class="oe_title">
+                        <label class="oe_edit_only" for="order_no" string="Order No"/>
+                        <h1><field name="order_no" placeholder="Order No"/></h1>
+                        
+                    </div> -->
+                            
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                        
+                            </group>
+                            <group name="group_right">
+                        
+                            <field name="total"/>
+
+
+                            </group>
+
+
+                        </group>
+                        <notebook>
+                    <page string = "Goods to Party">
+
+                        <field name="g2c">
+
+                                <tree editable="bottom">
+                                    <field name="transfer_from" required = "True"/>
+                                    <field name="mill"  options="{'no_create': True}" required = "True"/>
+                                    <field name="party" options="{'no_create': True}" required = "True"/>
+                                    <field name="for_sale" string = "Av for TRF"/>
+                                    <field name="qty" sum="Total"/>
+                                    <field name="adda"  options="{'no_create': True}"/>
+                                    <field name="memo"/>
+
+
+                                    <!-- <field name="customer"/>
+                                    <field name="supplier" />
+                                    <field name="adda_transferred"  />
+                                    <field name="date" /> -->
+                                    
+                                    <field name="transfer_type" invisible = "1"/>
+                                    <field name="date" invisible = "1"/>
+                                    <field name="g2c" invisible = "1"/>
+                                </tree>
+                            </field>
+                        </page>
+                            <page string = "Party to Goods">
+
+                        <field name="c2g">
+
+                                <tree editable="bottom">
+                                    <field name="mill"  options="{'no_create': True}" required = "True"/>
+                                    <field name="party" options="{'no_create': True}" required = "True"/>
+                                    <field name="for_sale" string = "Av for TRF"/>
+                                    <field name="adda"  options="{'no_create': True}" required = "True"/>
+                                    <field name="qty" sum="Total"/>
+                                    <field name="memo"/>
+
+                                    <!-- <field name="customer"/>
+                                    <field name="supplier" />
+                                    <field name="adda_transferred"  />
+                                    <field name="date" /> -->
+                                    
+                                    <field name="transfer_type" invisible = "1"/>
+                                    <field name="date" invisible = "1"/>
+                                    <field name="c2g" invisible = "1"/>
+                                </tree>
+                            </field>
+                        </page>
+
+
+
+                    <page string = "Party to Party">
+
+                        <field name="c2c">
+
+                                <tree editable="bottom">
+                                    <field name="mill"  options="{'no_create': True}" required = "True"/>
+                                    <field name="party" string = "From" options="{'no_create': True}" required = "True"/>
+                                    <field name="for_sale" string ="Av for TRF" options="{'no_create': True}"/>
+
+                                    <field name="to" options="{'no_create': True}" required = "True"/>
+                                    <field name="qty" sum="Total"/>
+                                    <field name="memo"/>
+
+                                   <!--  <field name="adda"  /> -->
+                                    <!-- <field name="customer"/>
+                                    <field name="supplier" />
+                                    <field name="adda_transferred"  />
+                                    <field name="qty" sum="Total"/>
+                                    <field name="date" /> -->
+                                    
+                                    <field name="transfer_type" invisible = "1"/>
+                                    <field name="date" invisible = "1"/>
+                                    <field name="c2c" invisible = "1"/>
+                                </tree>
+                            </field>
+                        </page>
+
+
+                    <page string = "Goods to Goods">
+
+                        <field name="g2g">
+
+                                <tree editable="bottom">
+                                    <field name="mill"  options="{'no_create': True}" required = "True"/>
+                                    <field name="adda" string = "From" options="{'no_create': True}" required = "True"/>
+                                    <field name="qty" sum="Total"/>
+                                    <field name="adda_transferred" string = "To" options="{'no_create': True}" required = "True"/>
+                                    <field name="memo"/>
+                                    
+                                   <!--  <field name="customer"/>
+                                    <field name="supplier" />
+                                    <field name="date" /> -->
+                                    
+                                    <field name="transfer_type" invisible = "1"/>
+                                    <field name="date" invisible = "1"/>
+                                    <field name="g2g" invisible = "1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+            <record id = "loading_sugar_tree_view" model = "ir.ui.view">
+            
+                <field name="name">loading_sugar_tree_view</field>
+        
+                <field name="model">loading.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+
+
+                    <tree delete ="false">   
+                            <field name="date"/>
+                            <field name="total"/>
+                        </tree>
+                            
+
+
+
+
+
+
+                            
+
+
+                
+                </field>
+        </record>
+
+  <!--       <record id="purchase_sugar_sequence" model="ir.sequence">
+            <field name="name">purchase_sugar_sequence</field>
+            <field name="code">purchase.sugar</field>
+             <field name="prefix">P-</field>
+            <field name="padding">0</field>
+        </record> -->
+
+
+
+
+            <!-- <record id = "stock_history_form_view" model = "ir.ui.view">
+            
+                <field name="name">stock_history_form_view</field>
+        
+                <field name="model">stock.history.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                            <field name="party"/>
+                            <field name="mill"/>
+                            <field name="qty" />
+                            <field name="ref_no"/>
+                            <field name="type_transaction" />
+                            <field name="delivery_to" />
+                            <field name="total" />
+                            <field name="amanat_id" />
+
+                            <field name="purchase_id" invisible = "1"/>
+                            <field name="delivery_id" invisible = "1"/>
+
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+         <record id = "stock_history_tree_view" model = "ir.ui.view">
+            
+                <field name="name">stock_history_form_view</field>
+        
+                <field name="model">stock.history.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree>
+                            <field name="date"/>
+                            <field name="party"/>
+                            <field name="mill"/>
+                            <field name="delivery_to"/>
+                            <field name="qty" sum = "Total"/>
+                            <field name="total" />
+                            <field name="ref_no"/>
+
+
+               </tree>      
+                </field>
+        </record> -->
+
+
+
+
+            <record id = "stock_summary_form_view" model = "ir.ui.view">
+            
+                <field name="name">stock_summar_form_view</field>
+        
+                <field name="model">stock.summary.sugar</field>
+        
+                <field name="type">form</field>
+
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="mill"/>
+                            <field name="qty"/>
+        <!--                     <field name="supplier"/>
+                            <field name="purchase_id" />
+                            <field name="sold"/> -->
+                            <field name="amanat" />
+                            <field name="for_sale" />
+                            <field name="stock_adda" />
+                            <field name="temporary" />
+                          <!--   <field name="amanat_of" />
+                            <field name="sales_id" /> -->
+                            
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+         <record id = "stock_summary_tree_view" model = "ir.ui.view">
+            
+                <field name="name">stock_summar_form_view</field>
+        
+                <field name="model">stock.summary.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false" create = "false" edit ="false">
+                            <field name="mill"/>
+                            <field name="qty"/>
+                            <!-- <field name="stock_adda"/> -->
+                            <!-- <field name="supplier"/>
+                            <field name="purchase_id" />
+                            <field name="sold"/> -->
+                            <field name="amanat" />
+                            <field name="for_sale" />
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+
+
+            <record id = "adda_form_view" model = "ir.ui.view">
+            
+                <field name="name">adda_form_view</field>
+        
+                <field name="model">adda</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="name"/>
+                            <field name="city"/>
+                            <field name="address" />
+                            <field name="phone" />
+                            
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+         <record id = "adda_tree_view" model = "ir.ui.view">
+            
+                <field name="name">adda_tree_view</field>
+        
+                <field name="model">adda</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree>
+                            <field name="name"/>
+                            <field name="city"/>
+                            <field name="address" />
+                            <field name="phone" />
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+
+
+
+            <record id = "forward_contract_form_view" model = "ir.ui.view">            
+                <field name="name">forward_contract_form_view</field>
+                <field name="model">forward.contract</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                <form delete ="false" create = "false" edit ="false">
+                    <header>
+                        <button name="create_settlement" type="object" string="Create Settlement" class = "oe_highlight" />
+                        
+                    </header>
+                  <sheet>  
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="maturity_date"/>
+                            <field name="mill" />
+                            <field name="party" />
+                            <field name="name" />
+                            </group>
+                            <group name="group_right">
+                            <field name="total_purchases"/>
+                            <field name="total_sales"/>
+                            <field name="net_amount" />
+                            <field name="total_purchase_qty" />
+                            <field name="total_sales_qty" />
+                            <field name="net_qty" />
+                            <field name="average_price" />
+                            <field name="total_amount" />
+
+                        </group>
+                        </group>
+
+                        <notebook>
+                            <page string="Purchases" name="purchases">
+                        
+                        <field name="forward_purchase" readonly = "1">
+
+                            <tree editable="bottom">
+                                <field name="date"/>
+                                <field name="supplier"/>
+                                <field name="qty" sum="Total"/>
+                                <field name="rate"  />
+                                <field name="total" sum="Total"/>
+                                <field name="forward_contract_id" invisible="1"/>
+                                <field name="purchase_id" invisible="1"/>
+
+                        
+                            </tree>
+                        </field>
+                    </page>
+                            <page string="Sales" name="sales" >
+                        <field name="forward_sale" readonly = "1">
+
+                            <tree editable="bottom">
+                                <field name="date"/>
+                                <field name="customer"/>
+                                <field name="qty" sum="Total"/>
+                                <field name="rate"  />
+                                <field name="total" sum="Total"/>
+                                <field name="sale_id" invisible="1"/>
+                                <field name="forward_contract_id" invisible="1"/>
+                        
+                            </tree>
+                        </field>
+                    </page>
+
+
+                    <page string="Hawala" name="hawala" >
+                        <field name="hawala">
+
+                            <tree editable="bottom">
+                                <field name="date" />
+                                <field name="contract" invisible="1"/>
+                                <field name="from_party"  />
+                                <field name="to" />
+                                <field name="rate" />
+                                <field name="qty" />
+                                <field name="amount"/>
+                                <field name="hawala_id"/>
+                        
+                            </tree>
+                        </field>
+                    </page>
+
+
+                    <page string="Settlement Summary" name="settlement_summary">
+                        <field name="settlement_summary" readonly = "1">
+
+                            <tree editable="bottom">
+                                <field name="date"/>
+                                <field name="number"/>
+                                <field name="types" />
+                                <field name="party"  />
+                            
+                                <field name="rate" />
+                                <field name="qty" />
+                                <field name="settled_quantity" />
+                                <field name="set_rate"/>
+                                <field name="adjustment" widget = "many2many_tags"/>
+                                <field name="remaining"/>
+                                <field name="forward_contract_id" invisible="1"/>
+                        
+                            </tree>
+                        </field>
+                    </page>
+
+
+                    <page string="Settlement Details" name="settlement_details">
+                        <field name="settlement" >
+
+                            <tree editable="bottom">
+                                <field name="date"/>
+                                <field name="number"/>
+                                <field name="types" />
+                                <field name="party"  />
+                                    <field name="hawala_ref"  />
+                                <field name="rate" />
+                                <field name="qty" />
+                                <field name="settled_quantity" />
+                                <field name="set_rate"/>
+                                <field name="adjustment" widget = "many2many_tags"/>
+                                <field name="remaining"/>
+                                <field name="forward_contract_id" invisible="1"/>
+                        
+                            </tree>
+                        </field>
+                    </page>
+
+
+
+
+                </notebook>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+        <record id = "forward_contract_tree" model = "ir.ui.view">
+            
+                <field name="name">forward_contract_tree</field>
+        
+                <field name="model">forward.contract</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false" create = "false" edit ="false">
+
+                            <field name="name" />
+                            <field name="maturity_date"/>
+                            <field name="mill"/>
+                            <field name="party"/>
+                            <field name="total_sales" />
+                            <field name="total_purchases" />
+                            <field name="net_qty" />
+                            <field name="net_amount" />
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+
+
+
+            <record id = "hawala_form_view" model = "ir.ui.view">            
+                <field name="name">hawala_form_view</field>
+                <field name="model">hawala</field>
+                <field name="type">form</field>
+                <field name="arch" type="xml">
+                <form delete ="false">
+                  <sheet>  
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                           
+                            </group>
+                            <group name="group_right">
+                           
+                        </group>
+                        </group>
+                        
+                        <field name="hawala_lines">
+
+                            <tree editable="bottom">
+                                <field name="maturity_date" />
+                                <field name="mill" options="{'no_create': True}"/>
+                                <field name="qty" />
+                                <field name="rate" />
+                                <field name="amount" />
+                                <field name="date" invisible="1"/>
+                                <field name="from_party"  options="{'no_create': True}"/>
+                                <field name="to" options="{'no_create': True}"/>
+                                <field name="hawala_id" invisible="1"/>
+
+                        
+                            </tree>
+                        </field>
+                   
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+        <record id = "hawala_tree" model = "ir.ui.view">
+            
+                <field name="name">hawala_tree</field>
+        
+                <field name="model">hawala</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false">
+                            <field name="date"/>
+        
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id = "remaining_transfers_form" model = "ir.ui.view">
+            
+                <field name="name">remaining_transfers_form</field>
+        
+                <field name="model">remaining.transfers</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="supplier"/>
+                            <field name="mill"/>
+                            <field name="purchased"/>
+                            <field name="received" />
+                            <field name="remaining"/>
+                            
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+          <record id = "remaining_transfers_tree" model = "ir.ui.view">
+            
+                <field name="name">remaining_transfers_tree</field>
+        
+                <field name="model">remaining.transfers</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false" create = "false" edit ="false">
+                            
+                            <field name="supplier"/>
+                            <field name="mill"/>
+                            <field name="purchased"/>
+                            <field name="received" />
+                            <field name="remaining"/>
+
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+
+        <record id = "adda_wise_stock_form" model = "ir.ui.view">
+            
+                <field name="name">adda_wise_stock_form</field>
+        
+                <field name="model">adda.wise</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="adda"/>
+                            <field name="mill"/>
+                            <field name="stock_in"/>
+                            <field name="stock_out" />
+                            <field name="remaining"/>
+                            
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+          <record id = "adda_wise_stock_tree" model = "ir.ui.view">
+            
+                <field name="name">adda_wise_stock_tree</field>
+        
+                <field name="model">adda.wise</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false" create = "false" edit ="false">
+                            
+                            <field name="adda"/>
+                            <field name="mill"/>
+                            <field name="stock_in"/>
+                            <field name="stock_out" />
+                            <field name="remaining"/>
+
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+                <record id = "mill_wise_stock_form" model = "ir.ui.view">
+            
+                <field name="name">mill_wise_stock_form</field>
+        
+                <field name="model">mill.wise</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="mill"/>
+                            <field name="brand"/>
+                            <field name="total_purchase"/>
+                            <field name="total_sale" invisible = "1"/>
+                            <field name="amanat" />
+                            <field name="assigned"/>
+                            <field name="loaded"/>
+                            <field name="remaining"/>
+
+
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+          <record id = "mill_wise_stock_tree" model = "ir.ui.view">
+            
+                <field name="name">mill_wise_stock_tree</field>
+        
+                <field name="model">mill.wise</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false" create = "false" edit ="false">
+                            
+                            <field name="mill"/>
+                            <field name="brand"/>
+                            <field name="total_purchase"/>
+                            <field name="total_sale" invisible = "1"/>
+                           <!--  <field name="amanat" />
+                            <field name="assigned"/> -->
+                            <field name="loaded"/>
+                            <field name="remaining"/>
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+
+        <record id = "amanat_wise_stock_form" model = "ir.ui.view">
+            
+                <field name="name">amanat_wise_stock_form</field>
+        
+                <field name="model">amanats</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false"> 
+
+                  <sheet >
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="customer"/>
+                            <field name="mill"/>
+                            <field name="sales"/>
+                            <field name="purchases" />
+                            <field name="delivered"/>
+                            <field name="received"/>
+                            <field name="amanat_transfers"/>
+                            <field name="amanat"/>
+
+
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+          <record id = "amanat_wise_stock_tree" model = "ir.ui.view">
+            
+                <field name="name">amanat_wise_stock_tree</field>
+        
+                <field name="model">amanats</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false" create = "false" edit ="false">
+                            
+                            <field name="customer"/>
+                            <field name="mill"/>
+                            <field name="sales"/>
+                            <field name="purchases" />
+                            <field name="delivered"/>
+                            <field name="received"/>
+                            <field name="amanat_transfers"/>
+                            <field name="amanat"/>
+
+
+
+
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+        <record id = "loading_adda_form_view" model = "ir.ui.view">
+            
+                <field name="name">loading_adda_form_view</field>
+        
+                <field name="model">loading.adda</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false">
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                            
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                        <notebook>
+                            <page string ="Supplier Loading" name ="supplier">
+                        <field name="loading_lines">
+
+                            <tree editable="bottom">
+                                <field name="adda" options="{'no_create': True}" required = "True"/>
+                                <field name="mill" options="{'no_create': True}" required = "True"/>
+                                <field name="party"  options="{'no_create': True}" required = "True"/>
+                                <field name="qty"/>
+                                <!-- <field name="supplier" /> -->
+                                <field name="destination"/>
+                                <field name="vehicle_no"/>
+                                <field name="billty_no"/>
+                                <field name="loading_id" invisible = "1"/>
+                                <field name="date" invisible = "1"/>
+                                
+
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string ="Mill Loading" name ="mill">
+                        <field name="mill_loading">
+
+                            <tree editable="bottom">
+                                <field name="party"  options="{'no_create': True}" required = "True"/>
+                                <field name="mill" options="{'no_create': True}" required = "True"/>
+                                <field name="qty" />
+                                <field name="adda" options="{'no_create': True}" required = "True"/>
+                                <field name="mill_loaded" domain = "[('mill','=',True)]" options="{'no_create': True}" required = "True"/>
+                                <field name="destination"/>
+                                <field name="vehicle_no"/>
+                                <field name="billty_no"/>
+                                <field name="date" invisible = "1"/>
+                                <field name="mill_loading" invisible = "1"/>
+                                
+
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+          <record id = "loading_adda_tree_view" model = "ir.ui.view">
+            
+                <field name="name">loading_adda_tree_view</field>
+        
+                <field name="model">loading.adda</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree delete ="false">
+                            
+                            <field name="date"/>
+      
+
+
+
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+        <record id = "contract_trial_form_view" model = "ir.ui.view">
+            
+                <field name="name">contract_trial_form_view</field>
+        
+                <field name="model">contract.trial</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+
+                  <sheet>
+                    <header>
+                        <button name="get_values" type="object" string="Get Values" class = "oe_highlight" />
+                        
+                    </header>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="maturity_date"/>
+                            <field name="mill" options="{'no_create': True}"/>
+                            <field name="total_purchase"/>
+                            <field name="total_sales"/>
+                            <field name="net"/>
+                            
+                            </group>
+                            <group name="group_right"/>
+                        </group>
+                    
+                        <field name="trial_lines">
+
+                            <tree editable="bottom">
+                                <field name="party"  />
+                                <field name="total_purchase_qty" />
+                                <field name="total_sales_qty" />
+                                <field name="average_price"/>
+                                <field name="total_amount" />
+
+
+                            </tree>
+                        </field>
+                    
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+          <record id = "contract_trial_tree_view" model = "ir.ui.view">
+            
+                <field name="name">contract_trial_tree_view</field>
+        
+                <field name="model">contract.trial</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                <tree>
+                            
+                                                        <field name="maturity_date"/>
+                            <field name="mill"/>
+
+      
+
+
+
+
+               </tree>      
+                </field>
+        </record>
+
+
+
+        <record id = "hawala_lines_form_view" model = "ir.ui.view">
+            
+                <field name="name">hawala_lines_form_view</field>
+        
+                <field name="model">hawala.lines</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+
+                  <sheet>
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="maturity_date"/>
+                             <field name="mill"/>
+                           
+                            <field name="from_party"/>
+                            <field name="to"/>
+                            
+                            </group>
+                            <group name="group_right">
+                            <field name="hawala_id"/>
+                            <field name="rate"/>
+                            <field name="date" invisible = "1"/>
+                            <field name="qty"/>
+                            <field name="amount"/>
+                        </group>
+                        </group>
+                    
+                        
+                    
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+        <record id="contract_trial_action" model="ir.actions.act_window">
+            <field name="name">Contract Trail Balance</field>
+            <field name="res_model">contract.trial</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="loading_adda_action" model="ir.actions.act_window">
+            <field name="name">Loading</field>
+            <field name="res_model">loading.adda</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="amanat_action" model="ir.actions.act_window">
+            <field name="name">Amanats</field>
+            <field name="res_model">amanats</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="mill_wise_action" model="ir.actions.act_window">
+            <field name="name">Mill Wise Stock</field>
+            <field name="res_model">mill.wise</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="adda_wise_action" model="ir.actions.act_window">
+            <field name="name">Adda Wise Stock</field>
+            <field name="res_model">adda.wise</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="remaining_transfers_action" model="ir.actions.act_window">
+            <field name="name">Remaining Transfers</field>
+            <field name="res_model">remaining.transfers</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="settlement_nubmer" model="ir.sequence">
+            <field name="name">settlement_nubmer</field>
+            <field name="code">contract.settlement</field>
+            <field name="prefix">CT</field>
+            <field name="padding">0</field>
+        </record>
+
+
+        <record id="hawala_action" model="ir.actions.act_window">
+            <field name="name">Hawala</field>
+            <field name="res_model">hawala</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="forward_contract_action" model="ir.actions.act_window">
+            <field name="name">Forward Contract</field>
+            <field name="res_model">forward.contract</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="loading_sugar_action" model="ir.actions.act_window">
+            <field name="name">Transfers</field>
+            <field name="res_model">loading.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="adda_action" model="ir.actions.act_window">
+            <field name="name">Adda</field>
+            <field name="res_model">adda</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <!-- <record id="sale_purchase_action" model="ir.actions.act_window">
+            <field name="name">Sale Purchase Report</field>
+            <field name="res_model">sale.purchase</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record> -->
+
+
+<!-- 
+         <record id="stock_history_action" model="ir.actions.act_window">
+            <field name="name">Stock History</field>
+            <field name="res_model">stock.history.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record> -->
+
+
+        <record id="stock_summary_action" model="ir.actions.act_window">
+            <field name="name">Stock Summary</field>
+            <field name="res_model">stock.summary.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+
+        <record id="purchase_booking_tree_view_action" model="ir.actions.act_window">
+            <field name="name">Purchase Booking</field>
+            <field name="res_model">purchase.booking</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+         <record id="purchase_delivery_tree_view" model="ir.actions.act_window">
+            <field name="name">Purchases</field>
+            <field name="res_model">purchase.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="base.action_partner_form" model="ir.actions.act_window">
+            <field name="name">Parties</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <!-- <field name="context">{"search_default_customer":1}</field>
+            <field name="search_view_id" ref="view_res_partner_filter"/> -->
+           <!--  <field name="help" type="html"> -->
+              <!-- <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                a customer: discussions, history of business opportunities,
+                documents, etc.
+              </p> -->
+            <!-- </field> -->
+        </record>
+
+
+        <menuitem id="new_sales_and_purchases" name="Sales and Purchases"  />
+
+        <menuitem id="admin_configuration" name="Admin Configuration"  />
+        <menuitem id="admin_configuration_menu" name="Admin Configurations" parent="sales_sugar.admin_configuration" sequence="2"/>
+        
+        <menuitem id="new_sales_and_purchases_sales" name="Sales" parent="sales_sugar.new_sales_and_purchases" sequence="2"/>
+        <menuitem id="new_sales_and_purchases_purchases" name="Purchases" parent="sales_sugar.new_sales_and_purchases" sequence="1"/>
+        <menuitem id="new_loading" name="Loading and Transfers" parent="sales_sugar.new_sales_and_purchases" sequence="4"/>
+        <menuitem id="forward_contracts" name="Forward Contracts" parent="sales_sugar.new_sales_and_purchases" sequence="4"/>
+        <menuitem id="new_sales_and_purchases_reporting" name="Stock Reporting" parent="sales_sugar.new_sales_and_purchases" sequence="5"/>
+
+        <!-- <menuitem id="new_sales_and_purchases_stock_report" name="Stock Report" parent="sales_sugar.new_sales_and_purchases_reporting" action = "stock_history_action"/> -->
+
+        <menuitem id="new_sales_and_purchases_stock_summary" name="Stock Summary" parent="sales_sugar.new_sales_and_purchases_reporting" action = "stock_summary_action"/>
+
+       <menuitem id="add_parties" name="Parties" parent="sales_sugar.admin_configuration_menu" action = "base.action_partner_form"/>
+       <menuitem id="add_products" name="Products" parent="sales_sugar.admin_configuration_menu" action = "product.product_template_action"/>
+   
+
+    <!--     <menuitem id="sale_purchase_menu_item" name="Sale Purchase Report" parent="sales_sugar.new_sales_and_purchases_reporting" action = "sale_purchase_action"/> -->
+
+        <menuitem   id="sales_sugar.new_purchase_booking" 
+            name="Purchase Booking"
+            parent="new_sales_and_purchases_purchases" 
+            action="purchase_booking_tree_view_action" 
+        />
+
+        <menuitem   id="new_purchase_main_form" 
+            name="Purchases"
+            parent="new_sales_and_purchases_purchases" 
+            action="purchase_delivery_tree_view" 
+        />
+
+
+        <menuitem   id="sales_delivery_tree_view_menu" 
+            name="Sales"
+            parent="sales_sugar.new_sales_and_purchases_sales" 
+            action="sales_delivery_tree_view" 
+            sequence="10"
+        />
+
+
+
+        <menuitem   id="sales_booking_tree_view_menu" 
+            name="Sales Booking"
+            parent="sales_sugar.new_sales_and_purchases_sales" 
+            action="sales_booking_tree_view_action" 
+            sequence="9"
+        />
+
+        <menuitem   id="loading_sugar_tree_view_menu" 
+            name="Transfers"
+            parent="sales_sugar.new_loading" 
+            action="loading_sugar_action" 
+            sequence="10"
+        />
+
+        <menuitem   id="loading_sugar_add_tree_view_menu" 
+            name="Loading"
+            parent="sales_sugar.new_loading" 
+            action="loading_adda_action" 
+            sequence="11"
+        />
+
+        <menuitem   id="adda_menu_item" 
+            name="Adda"
+            parent="sales_sugar.admin_configuration_menu" 
+            action="adda_action" 
+            sequence="12"
+        />
+
+
+        <menuitem   id="forward_contract_menu_item" 
+            name="Forward Contract"
+            parent="sales_sugar.forward_contracts" 
+            action="forward_contract_action" 
+            sequence="12"
+        />
+
+        <menuitem   id="contract_trial_menu" 
+            name="Contract Trial Balance"
+            parent="sales_sugar.forward_contracts" 
+            action="contract_trial_action" 
+            sequence="13"
+        />
+
+        <menuitem   id="hawala_menu_item" 
+            name="Hawala"
+            parent="sales_sugar.forward_contracts" 
+            action="hawala_action" 
+            sequence="14"
+        />
+
+
+        <menuitem   id="remaning_tranfers_menu" 
+            name="Stock Receivables"
+            parent="sales_sugar.new_sales_and_purchases_reporting" 
+            action="remaining_transfers_action" 
+            sequence="13"
+        />
+
+        <menuitem   id="adda_wise_menu" 
+            name="Adda Wise Stock"
+            parent="sales_sugar.new_sales_and_purchases_reporting" 
+            action="adda_wise_action" 
+            sequence="14"
+        />
+
+
+        <menuitem   id="mill_wise_menu" 
+            name="Mill Wise Stock"
+            parent="sales_sugar.new_sales_and_purchases_reporting" 
+            action="mill_wise_action" 
+            sequence="15"
+        />
+
+        <menuitem   id="amanat_menu" 
+            name="Amanat (Remaining Balance)"
+            parent="sales_sugar.new_sales_and_purchases_reporting" 
+            action="amanat_action" 
+            sequence="16"
+        />
+
+
+
+    <record id="mill_checkbox"   model="ir.ui.view"> 
+            <field name="name">mill_checkbox</field> 
+            <field name="model">res.partner</field> 
+            <field name="inherit_id" ref="base.view_partner_form"/> 
+            <field name="arch" type="xml"> 
+                <xpath expr="//field[@name='category_id']" position="after">
+                    <field name="mill" />
+                    <field name="brands" widget = "many2many_tags" />
+                    <field name="comm_rate"/>
+                </xpath>
+            </field> 
+        </record>
+
+
+        <record id="create_hawala" model="ir.actions.act_window">
+            <field name="name">Create Hawala</field>
+            <field name="res_model">hawala.lines</field>
+            <field name="src_model">contract.trial</field>
+            <field name="key2">client_action_multi</field>
+            <field name="view_id" ref="hawala_lines_form_view"/>
+            <field name="context">{'default_maturity_date': context.get('maturity_date', False),'default_mill': context.get('mill', False)}</field>
+            <field name="target">new</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="multi">False</field>
+        </record>
+
+    </data>
+</openerp>

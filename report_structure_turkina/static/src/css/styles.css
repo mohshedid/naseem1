@@ -1,0 +1,10 @@
+.custom .o_form_sheet_bg .o_form_sheet {
+    min-width: 1080px;
+    max-width: 1080px;
+}
+.custom .o_list_view .o_list_number {
+    text-align: left;
+}
+.custom .o_list_view.table th {
+    min-width: 75px;
+}

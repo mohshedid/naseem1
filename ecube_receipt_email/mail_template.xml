@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ecube_receipt_email_template" model="mail.template">
+            <field name="name">Ecube Receipt Email Template</field>
+            <field name="email_from">info@ventilasjonsfilter.no</field>
+            <field name="subject">Kvittering fra Ventilasjonsfilter.no (${object.name})</field>
+            <field name="email_to">${object.partner_id.email}</field>
+            <field name="lang">${object.lang}</field>
+            <field name="model_id" ref="ecube_receipt_email.model_account_payment"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="body_html">
+                <![CDATA[
+	      	      
+                
+                  <p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px">
+          <b>Kvittering for&nbsp;</b><b>abonnements&nbsp;utsending fra Ventilasjonsfilter.no</b></p>
+          <p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><br>
+          </p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px">Kjære
+           <b>${object.partner_id.name}</b>&nbsp; &nbsp; &nbsp; </p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><br></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px">da er det tid for filterbytte og vi har nå sent ut filter til deg.
+           Du er derfor nå&nbsp;belastet på ditt oppgitte betalings kort i henhold til avtale.</p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><br></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px">Dette er en kvittering for din betaling <b>${object.amount}</b><span style="font-family: arial, sans-serif; font-size: 18px; font-style: initial; font-variant-caps: initial; font-variant-ligatures: initial;" class="text-black"><b>kr</b></span></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><br></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><font class="bg-gray-lighter" style="color: rgb(0, 0, 0); font-size: 18px;">${object.company_id.name}</font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><font class="bg-gray-lighter" style="color: rgb(0, 0, 0); font-size: 18px;"><br></font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);"></font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);"></font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);">${object.company_id.street}</font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);">${object.company_id.city}&nbsp; &nbsp;</font></b><b style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;"><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);">${object.company_id.zip}</font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;"><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);">${object.company_id.country_id.name}</font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;"><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);"><br></font></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px;">Kontakt oss på&nbsp;</span><a href="mailto:support@ventilasjonsfilter.no" target="_blank" style="color: rgb(17, 85, 204); font-family: arial, sans-serif; font-size: 12.8px; background-color: rgb(255, 255, 255);">support@ventilasjonsfilter.no</a><span style="color: rgb(34, 34, 34); font-family: arial, sans-serif; font-size: 12.8px;">&nbsp;ved spørsmål.</span><b style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;"><font class="bg-gray-lighter" style="color: rgb(0, 0, 0);"><br></font></b><b style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;"><br></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b style="font-style: initial; font-variant-ligatures: initial; font-variant-caps: initial;">&nbsp;</b><b><br></b></p><p style="margin-top:0px;margin-bottom:0px;color:rgb(0,0,0);font-family:Calibri,Helvetica,sans-serif;font-size:16px"><b><br></b></p>
+        
+            
+	    ]]>
+            </field>
+        </record>
+    </data>
+</odoo>

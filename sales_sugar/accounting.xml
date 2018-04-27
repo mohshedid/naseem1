@@ -1,0 +1,982 @@
+<openerp>
+    <data>
+
+
+        <record id = "funds_flow_form_view" model = "ir.ui.view">
+            
+                <field name="name">funds_flow_form_view</field>
+        
+                <field name="model">funds.flow</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false">
+                    <!-- <header>
+                        <button name="post_entries" type="object" string="Post" class = "oe_highlight" attrs="{'invisible':[('stages','=','posted')]}"/>
+                        <button name="reset_draft" type="object" string="Reset to Draft" class = "oe_highlight" attrs="{'invisible':[('stages','=','draft')]}"/>
+                        <field name="stages" widget="statusbar" statusbar_visible="draft,posted"/>
+                    </header>
+ -->
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="date"/>
+                                <field name="supplier"/>
+                                <field name="total_jv"/>
+                                <field name="check" invisible = "0"/>
+                                <field name="parties" invisible = "1" widget = "many2many_tags"/>
+                        
+                            </group>
+                            <group name="group_right">
+                                <field name="customer"/>
+                                <field name="party"/>
+                                <field name="total_receipts"/>
+                                <field name="total_payments"/>
+
+                            </group>
+
+                        </group>
+                        <notebook>
+                            <page string = "Journal Voucher" >
+                        <field name="fund_lines_jv" >
+
+                            <tree editable="bottom">
+                                <field name="type_transaction" invisible = "1" required = "1" />
+                                <field name="customer" options="{'no_create': True}" attrs="{'readonly':[('stages','!=','entry')]}" required = "1"/>
+                                <field name="banks_pakistan" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="bank_code" attrs="{'readonly':[('stages','!=','entry')]}"/>
+
+                                <field name="amount" sum="Total" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="supplier" options="{'no_create': True}" attrs="{'readonly':[('stages','!=','entry')]}" required = "1"/>
+
+                                <field name="supplier_bank" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="supplier_bank_code" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="remarks" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="entry_level_ch" readonly = "1"/>
+                                <field name="clearance_ch" readonly = "1"/>
+                                <field name="virtual_ch" readonly = "1"/>
+                                <field name="actual_ch" readonly = "1"/>
+                                <field name="date" invisible = "1"/>
+                                <field name="stages" readonly = "1"/>
+                                <field name="funds_flow_jv" invisible = "1"/>
+                                <field name="j_entry_id" invisible = "1"/>
+
+
+
+
+                                
+
+
+
+                            </tree>
+                        </field>
+                    </page>
+
+                    <page string = "Receipt and Payments">
+                        <field name="fund_lines" >
+
+                            <tree editable="bottom">
+                                <field name="type_transaction" attrs="{'readonly':[('stages','!=','entry')]}" required = "1"/>
+                                <field name="party" options="{'no_create': True}" attrs="{'readonly':[('stages','!=','entry')]}" required = "1"/>
+                              <!--   <field name="supplier"/> -->
+                                <field name="amount" sum="Total" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="bank" domain = "[('bank','=',True)]" options="{'no_create': True}" attrs="{'readonly':[('stages','!=','entry')]}" required = "1"/>
+                                <field name="banks_pakistan"  attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="bank_code" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="remarks" attrs="{'readonly':[('stages','!=','entry')]}"/>
+                                <field name="entry_level" readonly = "1"/>
+                                <field name="clearance_level" readonly = "1"/>
+                                <field name="virtual_balance" readonly = "1"/>
+                                <field name="actual_balance" readonly = "1"/>
+
+                                <field name="date" invisible = "1"/>
+                                <field name="stages"  readonly = "1"/>
+                                <field name="j_entry_id"  invisible = "1"/>
+                                <field name="funds_flow_id"  invisible = "1"/>
+                                <field name="cash_id" invisible = "1"/>
+
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "funds_flow_tree_view" model = "ir.ui.view">
+            
+                <field name="name">funds_flow_tree_view</field>
+        
+                <field name="model">funds.flow</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false">
+                       <field name="date"/>
+                        <field name="total_jv" sum = "Total"/>
+                        <field name="total_receipts" sum = "Total"/>
+                        <field name="total_payments" sum = "Total"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="funds_flow_action" model="ir.actions.act_window">
+            <field name="name">Funds Flow</field>
+            <field name="res_model">funds.flow</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'readonly_by_pass': True}</field>
+           
+        </record>
+
+
+
+
+
+
+
+
+
+
+
+            <record id = "funds_flow_entries_form" model = "ir.ui.view">
+            
+                <field name="name">funds_flow_entries_form</field>
+        
+                <field name="model">funds.flow.tree</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+                    <header>
+                         <button name="back_to_entry" type="object" string="Back to Entry" class = "oe_highlight" attrs="{'invisible':[('stages','!=','clearing')]}"/>
+                        <button name="back_to_clearance" type="object" string="Back to Clearance" class = "oe_highlight" attrs="{'invisible':[('stages','!=','confirmation')]}"/>
+                        <field name="stages" widget="statusbar" statusbar_visible="entry,clearing,confirmation"/>
+                    </header>
+
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="type_transaction"/>
+                            <field name="customer"/>
+                            <field name="supplier"/>
+                            <field name="party"/>
+                            <field name="amount"/>
+                            <field name="date"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="bank"/>
+                                <field name="banks_pakistan"/>
+                                <field name="stages" />
+                                <field name="remarks"/>
+                                
+
+                            </group>
+
+                        </group>
+                        
+
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "funds_flow_entries_tree" model = "ir.ui.view">
+            
+                <field name="name">funds_flow_entries_tree</field>
+        
+                <field name="model">funds.flow.tree</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false" create = "false" edit ="false">
+                       <field name="type_transaction"/>
+                                <field name="party"/>
+                                <field name="customer"/>
+                                <field name="supplier"/>
+                                <field name="amount"  />
+                                <field name="bank"/>
+                                <field name="banks_pakistan" />
+                                <field name="remarks"/>
+                                <field name="date"/>
+                                <field name="date_clearance" />
+                                <field name="date_confirmation"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="funds_flow_entries_action" model="ir.actions.act_window">
+            <field name="name">Entry Level</field>
+            <field name="res_model">funds.flow.tree</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('stages', '=', 'entry')]</field>
+        </record>
+
+
+
+
+
+        
+        
+
+
+         <record id="funds_flow_entries_action_clearance" model="ir.actions.act_window">
+            <field name="name">Clearance Level</field>
+            <field name="res_model">funds.flow.tree</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('stages', '=', 'clearing')]</field>
+        </record>
+
+
+        
+        
+
+
+        <record id="funds_flow_entries_action_confirmation" model="ir.actions.act_window">
+            <field name="name">Confirmation Level</field>
+            <field name="res_model">funds.flow.tree</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('stages', '=', 'confirmation')]</field>
+        </record>
+
+
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <record id = "summary_entry_form" model = "ir.ui.view">
+            
+                <field name="name">summary_entry_form</field>
+        
+                <field name="model">summary.entry</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="customer"/>
+                
+                            </group>
+                            <group name="group_right">
+                                <field name="payable"/>
+                                <field name="receivable"/>
+                                <field name="net"/>
+                                <field name="balance"/>
+                                <field name="temporary"/>
+
+                                
+
+                            </group>
+
+                        </group>
+                        
+
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "summary_entry_tree" model = "ir.ui.view">
+            
+                <field name="name">summary_entry_tree</field>
+        
+                <field name="model">summary.entry</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false" create = "false" edit ="false">
+                       
+                                <field name="customer"/>
+                                <field name="receivable"/>
+                                <field name="payable"/>
+                                <field name="net" string ="Net Total"/>
+                                <field name="balance" string = "Ledger Balance"/>
+                                <field name="virtual_balance"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+        <record id = "summary_clearance_form" model = "ir.ui.view">
+            
+                <field name="name">summary_clearance_form</field>
+        
+                <field name="model">summary.clearance</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false" create = "false" edit ="false">
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="customer"/>
+                
+                            </group>
+                            <group name="group_right">
+                                <field name="payable"/>
+                                <field name="receivable"/>
+                                <field name="net"/>
+                                <field name="balance"/>
+                                <field name="virtual_balance"/>
+
+                                
+
+                            </group>
+
+                        </group>
+                        
+
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+        <record id = "summary_clearance_tree" model = "ir.ui.view">
+            
+                <field name="name">summary_clearance_tree</field>
+        
+                <field name="model">summary.clearance</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false" create = "false" edit ="false">
+                       
+                                <field name="customer"/>
+                                <field name="payable"/>
+                                <field name="receivable"/>
+                                <field name="net"/>
+                                <field name="virtual_balance"/>
+                                <field name="balance"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+    <record id="cash_book_extension" model="ir.ui.view">
+        <field name="name">cash_book_extension</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="opening" />
+                <field name="transactions" />
+                <field name="funds_flow" />
+                <field name="closing" />
+
+
+
+            </xpath>
+            
+
+        </field>
+    </record>
+
+    <record id="cash_book_extension_tree" model="ir.ui.view">
+        <field name="name">cash_book_extension_tree</field>
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_tree"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date']" position="after">
+                <field name="opening" />
+                <field name="transactions" />
+                <field name="funds_flow" />
+                <field name="closing" />
+
+
+
+            </xpath>
+
+            <xpath expr="//field[@name='balance_start']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='name']" position="replace">
+            </xpath>
+            <xpath expr="//field[@name='balance_end_real']" position="replace">
+                <field name="balance_end_real" string = "Real Balance" />
+            </xpath>
+            
+            
+
+        </field>
+    </record>
+
+
+
+
+
+         <record id="summary_clearance_tree_action" model="ir.actions.act_window">
+            <field name="name">Summary Clearance Level</field>
+            <field name="res_model">summary.clearance</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        
+
+
+         <record id="summary_entry_tree_action" model="ir.actions.act_window">
+            <field name="name">Summary Entry Level</field>
+            <field name="res_model">summary.entry</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        
+        
+
+
+
+
+        <act_window id="entry_clearance" name="Sent for Clearance" src_model="funds.flow.tree" res_model="clearance.wizard" key2="client_action_multi" target="new" view_mode="form" multi="False"/>
+
+
+
+
+
+        <record id="entry_clearance_wizard" model="ir.ui.view">
+            <field name="name">Clearance Wizard</field>
+            <field name="model">clearance.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                    <h1> Are you sure </h1>    
+                    </group>
+               <footer>
+                <button name="sent_for_clearance" type="object" string="Yes" class = "oe_highlight"  />
+                </footer>
+        </form>
+            </field>
+        </record>
+
+
+
+
+
+        <record id="entry_confirmed_wizard" model="ir.ui.view">
+            <field name="name">confirmed Wizard</field>
+            <field name="model">confirmation.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+               <header>
+                <button name="sent_for_confirmed" type="object" string="Confirmed"  />
+                </header>
+            </field>
+        </record>
+
+
+        <record id="account.action_account_form" model="ir.actions.act_window">
+            <field name="name">Account Heads</field>
+            <field name="res_model">account.account</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="search_view_id" ref="account.view_account_search"/>
+            <field name="view_id" ref="account.view_account_list"/>
+            <!-- <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an account.
+              </p><p>
+                An account is part of a ledger allowing your company
+                to register all kinds of debit and credit transactions.
+                Companies present their annual accounts in two main parts: the
+                balance sheet and the income statement (profit and loss
+                account). The annual accounts of a company are required by law
+                to disclose a certain amount of information.
+              </p>
+            </field> -->
+        </record>
+
+
+        <record model="ir.actions.act_window" id="account.payment_configuration">
+          <field name="name">Cash</field>
+          <field name="res_model">account.bank.statement</field>
+          <field name="view_type">form</field>
+          <field name="view_mode">tree,form</field>
+          <field name="domain">[('journal_id.type', '=', 'cash')]</field>
+          <field name="context">{'journal_type':'cash'}</field>
+        </record>
+
+        <record id="account.action_move_journal_line" model="ir.actions.act_window">
+            <field name="name">Journal Entriess</field>
+            <field name="res_model">account.move</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="account.view_move_tree"/>
+            <!-- <field name="search_view_id" ref="account.view_account_move_filter"/> -->
+            <field name="context">{}</field>
+<!--             <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a journal entry.
+              </p><p>
+                A journal entry consists of several journal items, each of
+                which is either a debit or a credit transaction.
+              </p><p>
+                Odoo automatically creates one journal entry per accounting
+                document: invoice, refund, vendor payment, bank statements,
+                etc. So, you should record journal entries manually only/mainly
+                for miscellaneous operations.
+              </p>
+            </field> -->
+        </record>
+
+
+
+
+        <act_window  id="entry_confirmation" name="Confirmed" src_model="funds.flow.tree" res_model="confirmation.wizard" key2="client_action_multi" target="new" view_mode="form" multi="False" />
+
+
+            <record id="purchase_journal"   model="account.journal"> 
+                <field name="name">Purchase</field> 
+                <field name="type">purchase</field> 
+                <field name="code">PUR</field> 
+            </record>
+
+            <record id="sales_journal"   model="account.journal"> 
+                <field name="name">Sale</field> 
+                <field name="type">sale</field> 
+                <field name="code">SALE</field> 
+            </record>  
+
+
+
+
+
+
+        <menuitem id="new_accounts_menu_sugar" name="Accounts"  />
+        
+        <!-- <menuitem id="payments_and_receipts" name="Funds Flow" parent="sales_sugar.new_accounts_menu_sugar" /> -->
+        <menuitem id="funds_flow_main" name="Funds Flow" parent="sales_sugar.new_accounts_menu_sugar" sequence = "1"/>
+        <menuitem id="entry_level" name="Entry Level" parent="sales_sugar.new_accounts_menu_sugar" />
+        <menuitem id="clearance_level" name="Clearance Level" parent="sales_sugar.new_accounts_menu_sugar" />
+        <menuitem id="confirmation_level" name="Confirmation Level" parent="sales_sugar.new_accounts_menu_sugar" />
+        <menuitem id="accounting_transactions" name="Accounting Transactions" parent="sales_sugar.new_accounts_menu_sugar" />
+        <menuitem id="funds_flow" name="Funds Flow" parent="sales_sugar.funds_flow_main" action = "funds_flow_action"/>
+
+        <menuitem id="funds_flow_entry" name="Entry Level" parent="sales_sugar.entry_level" action = "funds_flow_entries_action"/>
+
+        <menuitem id="funds_flow_entry_clearance" name="Clearance" parent="sales_sugar.clearance_level" action = "funds_flow_entries_action_clearance"/>
+
+        <menuitem id="funds_flow_entry_confirmation" name="Confirmation Level" parent="sales_sugar.confirmation_level" action = "funds_flow_entries_action_confirmation"/>
+
+        <menuitem id="journal_entries_sugar" name="Journal Entries" parent="sales_sugar.accounting_transactions" action = "account.action_move_journal_line"/>
+
+        <menuitem id="account_heads_sugar" name="Account Heads" parent="sales_sugar.accounting_transactions" action = "account.action_account_form"/>
+
+        <menuitem id="chart_of_accounts_sugar" name="Chart of Accounts" parent="sales_sugar.accounting_transactions" action = "account_parent.action_account_chart"/>
+
+        <menuitem id="summary_clearance_menu" name="Summary Clearance Level" parent="sales_sugar.clearance_level" action = "summary_clearance_tree_action"/>
+
+        <menuitem id="summary_entry_menu" name="Summary Entry Level" parent="sales_sugar.entry_level" action = "summary_entry_tree_action"/>
+
+
+        <menuitem name="Cash" id="cash_sales_configuration" parent="sales_sugar.accounting_transactions" action="account.payment_configuration" sequence="1"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <record id = "customer_payments_sugar_form_view" model = "ir.ui.view">
+            
+                <field name="name">customer_payments_sugar_form_view</field>
+        
+                <field name="model">customer.payments.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+                    <header>
+                        <button name="post_entries" type="object" string="Post" class = "oe_highlight" attrs="{'invisible':[('stages','=','posted')]}"/>
+                        <button name="reset_draft" type="object" string="Reset to Draft" class = "oe_highlight" attrs="{'invisible':[('stages','=','draft')]}"/>
+                        <field name="stages" widget="statusbar" statusbar_visible="draft,posted"/>
+                    </header>
+
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="total_amount"/>
+
+                            </group>
+
+                        </group>
+                        
+                        <field name="payments_tree" attrs="{'readonly': [('stages','=','posted')]}">
+
+                            <tree editable="bottom">
+                                <field name="customer"/>
+                                <field name="amount" sum="Total" />
+                                <field name="bank" domain="[('user_type_id.id', '=', 3)]"/>
+                                <field name="remarks"/>
+                            </tree>
+                        </field>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "customer_payments_sugar_tree_view" model = "ir.ui.view">
+            
+                <field name="name">customer_payments_sugar_tree_view</field>
+        
+                <field name="model">customer.payments.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree>
+                       <field name="date"/>
+                        <field name="total_amount" sum = "Total"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="customer_payments_sugar_action" model="ir.actions.act_window">
+            <field name="name">Customer Payments</field>
+            <field name="res_model">customer.payments.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <menuitem id="new_accounts_menu_sugar" name="Accounts"  />
+        
+        <menuitem id="payments_and_receipts" name="Payments" parent="sales_sugar.new_accounts_menu_sugar" />
+        <!-- <menuitem id="customer_payments_sugar" name="Customer Payments" parent="sales_sugar.payments_and_receipts" action = "customer_payments_sugar_action"/> -->
+        
+        
+
+
+        <record id = "supplier_payments_sugar_form_view" model = "ir.ui.view">
+            
+                <field name="name">supplier_payments_sugar_form_view</field>
+        
+                <field name="model">supplier.payments.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+
+                    <header>
+                        <button name="post_entries" type="object" string="Post" class = "oe_highlight" attrs="{'invisible':[('stages','=','posted')]}"/>
+                        <button name="reset_draft" type="object" string="Reset to Draft" class = "oe_highlight" attrs="{'invisible':[('stages','=','draft')]}"/>
+                        <field name="stages" widget="statusbar" statusbar_visible="draft,posted"/>
+                    </header>
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="total_amount"/>
+
+                            </group>
+
+                        </group>
+                        
+                        <field name="payments_tree">
+
+                            <tree editable="bottom">
+                                <field name="supplier"/>
+                                <field name="amount" sum="Total" />
+                                <field name="bank" />
+                                
+                                <field name="payment_from" domain="[('user_type_id.id', '=', 3)]"/>
+                                <field name="remarks"/>
+                            </tree>
+                        </field>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "supplier_payments_sugar_tree_view" model = "ir.ui.view">
+            
+                <field name="name">supplier_payments_sugar_tree_view</field>
+        
+                <field name="model">supplier.payments.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree>
+                       <field name="date"/>
+                        <field name="total_amount" sum = "Total"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="supplier_payments_sugar_action" model="ir.actions.act_window">
+            <field name="name">Supplier Payments</field>
+            <field name="res_model">supplier.payments.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    
+    
+      <!--   <menuitem id="supplier_payments_sugar" name="Supplier Payments" parent="sales_sugar.payments_and_receipts" action = "supplier_payments_sugar_action"/> -->
+
+
+
+
+        <record id = "inter_payments_sugar_form_view" model = "ir.ui.view">
+            
+                <field name="name">inter_payments_sugar_form_view</field>
+        
+                <field name="model">inter.payments.sugar</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form>
+
+                    <header>
+                        <button name="post_entries" type="object" string="Post" class = "oe_highlight" attrs="{'invisible':[('stages','=','posted')]}"/>
+                        <button name="reset_draft" type="object" string="Reset to Draft" class = "oe_highlight" attrs="{'invisible':[('stages','=','draft')]}"/>
+                        <field name="stages" widget="statusbar" statusbar_visible="draft,posted"/>
+                    </header>
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                            <field name="date"/>
+                            </group>
+                            <group name="group_right">
+                                <field name="total_amount"/>
+
+                            </group>
+
+                        </group>
+                        
+                        <field name="payments_tree">
+
+                            <tree editable="bottom">
+                                <field name="to"/>
+                                <field name="payment_from"/>
+                                <field name="amount" sum="Total" />
+                                <field name="bank" />
+                                <field name="remarks"/>
+                            </tree>
+                        </field>
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "inter_payments_sugar_tree_view" model = "ir.ui.view">
+            
+                <field name="name">inter_payments_sugar_tree_view</field>
+        
+                <field name="model">inter.payments.sugar</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree>
+                       <field name="date"/>
+                        <field name="total_amount" sum = "Total"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="inter_payments_sugar_action" model="ir.actions.act_window">
+            <field name="name">Inter Party Payments</field>
+            <field name="res_model">inter.payments.sugar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+        <record id="sugar_erp_journal_entry_linkage" model="ir.ui.view">
+            <field name="name">sugar_erp_journal_entry_linkage</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="customer_payment_id"/>
+                    <field name="supplier_payment_id"/>
+                    <field name="inter_payment_id"/>
+                    <field name="funds_flow_id"/>
+                </xpath>
+
+            </field>
+
+        </record>
+
+
+
+
+
+        <record id="bank_boolean_fields" model="ir.ui.view">
+            <field name="name">bank_boolean_fields</field>
+            <field name="model">account.account</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='deprecated']" position="after">
+                    <field name="bank"/>
+                    <field name="nature"/>
+                    
+                </xpath>
+
+            </field>
+
+        </record>
+
+    
+    
+        <!-- <menuitem id="inter_payments_sugar" name="Inter Party Payments" parent="sales_sugar.payments_and_receipts" action = "inter_payments_sugar_action"/>
+ -->
+
+    </data>
+</openerp>

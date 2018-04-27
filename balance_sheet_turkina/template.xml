@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+
+            id="report_for_module_balance_sheet" 
+            model="ecube.report.structure"
+            name="balance_sheet_turkina.module_report"
+            file="balance_sheet_turkina.module_report"
+            report_type="qweb-html"
+            string="Finacial Report"/>
+
+        <record id="balance_sheet_part_wise_wizard" model="ir.ui.view">
+            <field name="name">balance_sheet_part_wise_wizard</field>
+            <field name="model">ecube.balance.sheet</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="state"/>
+                            <field name="name" domain="[('description','=',state)]"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="form"/>
+                            <field name="to"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(report_for_module_balance_sheet)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="ecube_action_balance_sheet_part_wise" model="ir.actions.act_window">
+            <field name="name">UFC Financial Reports</field>
+            <field name="res_model">ecube.balance.sheet</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="balance_sheet_part_wise_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem action="ecube_action_balance_sheet_part_wise" id="balance_sheet_tagm_menu_acc" name="Turkina Financial Reports" parent="account.menu_finance_legal_statement" sequence="2" />
+    </data>
+</openerp>

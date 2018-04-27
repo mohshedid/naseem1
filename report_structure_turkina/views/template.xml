@@ -1,0 +1,142 @@
+<?xml version="1.0"?> 
+<odoo>
+
+    <template id="my_assets_id" name="website assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/report_structure_turkina/static/src/css/styles.css"/>
+        </xpath>
+    </template>
+
+<!--     <record id="ecube_report_structure_form_view" model="ir.ui.view">
+        <field name="name">ecube_report_structure_form_view</field>
+        <field name="model">ecube.report.structure</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form>
+            <div class="custom">
+
+              <sheet>
+
+                <group name="group_top">
+                  <group name="group_left">
+                    <field name="name" />
+                    <field name="description" />
+                  </group>
+                  <group name="group_right">
+                    <field name="division" widget="many2many_tags"/>
+                  </group>
+                </group>
+
+                <notebook>
+
+                  <page name="report_struc" string="Report Structure">
+
+                    <field name="report_link">
+
+                      <tree editable="bottom">
+
+                        <field name="sequence" widget="handle"/>
+                        <field name="id"/>
+                        <field name="level"/>
+                        <field name="description"/>
+                        <field name="account_head" widget="many2many_tags"/>
+                        <field name="summary2"/>
+                        <field name="entry_type"/>
+                        <field name="nature"/>
+                        <field name="amount"/>
+
+                      </tree>
+
+                    </field>
+
+                  </page>
+
+                  <page name="report_divisions" string="Divisions">
+
+                    <field name="division_link">
+
+                      <tree editable="bottom">
+
+                        <field name="report_id"/>
+                        <field name="description"/>
+                        <field name="partner"/>
+                        <field name="amount"/>
+
+                      </tree>
+
+                    </field>
+
+                  </page>
+
+                </notebook>
+
+              </sheet>
+            </div>
+
+          </form>
+        </field>
+    </record> -->
+
+    <record id="ecube_report_structure_detail_form_view" model="ir.ui.view">
+        <field name="name">ecube_report_structure_detail_form_view</field>
+        <field name="model">ecube.report.structure.details</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+          <form>
+            <div class="custom">
+
+              <sheet>
+
+                <group name="group_top">
+                  <group name="group_left">
+                      <field name="sequence" widget="handle"/>
+                      <field name="id"/>
+                      <field name="level"/>
+                      <field name="description"/>
+                  </group>
+                  <group name="group_right">
+                        <field name="account_head" widget="many2many_tags"/>
+                        <field name="summary2"/>
+                        <field name="entry_type"/>
+                        <field name="nature"/>
+                        <field name="amount"/>
+                  </group>
+                </group>
+
+              </sheet>
+            </div>
+
+          </form>
+        </field>
+    </record>
+
+     <record id="ecube_report_structure_tree_view" model="ir.ui.view">
+        <field name="name">ecube_report_structure_tree_view</field>
+        <field name="model">ecube.report.structure</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+         <tree>
+          <field name="name"/>
+          <field name="description"/>
+         </tree>
+        </field>
+      </record>
+
+    <record model="ir.actions.act_window" id="reporting">
+        <field name="name">Report Stucture</field>
+        <field name="res_model">ecube.report.structure</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain" >[]</field>
+    </record>
+
+    <record id="demand_note_seq" model="ir.sequence"> 
+        <field name="name">demand_note_seq</field> 
+        <field name="code">dem.seq</field> 
+        <field name="prefix"></field> 
+        <field name="padding">1</field> 
+    </record>
+
+    <menuitem name="Report Stucture" id="report_structure_menu" parent="account.menu_finance_legal_statement" action="reporting" sequence="1"/>
+
+</odoo>

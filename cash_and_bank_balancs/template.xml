@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_cash_bank" 
+            model="account.account"
+            name="cash_and_bank_balancs.customer_report"
+            file="cash_and_bank_balancs.customer_report"
+            report_type="qweb-html"
+            string=" "/>
+            
+
+         <record id="cash_bank_report_wizard" model="ir.ui.view">
+            <field name="name">cash_bank_report_wizard</field>
+            <field name="model">cash.bank</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="to"/>
+
+
+
+                        </group>
+
+                    </group>
+                    <footer>
+                        <button name="%(report_for_cash_bank)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="cash_bank_wizard" model="ir.actions.act_window">
+            <field name="name">Cash And Bank Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">cash.bank</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="cash_bank_report_wizard"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Cash And Bank Balances" id="general_ledger_menu_item" parent="account.menu_finance_reports" action="cash_bank_wizard" sequence="10"/> 
+
+
+
+    </data>
+</openerp>
+
+

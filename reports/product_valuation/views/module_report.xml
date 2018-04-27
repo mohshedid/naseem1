@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading {
+                                    width: 1000px;
+                                    margin: 0px auto
+                                }
+                                .heading h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .heading p {
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    margin-bottom: 35px;
+                                }
+                                .account{
+                                    width: 30%;
+                                    float: left;
+                                }
+                                .invoice{
+                                    width: 50%;
+                                    float: left;
+                                }
+                                .time{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .time p {
+                                    margin: 0px auto;
+                                }
+                                table, td, th {
+                                    border: 1px solid black;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    padding: 4px;
+                                    margin-top: 90px;
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESORIES</h3>
+                                        <P><b>Product Valuation</b></P>
+                                    </div>
+
+                                    <t t-set="num" t-value="namer()"/>
+
+                                    <t t-if="num == 'all_prod'">
+                                        <div class="account">
+                                            <P><b>All Products</b></P>
+                                        </div>
+                                    </t>
+
+                                    <t t-if="num == 'multi_prod'">
+                                        <div class="invoice">
+                                            <p><b>Multiple Products</b></p>
+                                        </div>
+                                    </t>
+
+                                    <div class="time">
+
+                                        <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></p>
+
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Description</th>
+                                            <th>In Stock Unit</th>
+                                            <th>Cost Price</th>
+                                            <th>Stock Value</th>
+                                            <th>List Price</th>
+                                            
+                                        </tr>
+                                        <t t-if="num == 'all_prod'">
+                                            <t t-foreach="records" t-as="line">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="line.id"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.uom"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.average_cost"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="hand(line.id)*line.average_cost"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.list_price_own"></span>
+                                                    </td>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </t>
+
+                                        <t t-if="num == 'multi_prod'">
+                                            <t t-foreach="select" t-as="data">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="data.id"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="data.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="data.uom"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="data.average_cost"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="hand(data.id)*data.average_cost"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.list_price_own"></span>
+                                                    </td>
+
+                                                </tr>
+                                                
+                                            </t>
+
+                                        </t>
+
+                                    </table>
+
+                                </div>
+    
+                            </div>
+
+
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

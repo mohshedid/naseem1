@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_sale_invoice_summary" 
+            model="account.invoice"
+            name="sale_invoice_summary.module_report"
+            file="sale_invoice_summary.module_report"
+            report_type="qweb-html"
+            string=" "/>
+            
+
+         <record id="sale_invoice_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">sale_invoice_report_wizard_form_view</field>
+            <field name="model">sale.invoice.summary</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+                            <field name="invoice_from"/>
+                            <field name="invoice_to"/>
+                            <field name="customer"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="form"/>
+                            <field name="to"/>
+                            <field name="slect_cust" widget="many2many_tags" domain="[('customer','=',True)]" attrs="{'invisible':[('customer','!=','spec_cust')]}"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="%(report_for_sale_invoice_summary)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="sale_invoice_report_wizard" model="ir.actions.act_window">
+            <field name="name">Sale Invoice Summary Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.invoice.summary</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sale_invoice_report_wizard_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Sale Invoice Summary" id="sale_invoice_menu_item" parent="customer_profile.customer_wise_item" action="sale_invoice_report_wizard" sequence="3"/>       
+
+    </data>
+</openerp>
+
+

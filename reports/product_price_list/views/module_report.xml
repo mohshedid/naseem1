@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading{
+                                    width: 100%;
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    margin-bottom: 50px;
+                                }
+                                .heading h3{
+                                    margin: 0px auto;
+                                }
+                                .heading p{
+                                    margin: 0px auto;
+                                }
+                                .list{
+                                    width: 80%;
+                                }
+                                .list p{
+                                    width: 80%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+                                .date {
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .date p {
+                                    margin: 0px auto;
+                                }
+                                table, th, td{
+                                    border: 1px solid;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    padding: 3px;
+                                    margin-top: 125px;
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <p><b>Product Price List</b></p>
+                                    </div>
+
+                                    <div class="list">
+                                        <p>List Price Wise</p>
+                                    </div>
+
+                                    <div class="date">
+
+                                        <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></p>
+
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Description</th>
+                                            <th>Category Title</th>
+                                            <th>List Price</th>
+                                            <th>Level 1</th>
+                                            <th>Level 2</th>
+                                            <th>Level 3</th>
+
+                                        </tr>
+
+                                        <t t-set="num" t-value="namer()"/>
+                                        <t t-if="num == 'all_prod'">
+                                            <t t-foreach="records" t-as="line">
+
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="line.id"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.name"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.categ_id.name"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.list_price_own"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.level_1"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.level_2"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.level_3"></span>
+                                                    </td>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </t>
+
+                                        <t t-if="num == 'multi_prod'">
+                                            <t t-foreach="select" t-as="data">
+
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="data.id"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.name"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.categ_id.name"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.list_price_own"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.level_1"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.level_2"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.level_3"></span>
+                                                    </td>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </t>
+
+                                    </table>
+
+                                </div>
+    
+                            </div>
+
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

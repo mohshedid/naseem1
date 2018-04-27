@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+
+
+                        <div class="page">
+
+                            <style>
+    
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    border: 1px solid;
+                                    padding: 3px;
+                                }
+                                .heading{
+                                    width: 84%;
+                                    float: left;
+                                }
+
+                                .heading h3{
+                                    margin: 0px 0px 0px 6px;
+                                    text-align: left;
+                                }
+                                .heading p{
+                                    margin: 0px 0px 0px 6px;
+                                    text-align: left;
+                                }
+                                .date {
+
+                                    width: 16%;
+                                    float: left;
+                                }
+
+                                .date .solid {
+                                    width: 30%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .date .liquid {
+
+                                    width: 60%;
+                                    float: left;
+                                    border: 1px solid;
+                                    padding: 1px;
+
+                                }
+                                .customer{
+                                    width: 1000px;
+                                }
+                                .customer p{
+                                    text-align: center;
+                                    font-weight: bold;
+                                    font-size: 20px;
+                                }
+                                .receipt{
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .receipt p{
+                                    margin: 1px 0px 0px 6px; 
+                                }
+                                .total{
+                                    width: 80%;
+                                    float: left;
+                                }
+                                .receive p{
+                                    margin: 1px 0px 0px 6px;
+                                }
+                            
+                                .receive{
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .hundred{
+                                    width: 63%;
+                                    float: left;
+                                }
+                                .hundred p{
+                                    border-bottom: 1px solid;
+                                }
+                                .rupees{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .rupees p{
+                                    border: 1px solid;
+                                }
+                                .from{
+                                    width: 30%;
+                                    float: left;
+                                }
+                                .from p{
+                                    margin: 1px 0px 0px 6px;
+                                }
+                                .side{
+                                    width: 56%;
+                                    float: right;
+                                }
+                                .side p{
+                                    border-bottom: 1px solid;
+                                }
+                                .case{
+                                    width: 65%;
+                                    float: left;
+                                }
+                                .case p{
+                                    margin: 1px 0px 0px 6px;
+                                }
+                                .sign{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .sign p{
+                                    border-top: 1px solid;
+                                }
+                                .clearfloat{
+                                    clear: both;
+                                    float: none;
+                                }
+
+                                p {
+
+                                    margin: 0 0 35px;
+                                    margin-top: 0px;
+                                    margin-right: 0px;
+                                    margin-bottom: 35px;
+                                    margin-left: 0px;
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <P>A Lahore, Pakistan</P>
+                                        <P>Tel: 0</P>
+                                        <P>Fax: URL:</P>
+                                        <P>Email:</P>
+                                    </div>
+
+                                    <div class="date">
+
+                                       <span class="solid">Date:</span>
+                                       <span class="liquid" t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span>
+
+                                    </div>
+
+                                    <br class="clearfloat"/>
+
+                                    <div class="customer">
+                                        <p>Customer Receipt</p>
+                                    </div>
+
+                                    <div class="receipt">
+                                        <p><b>Receipt No.</b></p>
+                                    </div>
+
+                                    <div class="total">
+                                        <P><span t-esc="o.number"></span></P>
+                                    </div>
+
+                                    <div class="receive">
+                                        <p><b>Received Rupess:</b></p>
+                                    </div>
+
+                                    <div class="hundred">
+                                        <p><span t-esc="number_to_word(o.amount)"></span></p>
+                                    </div>
+
+                                    <div class="rupees">
+                                        <P><b>Rs:</b>&#032;<span t-esc="o.amount"></span></P>
+                                    </div>
+
+                                    <div class="from">
+                                        <p><b>From:</b>&#032;<span t-esc="o.partner_id.name"></span></p>
+                                    </div>
+
+                                    <div class="side">
+                                        <p><b>In The Form of:</b>&#032;<span t-esc="o.journal_id.name"></span></p>
+                                    </div>
+
+                                    <div class="case">
+                                        <p><b>Note:</b>&#032;In case of cheque and draft the receipt is valid after its realization.</p>
+                                    </div>
+
+                                    <div class="sign">
+                                        <P><b>Signature</b></P>
+                                    </div>
+
+                                    <br class="clearfloat"/>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,93 @@
+<openerp>
+    <data>
+        <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%customer_form_naseem_bcube%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+            <!--========================[Form View-START]=====================-->
+ 
+                <record id="pdc_bcube_form_view" model="ir.ui.view">
+                    <field name="name">pdc_bcube_view</field>
+                    <field name="model">pdc_bcube.pdc_bcube</field>
+                    <field name="type">form</field>
+                    <field name="arch" type="xml">
+                        <form string="PDC">
+                            <header>
+                                <field name="stages" widget="statusbar" statusbar_visible="in_hand,deposited,credited,returned,settled,swap,cancelled"/>
+                            </header>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="customer"/>
+                                        <field name="bank"/>
+                                        <field name="amount"/>
+                                        <field name="inv_ref"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="date"/>
+                                        <field name="cheque_date"/>
+                                        <field name="chaque_no"/>
+                                        <field name="days_rem"/>
+                                        <field name="chk_date" invisible="1"/>
+
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+            <!--************************[Form View-ENDS]**********************-->
+             <!--========================[Search View-START]===================-->
+                <record id="view_tree_pdc" model="ir.ui.view"> 
+                    <field name="name">Rates Form</field> 
+                    <field name="model">pdc_bcube.pdc_bcube</field> 
+                    <field name="type">tree</field> 
+                    <field name="arch" type="xml"> 
+                        <tree> 
+                 
+                            <field name="customer"/>
+                            <field name="bank"/>
+                            <field name="cheque_date"/>
+     
+                        </tree> 
+                    </field> 
+            
+                </record>
+
+                
+                <record id="pdc_bcube_search_view" model="ir.ui.view">
+                    <field name="name">pdc_bcube_search_view</field>
+                    <field name="model">pdc_bcube.pdc_bcube</field>
+                    <field name="arch" type="xml">
+                        <search string="State">
+                            <filter string="This Week" name="filter_week" default="True" />
+                            <filter string="Today" name="filter_today"/>
+                            <filter string="Over Due" name="filter_over_due"  />
+                            <!-- domain="[('state','=','submitted')]"
+                            domain="[('state','=','prepared')]"  -->
+                            <group expand="0" string="Group By">
+                                <filter string="Bank Wise" icon="terp-partner" domain="[]" context="{'group_by':'bank'}"/>
+                                <filter string="Date Wise" icon="terp-partner" domain="[]" context="{'group_by':'date'}"/>
+                                <filter string="Customer Wise" icon="terp-partner" domain="[]" context="{'group_by':'customer_supplie'}"/>
+                                <filter string="Stage Wise" icon="terp-partner" domain="[]" context="{'group_by':'stages'}"/>
+                            </group>
+                        </search>
+                    </field>
+                </record>
+            <!--************************[Search View-ENDS]********************-->
+
+            <!--========================[Action-START]========================-->
+                <record model="ir.actions.act_window" id="action_pdc_bcube">
+                    <field name="name">PDC</field>
+                    <field name="res_model">pdc_bcube.pdc_bcube</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                </record>
+            <!--************************[Action-ENDS]*************************-->
+
+            <!--========================[Menu-START]==========================-->
+                <menuitem name="PDC" id="pdc_bcube" parent="account.menu_finance" sequence="3"/>
+                <menuitem name="PDC" id="pdc_bcube_child" parent="pdc_bcube" action="action_pdc_bcube" sequence="1"/>
+            <!--************************[Menu-ENDS]***************************-->
+        <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+    </data>
+</openerp>

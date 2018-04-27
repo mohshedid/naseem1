@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_product_location" 
+            model="product.product"
+            name="product_location_wise.customer_report"
+            file="product_location_wise.customer_report"
+            report_type="qweb-html"
+            string=" "/>
+            
+
+         <record id="product_location_wise_form_view" model="ir.ui.view">
+            <field name="name">product_location_wise_form_view</field>
+            <field name="model">product.location</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="product"/>
+
+                            
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="slect_prod" widget="many2many_tags" attrs="{'invisible':[('product','!=','multi_prod')]}"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(report_for_product_location)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+
+            </field>
+        </record>
+
+        <record id="product_location_report_wizard" model="ir.actions.act_window">
+            <field name="name">Product Location Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.location</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_location_wise_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Product Location Wise" id="product_location_menu_item" parent="customer_profile.customer_wise_item" action="product_location_report_wizard" sequence="10"/>       
+
+    </data>
+</openerp>
+
+

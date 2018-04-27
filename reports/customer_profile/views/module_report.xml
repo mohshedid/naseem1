@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .autos {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .autos h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    width: 30%;
+                                }
+                                .autos p {
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    font-weight: bold;
+                                }
+                                .clock{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .date{
+                                    width: 12%;
+                                    float: right;
+                                }
+                                .date p {
+                                    margin: 0px auto;
+                                }
+                                .walait {
+
+                                    width: 88%;
+                                    margin-bottom: -25px;
+                                    margin-top: 30px;
+                                }
+
+                                .walait p{
+                                    font-size: 25px;
+                                }
+                                .balance{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    float: left;
+                                }
+                                .total{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .balance p {
+
+                                    border: 1px solid;
+                                    font-size: 25px;
+                                    width: 45%;
+                                    padding: 8px;
+                                }
+                                .clearfloat{
+                                    clear: both;
+                                    float: none;
+                                }
+                                .current{
+                                    width: 45%;
+                                    float: left;
+                                    border: 1px solid;
+                                    padding: 3px;
+
+                                    
+                                }
+                                .current p{
+                                    width: 78%;
+                                    margin-left: 6px;
+                                    font-size: 18px;
+                                    
+
+                                }
+
+                                .contact {
+                                    width: 30%;
+                                    float: right;
+                                    border: 1px solid;
+                                    margin-bottom: 15px;
+                                    margin-top: -17px;
+                                }
+
+                                .contact p {
+                                
+                                    margin: 0px auto;
+                                    padding: 10px;
+                                    border-bottom: 1px solid;
+                                }
+
+                                table, td th {
+                                    
+                                    float: left;  
+                                    text-align: center;
+                                    border-bottom: 1px solid;
+                                    margin-top: 50px;    
+                                }
+
+
+                                table.space td {
+
+                                    border-top: 1px solid;
+
+                                }
+
+                                table.right td {
+
+                                    border-left: 1px solid;
+                                }
+
+                                .one {
+                                    width: 30%;
+                                    float: right;
+                                }
+
+                                table.bear th {
+
+                                    border: 1px solid;
+                                    border-collapse: collapse;
+                                    border-left: none;
+                                    border-right: none;
+                                    border-top: none;
+                                    text-align: center;
+                                }
+
+
+                                table tr td:first-child {
+
+                                    border-left: 1px solid;
+                                }
+
+                                table tr td:last-child {
+
+                                    border-right: 1px solid;
+                                }
+
+                                table.new th {
+
+                                    text-align: center;
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="autos">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <P>Customer Profile</P>
+                                    </div>
+
+                                    <div class="clock">
+
+                                        <div class="date">
+                                            <p><b>Date:</b>&#032;<span t-esc="date"></span></p>
+                                            <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></p>
+                                        </div>
+
+                                        <div class="walait">
+                                            <p><span t-esc="o.name"></span></p>
+                                        </div>
+
+                                    </div>
+
+                                    <br class="clearfloat"/>
+
+                                    <div class="total">
+
+                                        <div class="balance">
+                                            <p>BALANCE :&#032;<span t-esc="o.credit"></span></p>
+                                        </div>
+
+                                    </div>
+
+                                    <br class="clearfloat"/>
+
+                                    <div class="current">
+                                        <p><b>Current Month Payment:</b> 110500</p>
+                                        <p><b>Current Month Sales:</b>&#032;&#032;<span t-esc="get_sale()"></span></p>
+                                    </div>
+                                    <div class="contact">
+                                    
+                                        <p><b>Contact Person:</b></p>
+                                        <p><b>Mobile1:</b>&#032;<span t-esc="o.mobile1"></span></p> 
+                                        <p><b>Mobile2:</b>&#032;<span t-esc="o.mobile2"></span></p>
+                                        <p><b>Phone1:</b>&#032;<span t-esc="o.phone1"></span></p>
+                                        <p><b>Phone2:</b>&#032;<span t-esc="o.phone2"></span></p>
+
+                                    </div>
+
+                                    <table width="67%" class="space new">
+
+                                        <tr>
+
+                                            <th>..</th>
+                                            <t t-foreach="reporting_months" t-as="data">
+                                                <th><span t-esc="data"></span></th>
+                                            </t>
+
+                                        </tr>
+
+                                        <tr class="right">
+                                            <td>Receipt</td>
+                                            <td>877,000.00</td>
+                                            <td>187,280.00</td>
+                                            <td>649,800.00</td>
+                                            <td>619,300.00</td>
+                                            <td>766,000.00</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>SALES</td>
+                                            <td>
+                                                <span t-esc="get_val1()"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="get_val2()"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="get_val3()"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="get_val4()"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="get_val5()"></span>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <table width="100%" class="bear">
+                                        <tr>
+                                            <th>S#</th>
+                                            <th>PRODUCT</th>
+                                            <th>DETAILS</th>
+                                            <th>OLD</th>
+                                            <th>CURRENT</th>
+                                            <t t-foreach="reporting_months" t-as="data">
+                                                <th><span t-esc="data"></span></th>
+                                            </t>
+                                        </tr>
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-foreach="lissst" t-as="line">
+
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line"></span>
+                                                </td>
+                                                <td>$50.00 @ 75.00</td>
+                                                <td>
+                                                    <span t-esc="old_product(line)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_product(line)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_product1(line)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_product2(line)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_product3(line)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_product4(line)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_product5(line)"></span>
+                                                </td>
+
+                                            </tr>
+                                        </t>
+
+                                    </table>
+                                
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </t>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

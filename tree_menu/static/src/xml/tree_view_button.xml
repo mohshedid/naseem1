@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <template id="template" xml:space="preserve">
+
+    <t t-extend="ListView.buttons">                   
+      <t t-jquery="button.o_list_button_add" t-operation="after">
+
+        <div id="header_adds" class="header_additions" t-if="widget.model == 'account.invoice'">
+
+          <div id="buttons_wrapper">
+            
+            <div class="buttonnfields input-group date" id="field01">
+              <span class="head">Fecha Desde: </span>
+              <input type='text' id="dateTo" />
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar fa fa-calendar"></span>
+              </span>
+            </div>
+            
+            <div class="buttonnfields input-group date" id="field02">
+              <span class="head">Fecha Hasta: </span>
+              <input type='text' id="dateFrom" />
+              <span class="input-group-addon"><span class="glyphicon glyphicon-calendar fa fa-calendar"></span>
+              </span>
+            </div>
+            
+            <div class="buttonnfields" id="field03">
+              <button class="btn btn-primary btn-sm o_list_tender_button_create" type="button">Buscar</button>
+            </div>
+
+          </div>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
+
+          <script>
+            $(function() {              
+              $('#dateTo').datetimepicker({
+                  format: 'DD/MM/YYYY',
+                });
+                $('#dateFrom').datetimepicker({
+                  format: 'DD/MM/YYYY',
+              });
+              $("#header_adds").parent().parent().parent().parent().css({"position": "relative", "padding-bottom": "75px"});
+            });
+          </script>
+        </div>
+
+      </t>       
+    </t>  
+
+  </template>

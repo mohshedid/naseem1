@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_product_valuation_summary" 
+            model="product.category"
+            name="product_valuation_summary.customer_report"
+            file="product_valuation_summary.customer_report"
+            report_type="qweb-html"
+            string=" "/>
+            
+
+         <record id="product_valuation_summary_form_view" model="ir.ui.view">
+            <field name="name">product_valuation_summary_form_view</field>
+            <field name="model">product.valuation.summary</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="slect_prod" widget="many2many_tags"/>
+                           
+
+                        </group>
+
+                        <group name="group_right">
+
+                             
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(report_for_product_valuation_summary)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="product_valuation_summ_report_wizard" model="ir.actions.act_window">
+            <field name="name">Product Valuation Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.valuation.summary</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_valuation_summary_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Product Valuation Summary" id="product_valuation_summ_menu_item" parent="customer_profile.customer_wise_item" action="product_valuation_summ_report_wizard" sequence="7"/>       
+
+    </data>
+</openerp>
+
+

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_fabrics_plan" 
+            model="res.partner"
+            name="mr_fabrics_plan.module_report"
+            file="mr_fabrics_plan.module_report"
+            report_type="qweb-html"
+            string="Fabrics Plan"/> 
+    </data>
+</openerp>

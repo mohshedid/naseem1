@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+
+            id="product_profit_report" 
+            model="product.product"
+            name="product_profit.product_profit"
+            file="product_profit.product_profit"
+            report_type="qweb-html"
+            string="Product Profit"/>
+
+        <record id="product_profit_wizard" model="ir.ui.view">
+            <field name="name">product_profit_wizard</field>
+            <field name="model">product.profit.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="products" widget="many2many_tags"/>
+                            <field name="category" widget="many2many_tags"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="form"/>
+                            <field name="to"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(product_profit_report)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="product_profit_wizard_action" model="ir.actions.act_window">
+            <field name="name">Product Profit</field>
+            <field name="res_model">product.profit.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="product_profit_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="product_profit_menu" name="Product Profit" parent="customer_profile.customer_wise_item" action="product_profit_wizard_action" sequence="15"/>
+    </data>
+</openerp>

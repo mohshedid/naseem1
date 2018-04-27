@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="inherited_view_sms_configuration" model="ir.ui.view">
+        <field name="name">inherited_view_general_sms</field>
+        <field name="model">base.config.settings</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="base_setup.view_general_configuration"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='google']" position="before">
+                <group string="SMS Settings" name="sms_setting">
+                    <field name="user" />
+                    <field name="password" />
+                    <field name="url" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

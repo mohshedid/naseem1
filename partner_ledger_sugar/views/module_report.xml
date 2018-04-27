@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="partner_ledger_report">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+
+                    <t t-foreach="docs" t-as="o">
+                
+                        <div class="page">
+
+                            <style type="text/css">
+                                .header,
+                                .footer {
+                                    display: none;
+                                }
+                                .clearfloat {
+                                    clear: both;
+                                    float: none;
+                                    width: 100%;
+                                    height: 1px;
+                                    display: block;
+                                }
+                                .report-wrapper {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                table {
+                                    width: 100%;
+                                    border-spacing: 0px;
+                                    border: 2px solid #CCC;
+                                }
+                                table tr td, table tr th {
+                                    text-align: center;
+                                    padding: 10px 0px 10px 5px;
+                                    min-width: 130px;
+                                    border-right: 2px solid #CCC;
+                                    border-bottom: 1px solid #eee;
+                                }
+                                table tr td:last-child, 
+                                table tr th:last-child {
+                                    border-right: none
+                                }
+                                table tr:last-child td {
+                                    border-bottom: none
+                                }
+                                table tr th {
+                                    text-align: center;
+                                }
+                                .report-header {
+                                    width: 100%;
+                                    margin: 0px 0px 10px;
+                                    text-align: left;
+                                }
+                                .report-header p {
+                                    width: 50%;
+                                    float: left;
+                                    margin: 0px 0px 20px;
+                                }
+                                .report-header p .solid {
+                                    font-weight: bold;
+                                }
+                                h2 {
+                                    text-align: center;
+                                    font-size: 35px;
+                                    text-decoration: underline; 
+                                }
+                                .tile {
+                                    display: inline-block;
+                                    width: 100px;
+                                    text-align: center;
+                                    background: #a64f8e;
+                                    color: #fff;
+                                    padding: 2px 5px;
+                                }
+                            </style>
+
+                            <div class="report-wrapper">
+                                
+                                <div class="report-header">
+                                    
+                                    <p>
+                                        <span class="solid">Partner: </span>
+                                        <span class="liquid" t-esc="partner_wiz.name"></span>
+                                        <span class="tile"><span t-esc="typing()"></span> Ledger</span>
+                                    </p>
+                                    
+                                    <div style="float:right; width: 50%;text-align: right;">
+                                        <p style="float:none; width: 100%;">
+                                            <span class="solid">From: </span>
+                                            <span class="liquid" t-esc="form"></span>
+                                        </p>
+
+                                        <p style="float:none; width: 100%;">
+                                            <span class="solid">To: </span>
+                                            <span class="liquid" t-esc="to"></span>
+                                        </p>
+                                    </div>
+                                    <br class="clearfloat" />
+
+                                </div>
+                                <t t-set="balance" t-value="opening_bal" />
+                                <table>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>Debit</th>
+                                        <th>Credit</th>
+                                        <th>Balance</th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" style="background: #CCC; text-align: center; padding: 10px 0px; border-top: 1px solid #000;">
+                                            <b>
+                                                <span class="solid">Opening Balance: </span>
+                                                <span class="liquid" t-esc="'{:0,}'.format(int(float(balance)))"></span>
+                                            </b>
+                                        </td>
+                                    </tr>
+
+                                    <t t-foreach="entries.sorted(key=lambda x: x.date)" t-as="data">
+                                        <tr>
+                                            <td><span t-esc="time.strftime('%d %b %Y',time.strptime(data.date,'%Y-%m-%d'))"></span></td>
+
+                                            <td><span t-esc="data.journal_id.name"></span></td>
+
+                                            <td><span t-esc="data.name"></span></td>
+
+                                            <td>
+                                                <t t-if="dollar != True">
+                                                    <span t-esc="'{:0,}'.format(int(float(data.debit)))"></span>
+                                                </t>
+                                                <t t-if="dollar == True">
+                                                    <t t-if="data.debit > 0">
+                                                        <span t-esc="'{:0,}'.format(int(float(data.fc_amount)))"></span>
+                                                    </t>
+                                                </t>
+                                            </td>
+
+                                            <td>
+                                                <t t-if="dollar != True">
+                                                    <span t-esc="'{:0,}'.format(int(float(data.credit)))"></span>
+                                                </t>
+                                                <t t-if="dollar == True">
+                                                    <t t-if="data.credit > 0">
+                                                        <span t-esc="'{:0,}'.format(int(float(data.fc_amount)))"></span>
+                                                    </t>
+                                                </t>
+                                            </td>
+
+                                            <td>
+                                                <t t-if="dollar != True">
+                                                    <span t-esc="'{:0,}'.format(int(float((balance + data.debit) - data.credit)))"></span>
+                                                    <t t-set="balance" t-value="(balance + data.debit) - data.credit" />
+                                                </t>
+                                                <t t-if="dollar == True">
+
+                                                    <t t-set="the_debits" t-value="0" />
+                                                    <t t-set="the_credits" t-value="0" />
+                                                    
+                                                    <t t-if="data.debit > 0">
+                                                        <t t-set="the_debits" t-value="data.fc_amount" />
+                                                    </t>
+                                                    
+                                                    <t t-if="data.credit > 0">
+                                                        <t t-set="the_credits" t-value="data.fc_amount" />
+                                                    </t>
+                                                    <span t-esc="'{:0,}'.format(int(float((balance + the_debits) - the_credits)))"></span>
+                                                    <t t-set="balance" t-value="(balance + the_debits) - the_credits" />
+
+                                                </t>
+
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+
+                                <br></br>
+
+                                <t t-set="num" t-value="pdc_check()" />
+
+                                <t t-if = "num == 1">
+
+                                    <table>
+
+                                        <tr>
+                                            <th>Bank</th>
+                                            <th>Cheque No.</th>
+                                            <th>Cheque Date</th>
+                                            <th>Receiving Date</th>
+                                            <th>Remaining Days</th>
+                                            <th>Amount</th>
+                                        </tr>
+
+                                        <t t-set="pdc_tot" t-value="0" />
+                                        <t t-foreach="pdc" t-as="line">
+
+
+                                            <tr>
+
+                                                <td>
+                                                    <span t-esc="line.bank.name"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.chaque_no"></span>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.cheque_date"></span>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.date"></span>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line.days_rem"></span>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <span t-esc="'{:0,}'.format(int(float(line.amount)))"></span>
+                                                    <t t-set="pdc_tot" t-value="pdc_tot+line.amount" />
+                                                    
+                                                </td>
+
+                                            </tr>
+
+                                        </t>
+
+                                        <tr>
+                                            <td colspan="5" style="font-weight:bold">TOTAL</td>
+                                            <td style="font-weight:bold" >
+                                                <span t-esc="'{:0,}'.format(int(float(pdc_tot)))"></span>
+                                                
+                                            </td>
+                                        </tr>
+
+                                    </table>
+
+                                    <br></br>
+
+                                    <div style="float:right; width: 50%;text-align: right;">
+                                        <p style="float:none; width: 100%;">
+                                            <b><span class="solid">Remaining Balance: </span></b>
+                                            <b><span class="liquid" t-esc="'{:0,}'.format(int(float(balance-pdc_tot)))"></span></b>
+                                        </p>
+                                    </div>
+
+                                </t>
+
+
+                            </div><!--end of report wrapper-->
+
+                        </div><!--end of page -->
+
+                    </t>
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

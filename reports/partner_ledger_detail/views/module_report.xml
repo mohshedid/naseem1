@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .contain{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                    margin-bottom: 40px;
+                                }
+                                .heading h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .heading p{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .date{
+                                    width: 33%;
+                                    float: left;
+                                }
+                                .date p {
+                                    margin: 0px auto;
+                                }
+                                .to{
+                                    width: 48%;
+                                    float: left;
+                                }
+                                .to p {
+                                    margin: 0px auto;
+                                }
+                                .king{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .king p {
+                                    margin: 0px auto;
+                                }
+                                .customer{
+                                    width: 33%;
+                                    float: left;
+                                }
+                                .customer p {
+                                    margin: 0px auto;
+                                }
+                                .mn{
+                                    width: 48%;
+                                    float: left;
+                                }
+                                .mn p {
+                                    margin: 0px auto;
+                                }
+                                .time{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .time p {
+                                    margin: 0px auto;
+                                }
+                                .voucher{
+                                    width: 33%;
+                                    float: left;
+                                }
+                                .voucher p {
+                                    margin: 0px auto;
+                                }
+                                .act{
+                                    width: 60%;
+                                    float: left;
+                                }
+                                .act p {
+                                    margin: 0px auto;
+                                }
+                           
+                                table, th,td{
+                                    border: 1px solid;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    padding: 5px;
+                                    margin-bottom: 10px;
+                                }
+                                .custom{
+                                    width: 20%;
+                                    float: left;
+                                }
+
+                                .man{
+                                    width: 20%;
+                                    float: left;
+                                }
+                            
+                                .contact{
+                                    width: 20%;
+                                    float: left;
+                                }
+                                
+
+                                .previous{
+                                    width: 20%;
+                                    float: left;
+                                }
+                            
+                                .last{
+                                    width: 10%;
+                                    float: right;
+                                }
+                                .amount {
+                                    width: 100%;
+
+                                }
+                                .amount p1{
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+                                .amount p2 {
+                                    width: 80%;
+                                    float: left;
+                                }
+                                .amount p3 {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+                                .amount p4 {
+                                    width: 80%;
+                                    float: left;
+                                }
+                                .amount p5 {
+                                    width: 20%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+                                .amount p6 {
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .custom {
+                                    width: 100%;
+                                    border: 1px solid;
+                                    margin-bottom: 15px;
+                                    margin-top: 15px;
+                                    padding: 3px;
+
+                                }
+                                .custom p1 {
+                                    width: 13%;
+                                    float: left;
+                                }
+                                .custom p2 {
+                                    width: 8%;
+                                    float: left;
+                                }
+                                .custom p3 {
+                                    width: 7%;
+                                    float: left;
+                                }
+                                .custom p4 {
+                                    width: 25%;
+                                    float: left;
+                                }
+                                .custom p5 {
+                                    width: 7%;
+                                    float: left;
+                                }
+                                .custom p6 {
+                                    width: 16%;
+                                    float: left;
+                                }
+                                .custom p7 {
+                                    width: 15%;
+                                    float: left;
+                                }
+    
+                            </style>
+
+                            <div class="contain">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <P><b>Customer Ledger (Detailed) Invoice Wise Total</b></P>
+                                    </div>
+
+                                    <div class="date">
+                                        <p><b>Date From:</b>&#032;
+                                        <span t-esc="get_form()"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="to">
+                                        <P><b>To:</b>&#032;
+                                        <span t-esc="get_to()"></span>
+                                        </P>
+                                    </div>
+
+                                    <div class="king">
+                                        <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></p>
+                                    </div>
+
+
+                                    <div class="time">
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+                                    </div>
+
+
+                                    <div class="custom">
+                                        <p1><b>Customer ID:</b></p1>
+                                        <p2>
+                                            <span t-esc="o.id"></span>
+                                        </p2>
+                                        <p3><b>Name:</b></p3>
+                                        <p4>
+                                            <span t-esc="o.name"></span>
+                                        </p4>
+                                        <p5><b>Contact:</b></p5>
+                                        <p6>
+                                            <span t-esc="o.contact_address.customer_name"></span>
+                                        </p6>
+                                        <p7><b>Previous Balnce:</b></p7>
+                                        <p8></p8>
+                                        <p9>
+                                            <span t-esc="get_bal(o.id)"></span>
+                                        </p9>
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+
+                                            <th>Inv No.</th>
+                                            <th>Date</th>
+                                            <th>Type</th>
+                                            <th>Ref</th>
+                                            <th>Details</th>
+                                            <th>Debit</th>
+                                            <th>Credit</th>
+                                            <th>Balance</th>
+                                        </tr>
+
+                                        <t t-set="gd_total" t-value="0"/>
+                                        <t t-foreach="upper" t-as="data">
+                                            <span t-esc="get_line(data.id)"></span>
+                                            <t t-set="d_total" t-value="0"/>
+                                            <t t-foreach="inner" t-as="line">
+                                                
+                                                <tr>
+
+                                                    <td>
+                                                       <span t-esc="line.invoice_id.number"></span> 
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.invoice_id.date_invoice"></span>
+                                                    </td>
+                                                    <td>SI</td>
+                                                    <td>
+                                                        <span t-esc="line.invoice_id.reference"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.product_id.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.price_subtotal"></span>
+                                                        <t t-set="d_total" t-value="d_total+line.price_subtotal"/>
+                                                        <t t-set="gd_total" t-value="gd_total+d_total"/>
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+
+                                                </tr>
+
+                                            </t>
+
+                                            <tr>
+                                                <th colspan="5">Total:</th>
+                                                <td><b>
+                                                    <span t-esc="d_total"></span>
+                                                </b></td>
+                                                <td><b>0</b></td>
+                                                <td><b>0</b></td>
+                                            </tr>
+
+                                        </t>
+
+                                        <tr>
+                                            <th colspan="5">Total:</th>
+                                            <td><b>
+                                                <span t-esc="gd_total"></span>
+                                            </b></td>
+                                            <td><b>0</b></td>
+                                            <td><b>0</b></td>
+                                        </tr>
+
+
+                                    
+                                    </table>
+
+                                    <div class="amount">
+                                        <p1>Amount Ouststanding:</p1>
+                                        <p2>0</p2>
+                                        <p3>Amoun Paid This Period:</p3>
+                                        <p4>0</p4>
+                                        <p5>Credit Limit:</p5>
+                                        <p6>
+                                            <span t-esc="float(o.credit_limit)"></span>
+                                        </p6>
+                                    </div>
+
+                                </div>
+    
+                            </div>
+
+                        </div>
+
+                    </t>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

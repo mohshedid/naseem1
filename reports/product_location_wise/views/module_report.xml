@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading {
+                                    margin-bottom: 30px;
+                                }
+                                .heading h3{
+                                    margin: 0px auto;
+                                    text-align: center;
+                                }
+                                .heading p{
+                                    margin: 0px auto;
+                                    text-align: center;
+                                }
+                                .all{
+                                    width: 80%;
+                                    float: left;
+                                }
+                                .date{
+                                    width: 15%;
+                                    float: right;
+
+                                }
+                                .date p {
+                                    margin: 0px auto;
+                                }
+                                table, th, td {
+                                        border: 1px solid;
+                                        border-collapse: collapse;
+                                        text-align: center;
+                                        margin-top: 30px;
+
+                                }
+                                .clearfloat{
+                                    clear: both;
+                                    float: none;
+                                }
+                                .shop{
+                                    width: 40%;
+                                    margin: 0px auto;
+                                    float: right;
+                                    
+                                }
+                                .shop p1{
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .shop p2 {
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .shop p3 {
+                                    width: 24%;
+                                    float: left;
+                                }
+                                .shop p4 {
+                                    width: 17%;
+                                    float: left;
+                                }
+                                .shop p5 {
+                                    width: 16%;
+                                    float: right;
+                                }
+                                .shop p6 {
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .shop p7{
+                                    width: 20%;
+                                    float: left;
+                                }
+                                .shop p8 {
+                                    width: 21%;
+                                    float: left;
+                                }
+                                .shop p9 {
+                                    width: 15%;
+                                    float: left;
+                                    margin-left: 0px;
+                                }
+                                .shop p10 {
+                                    width: 21%;
+                                    float: right;
+                                    margin-left: left;
+                                }
+                                .market {
+                                    width: 100%;
+                                }
+                                
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <p><b>Product List With Location Wise Stock</b></p>
+                                    </div>
+
+                                    <div class="truck">
+
+
+                                        <div class="all">
+
+                                            <t t-set="num" t-value="namer()"/>
+
+                                            <t t-if="num == 'all_prod'">
+                                                <p><b>
+                                                    <span>All Products</span>
+                                                </b></p>
+                                            </t>
+
+                                             <t t-if="num == 'multi_prod'">
+                                                <p><b>
+                                                    <span>Multi Products</span>
+                                                </b></p>
+                                            </t>
+
+                                        </div>
+
+                                        <div class="date">
+
+                                            <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></p>
+
+                                            <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+
+                                        </div>
+                                        
+                                    </div>
+
+                                    <br class="clearfloat"/>
+                                    <t t-if="num == 'multi_prod'">
+
+                                        <table width="100%">
+                                            <t t-set="i" t-value="1"/>
+                                            <tr>
+                                                <th>Product ID</th>
+                                                <th>Description</th>
+                                                <th>UOM</th>
+                                                <t t-foreach="new_loc" t-as="data">
+                                                    <th>Loo
+                                                        <span t-esc="i"></span>
+                                                        <t t-set="i" t-value="i+1"/>
+                                                    </th>
+                                                </t>
+                                            </tr>
+
+                                             <tr>
+                                                <th colspan="3">Location</th>
+                                                <t t-foreach="new_loc" t-as="data">
+                                                    <th>
+                                                        <span t-esc="data"></span>
+                                                    </th>
+                                                </t>
+                                            </tr>
+                                            <t t-foreach="multi" t-as="line">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="line.id"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.uom"></span>
+                                                    </td>
+
+                                                    <t t-foreach="new_loc" t-as="data">
+
+                                                        <td>
+                                                            <span t-esc="get_amt(line.id,data)"></span>
+                                                        </td>
+
+                                                    </t>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </table>
+
+                                    </t>
+
+                                    <t t-if="num == 'all_prod'">
+
+                                        <table width="100%">
+                                            <t t-set="i" t-value="1"/>
+                                            <tr>
+                                                <th>Product ID</th>
+                                                <th>Description</th>
+                                                <th>UOM</th>
+                                                <t t-foreach="loc" t-as="data">
+                                                    <th>Loo
+                                                        <span t-esc="i"></span>
+                                                        <t t-set="i" t-value="i+1"/>
+                                                    </th>
+                                                </t>
+                                            </tr>
+
+                                             <tr>
+                                                <th colspan="3">Location</th>
+                                                <t t-foreach="loc" t-as="data">
+                                                    <th>
+                                                        <span t-esc="data"></span>
+                                                    </th>
+                                                </t>
+                                            </tr>
+                                            <t t-foreach="records" t-as="line">
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="line.id"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.uom"></span>
+                                                    </td>
+
+                                                    <t t-foreach="loc" t-as="data">
+
+                                                        <td>
+                                                            <span t-esc="get_amt(line.id,data)"></span>
+                                                        </td>
+
+                                                    </t>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </table>
+
+                                    </t>
+                                                                    
+                                </div>
+
+
+                            </div> 
+                            
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

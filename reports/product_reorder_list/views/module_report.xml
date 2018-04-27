@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+
+
+
+                        <div class="page">
+
+                            <style>
+
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading {
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    margin-bottom: 55px;
+                                }
+                                .heading h3{
+                                    margin: 0px auto;
+                                }
+                                .heading p{
+                                    margin: 0px auto;
+                                }
+                                .all{
+                                    width: 80%;
+                                    float: left;
+                                }
+                                .date{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .date p {
+                                    margin: 0px auto;
+                                }
+                                table, th, td {
+                                    border: 1px solid;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    margin-top: 120px;
+                                    padding: 4px;
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <p>Product Re-Order List With Stock</p>
+                                    </div>
+
+                                    <div class="all">
+                                        <p><b>All Products</b></p>
+                                    </div>
+
+                                    <div class="date">
+                                        <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></p>
+
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></p>
+
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>ProductID</th>
+                                            <th>Description</th>
+                                            <th>InStock</th>
+                                            <th>Re-Order</th>
+                                            <th>Last Supplier (Purchased)</th>
+                                        </tr>
+
+                                        <t t-foreach="docs" t-as="o">
+
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="o.id"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="o.name"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="hand(o.id)"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="o.minimum_level"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="get_supp(o.id)"></span>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

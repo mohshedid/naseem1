@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="default_style_for_all_reports" model="report.template.settings">
+            <field name="name">Default Style (don't delete)</field>
+        </record>
+        <record id="base.main_company" model="res.company">
+            <field name="default_style" ref="customized_invoice.default_style_for_all_reports"/>
+        </record>
+    </data>
+</openerp>

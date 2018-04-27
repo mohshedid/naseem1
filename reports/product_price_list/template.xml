@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_product_list_wise" 
+            model="product.product"
+            name="product_price_list.customer_report"
+            file="product_price_list.customer_report"
+            report_type="qweb-html"
+            string=" "/>
+            
+
+         <record id="product_price_list_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">product_price_list_report_wizard_form_view</field>
+            <field name="model">product.list</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="product"/>
+                           
+
+                        </group>
+
+                        <group name="group_right">
+
+                             <field name="slect_prod" widget="many2many_tags" attrs="{'invisible':[('product','!=','multi_prod')]}"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(report_for_product_list_wise)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="product_price_list_report_wizard" model="ir.actions.act_window">
+            <field name="name">Product Wise Report Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.list</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_price_list_report_wizard_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Product Price List" id="product_wise_menu_item" parent="customer_profile.customer_wise_item" action="product_price_list_report_wizard" sequence="4"/>       
+
+    </data>
+</openerp>
+
+

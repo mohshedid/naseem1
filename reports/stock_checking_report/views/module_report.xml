@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0PX auto;
+                                }
+                                .heading{
+                                    width: 1000px;
+                                }
+                                .heading h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .heading p {
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    margin-bottom: 43px; 
+                                }
+                                .single{
+                                    width: 50%;
+                                    float: left;
+                                }
+                                .da{
+                                    width: 15%;
+                                    float: right;
+                                    margin-bottom: 15px;
+                                }
+                                .da p {
+                                    margin: 0px auto;
+                                }
+                                table, td, th {
+                                    border: 1px solid;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    padding: 4px;
+                                    margin-top: 100px;
+                                }
+                                
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="heading">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <p><b>Stock Checking Report</b></p>
+                                    </div>
+
+                                    <div class="single">
+                                        <t t-set="num" t-value="namer()"/>
+
+                                        <t t-if="num == 'all_loc'">
+                                            <p><b>
+                                                <span>All Locations</span>
+                                            </b></p>
+                                        </t>
+
+                                         <t t-if="num == 'multi_loc'">
+                                            <p><b>
+                                                <span t-esc="get_loc()"></span>
+                                            </b></p>
+                                        </t>
+                                    </div>
+
+                                    <div class="da">
+
+                                        <P><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></P>
+
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th rowspan="2">Product ID </th>
+                                            <th rowspan="2">Description</th>
+                                            <th rowspan="2">Category Title</th>
+                                            <th rowspan="2">Pieces</th>
+                                            <th rowspan="2">Cartons</th>
+                                            <th rowspan="2">In Stock</th>
+                                            <th colspan="2">Physical Stock</th>
+                                            <th rowspan="2">Balance</th>
+                                        </tr>
+
+                                        <tr>
+                                            <th>In Pieces</th>
+                                            <th>In Cartoons</th>
+                                          <!--   <th>Category Title</th>
+                                            <th>Pieces</th>
+                                            <th>Cartons</th>
+                                            <th>In Stock</th>
+                                            <th>Physical Stock</th>
+                                            <th>Balance</th> -->
+                                        </tr>
+
+                                        <t t-if="num == 'multi_loc'">
+
+                                            <t t-foreach="lisst" t-as="line">
+
+                                                <tr>
+
+                                                    <td>
+                                                        <span t-esc="line"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="get_name(line)"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="get_cat(line)"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="get_quan(line)"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="get_caton(line)"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="get_quan(line)"></span>
+                                                    </td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    
+
+                                                </tr>
+
+                                            </t>
+                                        </t>
+
+                                        <t t-if="num == 'all_loc'">
+
+                                            <t t-foreach="new" t-as="data">
+
+                                                <tr>
+
+                                                    <td>
+                                                        <span t-esc="data"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="get_name(data)"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="get_cat(data)"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="get_quan(data)"></span>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="get_caton(data)"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="get_quan(data)"></span>
+                                                    </td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                    
+
+                                                </tr>
+
+                                            </t>
+                                        </t>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+                            
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

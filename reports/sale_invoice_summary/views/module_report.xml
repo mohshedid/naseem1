@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .name{
+                                    width: 100%;
+                                    margin: 0px auto
+                                }
+                                .name h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .name p{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    font-weight: bold;
+                                    margin-bottom: 38px;
+                                }
+                                .account p2 {
+                                    width: 12%;
+                                    float: left;
+                                }
+                                .account P3 {
+                                    width: 73%;
+                                    float: left;
+                                }
+                                .account p4 {
+                                    width: 5%;
+                                    float: left;
+                                }
+                                .account p5 {
+                                    width: 10%;
+                                    float: right;
+                                }
+                                .account p6 {
+                                    width: 12%;
+                                    float: left;
+                                }
+                                .account p7 {
+                                    width: 15%;
+                                    float: left;
+                                }
+                                .account p8 {
+                                    width: 3%;
+                                    float: left;
+                                }
+                                .account p9 {
+                                    width: 55%;
+                                    float: left;
+                                }
+                                .account p10 {
+                                    width: 5%;
+                                    float: left;
+                                }
+
+                                .account p11 {
+                                    width: 7%;
+                                    float: left;
+                                }
+
+                                .account p12 {
+                                    width: 12%;
+                                    float: left;
+                                }
+                                .account p13 {
+                                    width: 15%;
+                                    float: left;
+                                }
+                                .account p14 {
+                                    width: 3%;
+                                    float: left;
+                                }
+
+                                .account p15 {
+                                    width: 10%;
+                                    float: left;
+                                }
+                                
+                                
+                                table, th, td {
+                                    border: 1px solid;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    border-left: none;
+                                    border-right: none;
+                                    margin-top: 130px;
+                                    padding: 4px;
+                                }
+
+                            </style>
+
+                           <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="name">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <P>Sale Invoice Summary</P>
+                                    </div>
+
+                                    <div class="account">
+                                        <P2><b>A/C Name:</b></P2>
+
+                                        <P3>AFG-QADIR To UNKNOWN</P3> 
+
+                                        <p4><b>Date:</b></p4>
+
+                                        <p5><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></p5>
+
+                                        <p6><b>Invoice Date:</b></p6>
+
+                                        <p7>
+                                            <span t-esc="get_form()"></span>
+                                        </p7>
+
+                                        <p8><b>To:</b></p8>
+
+                                        <p9>
+                                            <span t-esc="get_to()"></span>
+                                        </p9>
+
+                                        <p10><b>Time:</b></p10>
+
+                                        <p11><span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></p11>  
+
+                                        <p12><b>Invoice No:</b></p12>
+
+                                        <p13>
+                                            <span t-esc="get_inv_from()"></span>
+                                        </p13> 
+
+                                        <p14><b>To:</b></p14>
+
+                                        <p15>
+                                            <span t-esc="get_inv_to()"></span>
+                                        </p15>
+
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>No.</th>
+                                            <th>Inv No</th>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>Cutomer ID</th>
+                                            <th>Company</th>
+                                            <th>Total Amount</th>
+                                            <th>Paid Amount</th>
+                                            <th>Balance</th>
+                                        </tr>
+
+                                        <t t-set="i" t-value="1" />
+                                        <t t-set="total" t-value="0" />
+                                        <t t-set="num" t-value="namer()" />
+
+                                        <t t-if="num == 'all_cust'">
+
+                                            <t t-foreach="records" t-as="data">
+
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="i"/>
+                                                        <t t-set="i" t-value="i+1"/>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="data.number"></span>
+                                                    </td>
+                                                    <td>SI</td>
+                                                    <td>
+                                                        <span t-esc="data.date_invoice"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="data.partner_id.id"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="data.partner_id.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="data.amount_total"></span>
+                                                        <t t-set="total" t-value="total+data.amount_total" />
+                                                    </td>
+                                                    <td>0.00</td>
+                                                    <td>0.00</td>
+
+                                                </tr>
+
+                                            </t>
+
+                                        </t>
+
+                                        <t t-if="num == 'spec_cust'">
+
+                                            <t t-foreach="multi" t-as="line">
+
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="i"/>
+                                                        <t t-set="i" t-value="i+1"/>
+                                                    </td>
+
+                                                    <td>
+                                                        <span t-esc="line.number"></span>
+                                                    </td>
+                                                    <td>SI</td>
+                                                    <td>
+                                                        <span t-esc="line.date_invoice"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.partner_id.id"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.partner_id.name"></span>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line.amount_total"></span>
+                                                        <t t-set="total" t-value="total+line.amount_total" />
+                                                    </td>
+                                                    <td>0.00</td>
+                                                    <td>0.00</td>
+
+                                                </tr>
+
+                                            </t>
+                                            
+                                        </t>
+
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                            <th>Total:</th>
+                                            <th>
+                                                <span t-esc="total"></span>
+                                            </th>
+                                            <th>00</th>
+                                            <th>00</th>
+                                        </tr>
+                                        
+                                    </table>
+                                </div>
+                                
+
+                            </div>
+
+                        </div>
+
+                    </t>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="customer_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .container{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .center-container{
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .heading{
+                                    width: 1000px;
+                                    margin: 0px auto
+                                }
+                                .heading h3{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                }
+                                .heading p{
+                                    text-align: center;
+                                    margin: 0px auto;
+                                    margin-bottom: 38px;
+                                }
+                                .account{
+                                    width: 30%;
+                                    float: left;
+                                }
+                                .invoice{
+                                    width: 50%;
+                                    float: left;
+                                }
+                                .time{
+                                    width: 15%;
+                                    float: right;
+                                }
+                                .time p {
+                                    margin: 0px auto;
+                                }
+
+                                table, td, th {
+
+                                    border: 1px solid black;
+                                    text-align: center;
+                                    border-collapse: collapse;
+                                    padding: 4px;
+                                    margin-top: 90px;
+                                }
+                                .total{
+                                    width: 100%;
+                                    margin: 0px auto;
+                                }
+                                .total p1{
+                                    width: 15%;
+                                    float: right;
+                                    margin-left: 0px;
+                                    border-top: 1px solid;
+                                    border-bottom: 1px solid;
+                                }
+                                .total p2{
+                                    width: 18%;
+                                    float: right;
+                                    margin-left: 0px;
+                                    border-top: 1px solid;
+                                    border-bottom: 1px solid;
+                                }
+                                .total p3{
+                                    width: 20%;
+                                    margin-right:  0px;
+                                    float: right;
+                                    
+                                }
+    
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+                                    <div class="heading">
+                                        <h3>CAR ACCESORIES</h3>
+                                        <P><b>Product Valuation Summary</b></P>
+                                    </div>
+                                    <div class="account">
+                                        <P><b>Category From:</b>&#032;
+                                        <span t-esc="last()"></span>
+                                        </P>
+                                    </div>
+                                    <div class="invoice">
+                                        <p><b>To:</b>&#032;
+                                        <span t-esc="first()"></span>
+                                        </p>
+                                    </div>
+                                    <div class="time">
+
+                                        <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></p>
+
+                                        <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+
+                                    </div>
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>Category ID</th>
+                                            <th>Description</th>
+                                            <th>InStock</th>
+                                            <th>Stock Value</th>
+                                        </tr>
+
+                                        <t t-set="stok" t-value="0"/>
+                                        <t t-set="val" t-value="0"/>
+                                        <t t-foreach="select" t-as="data">
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="data.id"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="data.name"></span>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="hand(data.id)"></span>
+                                                    <t t-set="stok" t-value="stok+hand(data.id)"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="cost(data.id)"></span>
+                                                    <t t-set="val" t-value="val+cost(data.id)"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <tr>
+                                            <th colspan="2">Total:</th>
+                                            <th>
+                                                <span t-esc="stok"></span>
+                                            </th>
+                                            <th>
+                                                <span t-esc="val"></span>
+                                            </th>
+                                        </tr>
+                                
+                                        
+                                    </table>
+                                    
+                                </div>
+    
+                            </div>
+
+                        </div>
+
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

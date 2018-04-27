@@ -1,0 +1,1455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <!-- <t t-foreach="docs" t-as="o"> -->
+
+                        <div class="page">
+
+                            <style>
+                                @media (min-width: 992px) {
+                                    .container {
+                                        width: 1450px;
+                                    }
+                                }
+                                @media (min-width: 768px) {
+                                    .container {
+                                        width: 1450px;
+                                    }
+                                }
+                                @media (min-width: 768px) {
+                                    .container {
+                                        width: 1450px;
+                                    }
+                                }
+                                .report-container,
+                                .page,
+                                body,
+                                .container {
+                                    width: 1450px;
+                                }
+                                .container {
+                                    max-width: 1450px !important;
+                                }
+                                .center-container {
+                                    width: 1450px;
+                                    margin: 0px auto;
+                                    text-align: center;
+                                }
+                                h2 {
+                                    margin-bottom: 3px;
+                                }
+                                .report-header table {
+                                    float: left;
+                                }
+                                table {
+                                    border: 2px solid #595959;
+                                    font-size: 10px;
+                                    border-spacing: 0px;
+                                    margin: 10px 0px;
+                                }
+                                table tr th,
+                                table tr td {
+                                    padding: 5px;
+                                    border-bottom: 1px solid #595959;
+                                    border-right: 1px solid #595959;
+                                    vertical-align: middle;
+                                }
+                                .container-two table tr th,
+                                .container-two table tr td {
+                                    padding: 0px 5px;
+                                }
+                                table tr th:last-child,
+                                table tr td:last-child {
+                                    border-right: none;
+                                }
+                                table tr:last-child td {
+                                    border-bottom: none;
+                                }
+                                table tr td.heading {
+                                    text-align: center;
+                                    font-weight: bold;
+                                }
+                                table.first-table {
+                                    width: 350px;
+                                }
+                                table.first-table tr td {
+                                    padding: 3px 5px;
+                                }
+                                table.second-table {
+                                    margin: 10px 0px 0px 50px;
+                                    width: 250px;
+                                }
+                                table.third-table,
+                                table.sixth-table {
+                                    margin-left: 0px !important;
+                                }
+                                table.fifth-table,
+                                table.eighth-table {
+                                    margin-right: 0px !important;
+                                }
+                                .container-one table {
+                                    width: 32%;
+                                    margin: 0px 5px;
+                                    float: left;
+                                    min-height: 600px;
+                                }
+                                .container-two table {
+                                    width: 31.1%;
+                                    min-height: 700px;
+                                }
+                                .container-one table tr:first-child td {
+                                    padding: 10px 0px;
+                                    font-weight: bold;
+                                    text-align: center;
+                                }
+                                .container-one table tr:nth-child(2) th,
+                                .container-one table tr:nth-child(2) td {
+                                    height: 100px;
+                                }
+                                .container-one table tr td:first-child span {
+                                    text-align: right;
+                                }
+                                .container-one table tr td:first-child span:first-child {
+                                    text-align: left;
+                                }
+                                .container-one table tr td span {
+                                    display: block;
+                                    margin: 8px 0px;
+                                    min-height: 10px;
+                                    text-align: center;
+                                    font-weight: bold;
+                                }
+                                .clearfloat {
+                                    clear: both;
+                                    float: none;
+                                }
+                                .container-one {
+                                    width: 100%;
+                                    margin: 10px 0px;
+                                }
+                                .border-right {
+                                    border-right: 1px solid #595959 !important;
+                                }
+                                .border-none {
+                                    border-bottom: none !important;
+                                }
+                                .report-footer p {
+                                    width: 33%;
+                                    float: left;
+                                    text-align: left;
+                                }
+                                .report-footer p span {
+                                    border: 2px solid #595959;
+                                    display: inline-block;
+                                    width: 200px;
+                                    padding: 5px 0px;
+                                    text-align: center;
+                                }
+                                .report-footer p:first-child {
+                                    text-align: left;
+                                }
+                                .report-footer p:nth-child(3) {
+                                    text-align: right;
+                                }
+                                .report-footer p:nth-child(2) {
+                                    text-align: center;
+                                }
+                            </style>
+
+                            <div class="report-container">
+
+                                <div class="center-container">
+
+                                    <div class="report-header">
+
+                                        <h2>FABRIC PLAN</h2>
+
+                                        <table class="first-table">
+
+                                            <tr>
+                                                <td colspan="2" class="heading">MATRIX</td>
+                                                <td rowspan="2">DELL DATE:</td>
+                                                <td>16-Oct-17</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td colspan="2" class="heading">BILLABONG</td>
+                                                <td>WEEK-42</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>W/O#</td>
+                                                <td>MF-BL-750-17</td>
+                                                <td rowspan="3" class="border-none">DEST:</td>
+                                                <td rowspan="3" class="border-none">FRANCE</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>STYLE#</td>
+                                                <td class="border-right">H1FL02(M616BAL)</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>P.O#</td>
+                                                <td class="border-right">70142</td>
+                                            </tr>
+                                            
+                                        </table>
+
+                                        <table class="second-table">
+                                            <tr>
+                                                <td style="text-align: center;">MEN'S</td>
+                                                <td style="text-align: center;">SP-18</td>
+                                            </tr>
+                                        </table>
+                                        <br class="clearfloat" />
+
+                                    </div>
+
+                                    <div class="container-one">
+
+                                        <table class="third-table">
+                                            <tr>
+                                                <td colspan="6">KNITTING PLAN</td>
+
+                                            </tr>
+
+                                            <tr style=" text-align: center;">
+                                                <th>FABRIC:</th>
+                                                <th>YARN</th>
+                                                <th>DIA</th>
+                                                <th>GG</th>
+                                                <th>GSM</th>
+                                                <th>KGS</th>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span>BALANCE FLEECE:</span>
+                                                    <span>MUSTERED/EARTH</span>
+                                                    <span>BLACKASPHALT</span>
+                                                    <span>HYDRO/BLACK</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30/s+320cvc</span>
+                                                    <span>30/s+320cvc</span>
+                                                    <span>30/s+320cvc</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30</span>
+                                                    <span>30</span>
+                                                    <span>30</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>18</span>
+                                                    <span>18</span>
+                                                    <span>18</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>-</span>
+                                                    <span>-</span>
+                                                    <span>-</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>120</span>
+                                                    <span>191</span>
+                                                    <span>252</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span>BUTTER FLEECE:</span>
+                                                    <span>ECRU</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30/s</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>15</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>-</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>420</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span>BUTTER FLEECE:</span>
+                                                    <span>ECRU</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30/s</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>15</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>-</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>420</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span>2*1 RIB LYCRIA:</span>
+                                                    <span>ECRU</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30/s</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>15</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>-</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>302</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>
+                                                    <span>JERSEY:</span>
+                                                    <span>ECRU</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30/s</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>30</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>15</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>-</span>
+                                                </td>
+                                                <td>
+                                                    <span></span>
+                                                    <span>61</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th style="text-align: right; text-decoration: underline;" >TOTAL</th>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td style="text-align: center;">1356</td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="6">FKR Plan</th>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>-</td>
+                                                <td>..</td>
+                                            </tr>
+                                            <tr>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr>
+                                        </table>
+
+                                        <table class="fourth-table">
+                                            <tr>
+                                                <td colspan="9">DYING PLAN</td>
+
+                                            </tr>
+                                            
+                                            <tr style="font-weight: bold;">
+                                                <td>COLOR</td>
+                                                <td>1-63 WIDTH 85/15 CVC BALANC FLEECE 270GSM FOR BODYYRK</td>
+                                                <td>2-66 WIDTH 60/40 CVC BUTTER GLEECE 280GSM FOR SLEEVE</td>
+                                                <td>3-62 WIDTH 100%COT JERSEY 150GSM FOR PKT UPPER LAX</td>
+                                                <td>4- TUBE 2*1L/RIB 400GSM @ CUFF/BT M/NECK/V</td>
+                                                <td>5-3/" HB TWILL TAPE FOR NECK.</td>
+                                                <td></td>                               
+                                                <td></td>                               
+                                                <td></td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>MUSTARD ARTH</th>
+                                                <td>120</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>BLACK/ASPH ALT</th>
+                                                <td>191</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr><tr>
+                                                <th>MUSTERED</th>
+                                                <td></td>
+                                                <td>88</td>
+                                                <td>14</td>
+                                                <td>64</td>
+                                                <td>4</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>BLACK</th>
+                                                <td></td>
+                                                <td>140</td>
+                                                <td>20</td>
+                                                <td>101</td>
+                                                <td>5</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <th>HYDRRO</th>
+                                                <td></td>
+                                                <td>192</td>
+                                                <td>27</td>
+                                                <td>138</td>
+                                                <td>7</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr><tr>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr><tr>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr style="font-weight: bold;">
+                                                <td>TOTAL</td>
+                                                <td>572</td>
+                                                <td>420</td>
+                                                <td>61</td>
+                                                <td>302</td>
+                                                <td>16</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                            </tr>
+                                                
+                                        </table>
+
+                                        <table class="fifth-table">
+                                            <tr>
+                                                <td colspan="9">FINISH FABRIC PLAN</td>
+
+                                            </tr>
+                                            
+                                            <tr style="font-weight: bold;">
+                                                <td>1-63 WIDTH 85/15 CVC BALANCE FLEECE 270GSM FOR BODY/RKT</td>
+                                                <td>2-66 WIDTH 60/40 CVC BUTTER FLEECE 280GSM FOR SLEEVE</td>
+                                                <td>3-62 WIDTH 100%COT JERSEY 150GSM FOT PKT UPPER LAY</td>
+                                                <td>18 TUBE 2*1 L/R/B 400GSM @ CUFF/BT M/NECK/V</td>
+                                                <td>5-3/8" HB TWILL TAPE FOR NECK</td>
+                                                <td>.</td>
+                                                <td>.</td>
+                                                <td>.</td>
+                                                <td>.</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 25px;">113</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td style="line-height: 25px;">180</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>.</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>247</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>..</td>
+                                                <td>83</td>
+                                                <td>13</td>
+                                                <td>60</td>
+                                                <td>4</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>132</td>
+                                                <td>19</td>
+                                                <td>95</td>
+                                                <td>5</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            
+                                            
+                                            <tr>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr>
+                                            <tr>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr>
+                                            <tr>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td>..</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                <td>0.00</td>
+                                                
+                                            </tr>
+
+                                        </table>
+                                        <br class="clearfloat" />
+
+                                    </div>
+
+                                    <div class="container-one container-two">
+                                            
+                                        <table class="sixth-table">
+                                                <tr>
+                                                    <th colspan="6">YARN PLAN</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>YARN:</th>
+                                                    <th>FLEECE</th>
+                                                    <th>RIB</th>
+                                                    <th>JERSEY</th>
+                                                    <th>TAPE</th>
+                                                    <th>TIT BAGS</th>
+                                                </tr>
+                                                
+                                                <tr style="border-bottom: hidden;">
+                                                    <th>32/S CARD 60/40CVC</th>
+                                                    <td>314</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>6.92</td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+                                                    <th>16/S CARD 52/48PC</th>
+                                                    <td>129</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>2.85</td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+                                                    <th>30/S CARD 100%COT</th>
+                                                    <td>378</td>
+                                                    <td>304</td>
+                                                    <td>63</td>
+                                                    <td></td>
+                                                    <td>16.42</td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+
+                                                    <th>30/S SLUB 100%COT</th>
+                                                    <td>147</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>3.42</td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+                                                    <th>20PC 65/35</th>
+                                                    <td>130</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>2.86</td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+                                                    <th>70D SPENDIX</th>
+                                                    <td></td>
+                                                    <td>10.07</td>
+                                                    <td>KGS</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr style="border-bottom: hidden;">
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                
+                                                
+                                            
+                                                <tr>
+                                                    <th>TOTAL</th>
+                                                    <td>10.96</td>
+                                                    <td>314</td>
+                                                    <td>63</td>
+                                                    <td>0</td>
+                                                    <td>32.29</td>
+                                                </tr>
+
+                                        </table>
+
+                                        <table class="seventh-table">
+                                            <tr>
+                                                    <th colspan="9">YARN DYING PLAN(FIN)</th>
+
+                                                </tr>
+                                                
+                                                <tr style="font-weight: bold;">
+                                                    <td>COMBO</td>
+                                                    <td>COLOR A</td>
+                                                    <td>38.00%</td>
+                                                    <td>COLOR B</td>
+                                                    <td>22.00%</td>
+                                                    <td>COLOR C </td>
+                                                    <td>19.50%</td>
+                                                    <td>color D</td>
+                                                    <td>20.50%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>MUSTERED RTH</td>
+                                                    <td>30/S MUSTERED</td>
+                                                    <td>50</td>
+                                                    <td>30/S SLUB EARTH</td>
+                                                    <td>30</td>
+                                                    <td>30/S EARTH</td>
+                                                    <td>27</td>
+                                                    <td>20 pc 65/35 ECRU</td>
+                                                    <td>28</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>BLACK/ASPKA LT</td>
+                                                    <td>30/S BLACK</td>
+                                                    <td>78</td>
+                                                    <td>30/SLUB ASPHALT</td>
+                                                    <td>46</td>
+                                                    <td>30/S ASPHALT</td>
+                                                    <td>41</td>
+                                                    <td>20PC 65/35 ECRU </td>
+                                                    <td>43</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>HYDRO/BLACK</td>
+                                                    <td>30SHYDRO</td>
+                                                    <td>106</td>
+                                                    <td>30S SLUB BLACK</td>
+                                                    <td>62</td>
+                                                    <td>30SBLACK</td>
+                                                    <td>56</td>
+                                                    <td>20PC 65/35 ECRU</td>
+                                                    <td>58</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>TOTAL </td>
+                                                    <td></td>
+                                                    <td>233</td>
+                                                    <td></td>
+                                                    <td>139</td>
+                                                    <td></td>
+                                                    <td>124</td>
+                                                    <td></td>
+                                                    <td>130</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="9">YARN DYING PLAN (ECRU)</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="3">30/S CARD</th>
+                                                    <th colspan="3">30/S SLUB</th>
+                                                    <td>..</td>
+                                                    <td>..</td>
+                                                    <td>..</td>
+                                            
+
+
+                                                </tr>
+                                                <tr style="font-weight: bold;">
+                                                    <td>COLOR</td>
+                                                    <td>FIN</td>
+                                                    <td>ECRU</td>
+                                                    <td>COLOR</td>
+                                                    <td>FIN</td>
+                                                    <td>ECRU</td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30/S MUSTERED</td>
+                                                    <td>50</td>
+                                                    <td>53</td>
+                                                    <td>30/S SLUB EARTH</td>
+                                                    <td>30</td>
+                                                    <td>32</td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30/S EARTH </td>
+                                                    <td>27</td>
+                                                    <td>29</td>
+                                                    <td>30/S SLUB EARTH</td>
+                                                    <td>46</td>
+                                                    <td>49</td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30/S BLACK</td>
+                                                    <td>133</td>
+                                                    <td>141</td>
+                                                    <td>30/S SLUB BLACK</td>
+                                                    <td>62</td>
+                                                    <td>66</td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30/S ASPHALT</td>
+                                                    <td>41</td>
+                                                    <td>44</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>30/S HYDRO</td>
+                                                    <td>106</td>
+                                                    <td>112</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td>0</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>TOTAL:</td>
+                                                    <td>357</td>
+                                                    <td>378</td>
+                                                    <td>TOTAL</td>
+                                                    <td>139</td>
+                                                    <td>147</td>
+                                                    <td>..</td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="9">INSTRUCTIONS</th>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="9">FABRIC WASTAGES</th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">1-WASHING+FINISHING WASTE</td>
+                                                    <td colspan="2">106%</td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">2-YD </td>
+                                                    <td colspan="2">106%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">3-KNITTING PLAN</td>
+                                                    <td colspan="2"></td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="9">YARN PERCENTAGE DETAIL</th>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">1-32/S CARD 60/40/ CVC</td>
+                                                    <td colspan="2">71.34%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">2-16/S CARD 52/48 PCS</td>
+                                                    <td colspan="2">28.67%</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">1-30/S GREY HTR 60/40 CVC</td>
+                                                    <td colspan="2">74.00% </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7">2-16/S CARD 52/48 PC</td>
+                                                    <td colspan="2">26.00%</td>
+                                                </tr>
+
+                                        </table>
+
+                                        <table class="eighth-table">
+                                                <tr>
+                                                    <th colspan="5">CONSUMPTION PLAN</th>
+
+                                                </tr>
+                                                
+                                                <tr style="line-height: 25px;">
+                                                    <td>1-63" width 85/15 CVC BALANCE FLEECE 270 GSM FOR BODY/PKT LOWER LAY</td>
+                                                    <td>315</td>
+                                                    <td>GRM/PCS</td>
+                                                    <td>2.76</td>
+                                                    <td>KGS/DZN</td>
+                                                </tr>
+                                                <tr style="line-height: 25px;">
+                                                    <td>2-66 WIDTH 60/40 CVC BUTTER FLEECE 280 GSM FOR SLEEVE</td>
+                                                    <td>230</td>
+                                                    <td>GRM/PCS</td>
+                                                    <td>2.76</td>
+                                                    <td>KGS/DZN</td>
+                                                </tr>
+                                                <tr style="line-height: 25px;">
+                                                    <td>3-62" WIDTH 60/40 CVC BUTTER FLEECE 280 GSM FOR SLEEVE</td>
+                                                    <td>28</td>
+                                                    <td>GRM/PCS</td>
+                                                    <td>0.336</td>
+                                                    <td>KGS/DZN</td>
+                                                </tr>
+                                                <tr style="line-height: 25px;">
+                                                    <td>4-18 WIDTH 100%COT JERSEY 150GSM FOR PK 1 UPPER LAY</td>
+                                                    <td>28</td>
+                                                    <td>GRM/PCS</td>
+                                                    <td>1.98</td>
+                                                    <td>KGS/DZN</td>
+                                                </tr>
+                                                <tr style="line-height: 25px;">
+                                                    <td>5-3/8 HB TWILL TAPE FOR NECK</td>
+                                                    <td>18</td>
+                                                    <td>INCH/PCS</td>
+                                                    <td>6.00</td>
+                                                    <td>YRD/DZN</td>
+                                                </tr>
+                                                <tr style="line-height: 20px;">
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>..</td>
+                                                    
+                                            
+                                                </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                            
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                            
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                            
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr><tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                            
+                                                        <td>..</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        
+                                                        <td>..</td>
+                                                    </tr>
+                                                    
+                                        </table>
+                                        <br class="clearfloat"/>
+                                    </div>
+
+                                    <div class="report-footer">
+                                        <p><span>MANAGER PPC</span></p>
+                                        <p><span>MERCHANT</span></p>
+                                        <p><span>GM</span></p>
+                                    </div>
+                                    <br class="clearfloat"/>
+                                    
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    <!-- </t> -->
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <report
+            id="report_for_naseem_delivery_challan_stock" 
+            model="stock.picking"
+            name="naseem_delivery_challan_stock.module_report"
+            file="naseem_delivery_challan_stock.module_report"
+            report_type="qweb-html"
+            string="Delivery Challan"/>
+
+       <record id="dc_stock_picking_extension" model="ir.ui.view"> 
+            <field name="name">dc_stock_picking_extension</field> 
+            <field name="model">stock.picking</field> 
+            <field name="inherit_id" ref="stock.view_picking_form"/> 
+            <field name="arch" type="xml"> 
+                <header>
+                    <button name="%(report_for_naseem_delivery_challan_stock)d" string="Print DC" type="action" class="btn-primary"  attrs="{'invisible': [('print_do', '!=',True)]}" />
+                </header>
+            </field>
+
+        </record>
+
+    </data>
+</openerp>

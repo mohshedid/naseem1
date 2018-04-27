@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+
+            id="top_sales_wise_report" 
+            model="account.invoice"
+            name="top_sales.top_sales_wise"
+            file="top_sales.top_sales_wise"
+            report_type="qweb-html"
+            string="Top Sales"/>
+
+        <record id="top_saled_wise_wizard" model="ir.ui.view">
+            <field name="name">top_saled_wise_wizard</field>
+            <field name="model">topsales.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    
+                    <group name="group_top">
+
+                        <group name="group_left">
+
+                            <field name="report_type"/>
+                            <field name="category"/>
+
+                        </group>
+
+                        <group name="group_right">
+
+                            <field name="form"/>
+                            <field name="to"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(top_sales_wise_report)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="top_sales_wizard_action" model="ir.actions.act_window">
+            <field name="name">Top Sales</field>
+            <field name="res_model">topsales.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="top_saled_wise_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="top_sales_menu" name="Top Sales" parent="customer_profile.customer_wise_item" action="top_sales_wizard_action" sequence="17"/>
+    </data>
+</openerp>

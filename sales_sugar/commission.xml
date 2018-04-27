@@ -1,0 +1,104 @@
+<openerp>
+    <data>
+
+
+        <record id = "commission_form_view" model = "ir.ui.view">
+            
+                <field name="name">commission_form_view</field>
+        
+                <field name="model">sugar.commission</field>
+        
+                <field name="type">form</field>
+        
+                <field name="arch" type="xml">
+        
+                <form delete ="false">
+                    <!-- <header>
+                        <button name="post_entries" type="object" string="Post" class = "oe_highlight" attrs="{'invisible':[('stages','=','posted')]}"/>
+                        <button name="reset_draft" type="object" string="Reset to Draft" class = "oe_highlight" attrs="{'invisible':[('stages','=','draft')]}"/>
+                        <field name="stages" widget="statusbar" statusbar_visible="draft,posted"/>
+                    </header>
+ -->
+
+                  <sheet>
+
+
+                        
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="date"/>
+                                <field name="transaction_type"/>
+                                <field name="party"/>
+                                <field name="mill" />
+                                <field name="qty" />
+                        
+                            </group>
+                            <group name="group_right">
+                                <field name="rate"/>
+                                <field name="total"/>
+                                <field name="commission_agent"/>
+                                <field name="comm_type"/>
+                                <field name="comm_amount"/>
+                                <field name="comm_rate"/>
+                                <field name="sale_id"/>
+
+                            </group>
+
+                        </group>
+                        
+                   </sheet>                              
+               </form>      
+                </field>
+        </record>
+
+
+
+
+       <record id = "commission_tree_view" model = "ir.ui.view">
+            
+                <field name="name">commission_tree_view</field>
+        
+                <field name="model">sugar.commission</field>
+        
+                <field name="type">tree</field>
+        
+                <field name="arch" type="xml">
+        
+                    <tree delete ="false">
+                                <field name="date"/>
+                                <field name="transaction_type"/>
+                                <field name="party"/>
+                                <field name="mill" />
+                                <field name="qty" />
+                                <field name="rate"/>
+                                <field name="total"/>
+                                <field name="commission_agent"/>
+                                <field name="comm_type"/>
+                                <field name="comm_amount"/>
+                                <field name="comm_rate"/>
+                           
+                    </tree>      
+                </field>
+        </record>
+
+
+         <record id="commission_action" model="ir.actions.act_window">
+            <field name="name">Commission</field>
+            <field name="res_model">sugar.commission</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            
+           
+        </record>
+
+        <menuitem id="commission_menu" name="Commissions" parent="sales_sugar.new_sales_and_purchases" sequence="3"/>
+
+        <menuitem   id="sales_sugar.commission_menu_item" 
+            name="Commissions"
+            parent="commission_menu" 
+            action="commission_action" 
+        />
+
+
+    </data>
+</openerp>

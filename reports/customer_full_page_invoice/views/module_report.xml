@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                            <style>
+
+                                .container {
+                                    width: 100%;
+                                    margin: 0px auto
+                                }
+                                .center-container {
+                                    width: 1000px;
+                                    margin: 0px auto;
+                                }
+                                .head {
+                                    width: 100%;
+
+                                }
+                                .head h3 {
+                                    text-align: center;
+                                }
+                                .customer {
+                                    width: 100%;
+                                    margin: 0px auto;
+                                    margin-bottom: 20px;
+                                    margin-top: 50px;
+                                }
+                                .customer p1 {
+                                    width: 32%;
+                                    float: left;
+                                }
+                                .customer p2 {
+                                    width: 28%;
+                                    float: left;
+                                }
+                                .customer p3 {
+                                    width: 25%;
+                                    float: left;
+                                }
+                                .customer p4 {
+                                    width: 15%;
+                                    float: right;
+                                    margin: 0px auto;
+                                    margin-top: 0px;
+                                }
+                                .customer p5 {
+                                    width: 32%;
+                                    float: left;
+                                }
+                                .customer p6 {
+                                    width: 25%;
+                                    float: left;
+                                }
+                                .customer p7 {
+                                    width: 28%;
+                                    float: left;
+                                }
+                                .customer p8 {
+                                    width: 15%;
+                                    float: right;
+                                    margin: 0px auto;
+                                    margin-bottom: 20px;
+                                    margin-top: 0px;
+                                }
+
+                                .customer p9 {
+                                    width: 32%;
+                                    float: left;
+                                    margin-bottom: 28px;
+                                }
+
+                                .customer p10 {
+                                    width: 25%;
+                                    float: left;
+                                }
+                                
+                                
+                                table, td, th {
+                                    text-align: center;
+                                    border: 1px solid;
+                                    border-collapse: collapse;
+                                }
+
+                                .number {
+
+                                    width: 100%;
+                                    float: left;
+                                    margin-top: 20px;
+                                }
+
+                                .number .solid {
+
+                                    width: 14%;
+                                    float: left;
+                                    font-weight: bold;
+                                }
+
+                                .number .liquid {
+
+                                    width: 70%;
+                                    float: left;
+
+
+                                }
+
+                            </style>
+
+                            <div class="container">
+
+                                <div class="center-container">
+
+                                    <div class="head">
+                                        <h3>CAR ACCESSORIES
+                                        </h3>
+                                    </div>
+
+                                    <div class="customer">
+
+                                        <p1><b>Customer Name:</b>&#032;
+                                        <span t-esc="o.partner_id.name"></span>
+                                        </p1>
+
+                                        <p2><b>Payment Terms:</b>&#032;
+                                        <span t-esc="o.payment_term_id.name"></span>
+                                        </p2>
+
+                                        <p3><b>Invoice #:</b>&#032;
+                                        <span t-esc="o.number"></span>
+                                        </p3>
+
+                                        <p4><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/></p4>
+
+                                        <p5><b>Trasporter:</b>&#032;
+                                        <span t-esc="o.transporter.name"></span>
+                                        </p5>
+
+                                        <p7><b>Delivery Terms:</b>&#032;
+                                        <span t-esc="o.incoterm.name"></span>
+                                        </p7>
+
+                                        <p6><b>Due Days:</b>&#032;
+                                        <span t-esc="o.due_days"></span>
+                                        </p6>
+
+                                        <p8><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"/></p8>
+
+                                        <p9><b>Sales Person:</b>&#032;
+                                        <span t-esc="o.date_invoice"></span>
+                                        </p9>
+
+                                        <p10><b>Invoice Date:</b>&#032;
+                                        <span t-esc="o.date_invoice"></span>
+                                        </p10>
+
+
+
+                                    </div>
+
+                                    <table width="100%">
+
+                                        <tr>
+                                            <th>Serial No.</th>
+                                            <th>Item Name</th>
+                                            <th>UOM</th>
+                                            <th>Qty Pieces</th>
+                                            <th>Qty Cartons</th>
+                                            <th>List Prices</th>
+                                            <th>Discount%</th>
+                                            <th>Net Price</th>
+                                            <th>Total</th>
+                                            <th>Promo Code</th>
+                                        </tr>
+
+                                        <t t-set="i" t-value="1"/>
+                                        <t t-set="t_1" t-value="0"/>
+                                        <t t-set="t_2" t-value="0"/>
+                                        <t t-set="t_3" t-value="0"/>
+                                        <t t-set="t_4" t-value="0"/>
+                                        <t t-foreach="enteries" t-as="data">
+
+                                            <tr>
+
+                                                <td>
+                                                    <t t-esc="i"/>
+                                                    <t t-set="i" t-value="i+1"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.product_id.name"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.uom"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.quantity"></span>
+                                                    <t t-set="t_1" t-value="t_1 + data.quantity"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.carton"></span>
+                                                    <t t-set="t_2" t-value="t_2 + data.carton"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.price_unit"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.discount"></span>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.customer_price"></span>
+                                                    <t t-set="t_3" t-value="t_3 + data.customer_price"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.price_subtotal"></span>
+                                                    <t t-set="t_4" t-value="t_4 + data.price_subtotal"/>
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="data.promo_code"></span>
+                                                </td>
+                                            </tr>
+
+                                        </t>
+
+                                        <tr>
+                                            <th colspan="3">Total</th>
+                                            <th>
+                                                <span t-esc="t_1"></span>
+                                            </th>
+
+                                            <th>
+                                               <span t-esc="t_2"></span> 
+                                            </th>
+                                            <th colspan="2">Total</th>
+                                            <th>
+                                                <span t-esc="t_3"></span>
+                                            </th>
+                                            <th>
+                                                <span t-esc="t_4"></span>
+                                            </th>
+                                            <th></th>
+                                        </tr>
+
+                                    </table>
+
+
+                                    <div class="number">
+
+                                        <span class="solid">Amount in Words:</span>
+                                        <span class="liquid" t-esc="number_to_word(t_4)"></span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </t>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="top_sales_wise">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+                
+                    <div class="page">
+
+                        <style>
+                            .container {
+                                width: 100%;
+                            }
+                            .center-container{
+                                width: 1000px;
+                                margin: 0px auto;
+                            }
+                            .report-header{
+                                width: 100%;
+                                margin-bottom: 20px;
+                            }
+                            .report-header h3 {
+                                text-align: center;
+                                margin: 0px auto;
+                            }
+                            .report-header p {
+                                text-align: center;
+                                margin: 0px auto;
+                            }
+                            .partly-col-01,
+                            .partly-col-02 {
+                                width: 50%;
+                                float: left;
+                            }
+                            .partly-col-02 {
+                                text-align: right;
+                            }
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                                display: block;
+                            }
+                            table {
+                                border: none;
+                                width: 100%;
+                                border-spacing: 0px;
+                            }
+                            table tr th {
+                                padding: 10px 5px;
+                                text-align: left;
+                                border-bottom: 2px solid #595959;
+                            }
+                            table tr td {
+                                padding: 10px 5px;
+                            }
+                            .last {
+                                text-align: right;
+                            }
+                            table tr.totlar td {
+                                padding: 5px;
+                                border-top: 2px solid #595959;
+                                border-bottom: 2px solid #595959;
+                                font-weight: bold;
+                            }
+                        </style>
+
+                        <div class="contanier">
+
+                            <div class="center-container">
+                            
+                                <div class="report-header">
+
+                                    <h3>CAR ACCESSORIES</h3>
+                                    <p>Top Sales (City Wise)</p>
+
+                                </div>
+
+                                <div class="partly">
+
+                                    <div class="partly-col-01">
+                                        <p>
+                                            <span class="solid">From:</span>
+                                            <span class="liquid"><span t-esc="form"></span></span>
+                                        </p>
+                                        <p>
+                                            <span class="solid">To:</span>
+                                            <span class="liquid"><span t-esc="to"></span></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="partly-col-02">
+                                        <p>
+                                            <span class="solid">Date:</span>
+                                            <span class="liquid"><span t-esc="date"></span></span>
+                                        </p>
+                                        <p>
+                                            <span class="solid">Time:</span>
+                                            <span class="liquid"><span t-esc="get_time()"></span></span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <br class="clearfloat"/>
+
+                                <table>
+
+                                    <tr>
+                                        <th>City</th>
+                                        <th class="last">Amount</th>
+                                    </tr>
+                                    <t t-set="amount_total" t-value="0" />
+                                    <t t-foreach="entries" t-as="o">
+                                        <tr>
+                                            
+                                            <td><span t-esc="o"></span></td>
+                                            
+                                            <td class="last">
+                                                <span t-esc="getamount(o)"></span>
+                                                <t t-set="amount_total" t-value="amount_total + getamount(o)" />
+                                            </td>
+
+                                        </tr>
+                                    </t>
+
+                                    <tr class="totlar">
+                                        <td>Total</td>
+                                        <td class="last"><span t-esc="amount_total"></span></td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+                        </div>
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                <t t-foreach="docs" t-as="o">
+
+                        <div class="page">
+
+                			<style>
+
+								.main-data {
+									width: 100%;
+								}
+								.center-data {
+									width: 1200px;
+									margin: 0px auto;
+								}
+								.center-data .solid{
+									font-weight: bold;
+									margin-right: 10px;
+								}
+								.center-data p{
+									line-height: 1;
+									margin-left: 20px;
+								}
+								.center-data h2 {
+									margin-left: 20px;
+								}
+								.heading {
+									width: 100%;
+									float: left;
+									text-align: center;
+								}
+								.logo {
+									width: 10%;
+									float: right;
+								}
+								.challan {
+									width: 100%;
+								}
+								.challan .liquid {
+									width: 20%;
+									margin-left: 22px;
+								}
+								table, th, td {
+									border: 1px solid;
+									border-collapse: collapse;
+									border-color: #b4b4b4;
+									text-align: center;
+									padding: 10px;
+								}
+								.engineering {
+									width: 30%;
+									margin-top: 50px;
+									font-weight: bold;
+								}
+
+
+
+							</style>
+							
+							<div class="main-data">
+
+								<div class="center-data">
+									<div class="heading">
+										<h2>CAR ACCESSORIES</h2>
+									</div>
+									<hr width="100%"></hr>
+									<div class="challan">
+										<h2>DELIVERY CHALLAN</h2>
+										<p><span class="solid">DC NO.</span><span t-esc="o.name"></span></p>
+										<p><span class="solid">Dated:</span><span t-esc="o.min_date"></span></p>
+										<p><span class="solid">CUSTOMER:</span>
+										<span t-esc="o.partner_id.name"></span></p>
+										<span class="liquid" t-esc="o.partner_id.street"></span><br></br>
+										<span class="liquid" t-esc="o.partner_id.street2"></span><br></br>
+										<span class="liquid" t-esc="o.partner_id.city"></span><br></br>
+										<br></br>
+										<span class="liquid"><b>Ph:</b><span t-esc="o.partner_id.phone"></span></span><br></br>
+										<br></br>
+										<p><span class="solid">Warehouse:</span>
+										<span class="liquid" t-esc="o.location_dest_id.location_id.name"></span></p>
+									</div>
+
+
+									<table width="100%">
+										<tr>
+											<th>S#</th>
+											<th>Item Detail</th>
+											<th>Quantity Delivered</th>
+											<th>Remarks</th>
+										</tr>
+
+										<t t-set="amt" t-value="0"/>
+										<t t-set="i" t-value="1"/>
+										<t t-foreach="lisst" t-as="line">
+
+											<tr>
+												<td>
+													<t t-esc="i"/>
+                                                	<t t-set="i" t-value="i+1"/>
+												</td>
+												<td>
+													<span t-esc="line.product_id.name"></span>
+												</td>
+												<td>
+													<span t-esc="line.qty_done"></span>
+													<t t-set="amt" t-value="amt+line.qty_done"/>
+												</td>
+												<td></td>
+											</tr>
+
+
+										</t>
+										<tr>
+											<td colspan="2"><b>Total Quantity</b></td>
+											<td>
+												<span t-esc="amt"></span>
+											</td>
+											<td></td>
+										</tr>
+									</table>
+									<div class="engineering">
+										<p class="no-margin">Received By/Name &amp; Sign</p>
+										<br></br>
+										<p class="no-margin">_____________________________</p>
+									</div>
+								</div>
+				
+							</div>
+								
+                        </div><!--end of page-->
+                    </t>
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

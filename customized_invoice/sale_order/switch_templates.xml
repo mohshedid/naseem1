@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+<template id="sale_order">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-set="style" t-value="doc.style or res_company.default_style or user.env.ref('customized_invoice.default_style_for_all_reports')"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_1_document'" t-call="customized_invoice.SO_1_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_2_document'" t-call="customized_invoice.SO_2_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_3_document'" t-call="customized_invoice.SO_3_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_4_document'" t-call="customized_invoice.SO_4_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_5_document'" t-call="customized_invoice.SO_5_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_6_document'" t-call="customized_invoice.SO_6_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_7_document'" t-call="customized_invoice.SO_7_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_8_document'" t-call="customized_invoice.SO_8_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_9_document'" t-call="customized_invoice.SO_9_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_10_document'" t-call="customized_invoice.SO_10_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="style.template_so.key == 'customized_invoice.SO_11_document'" t-call="customized_invoice.SO_11_document" t-lang="doc.partner_id.lang"/>
+            <t t-if="not style" t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+         </t>
+    </t>
+</template>
+</data>
+</openerp>

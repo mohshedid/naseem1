@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+<record id="add_stop_invoice_checkbox"   model="ir.ui.view"> 
+        <field name="name">add_stop_invoice_checkbox</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form"/> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="credit_limit" attrs="{'invisible':[('stop_invoice','=',False)]}" />
+                <field name="stop_invoice" attrs="{'invisible':[('customer','=',False)]}"/>
+                <field name="currency" widget="selection" attrs="{'invisible':['&amp;',('customer','=',False),('supplier','=',False)]}"/>
+            </xpath>
+        </field> 
+    </record>
+
+
+    <record id="add_customer_invoice_percentage"   model="ir.ui.view"> 
+        <field name="name">add_customer_invoice_percentage</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="account.view_partner_property_form"/> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//field[@name='title']" position="replace">
+            </xpath>
+<!--             <xpath expr="//field[@name='debit']" position="replace">
+            </xpath> -->
+<!--             <xpath expr="//field[@name='category_id']" position="after">
+                <field name="debit"/>
+            </xpath> -->
+<!--             <xpath expr="//page[@name='sales_purchases']" position="replace">
+            </xpath> -->
+            <xpath expr="//field[@name='function']" position="before">
+                <field name="contact_person"/>
+            </xpath>
+            <xpath expr="//field[@name='contact_person']" position="after">
+                <field name="title"/>
+            </xpath>
+
+        </field> 
+    </record>
+
+
+    <record id="remove_vendor_checkbox"   model="ir.ui.view"> 
+        <field name="name">remove_vendor_checkbox</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form"/> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//group[@name='purchase']" position="replace">
+                <group name="purchase" string="Purchase" attrs="{'invisible':[('customer','=',True)]}">
+                    <field name="supplier" string="Is a Supplier" attrs="{'invisible':[('customer','=',True)]}"/>
+                </group>
+            </xpath>  
+            <xpath expr="//group[@name='sale']" position="replace">
+                <group name="sale" string="Sale" attrs="{'invisible':[('supplier','=',True)]}">
+                    <field name="customer"  attrs="{'invisible':[('supplier','=',True)]}"/>
+                    <field name="user_id"  attrs="{'invisible':[('supplier','=',True)]}"/>
+                </group>
+            </xpath>
+
+            <xpath expr="//group[@name='acc_sale']" position="replace">
+                <group name="acc_sale" string="Sale" attrs="{'invisible':[('supplier','=',True)]}">
+                    <field name="credit"  attrs="{'invisible':[('supplier','=',True)]}"/>
+                    <field name="trust"  attrs="{'invisible':[('supplier','=',True)]}"/>
+                </group>
+            </xpath>  
+            <xpath expr="//page[@name='accounting']" position="after">
+                <page name="terms_and_condition" string="Terms and Conditions" >
+                    <field name="terms_conditions"/>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='property_supplier_payment_term_id']" position="replace">
+                <field name="property_supplier_payment_term_id"  attrs="{'invisible':[('supplier','=',True)]}"/>
+            </xpath>             
+        </field> 
+    </record>
+
+
+<record id="remove_purchases_accounting"   model="ir.ui.view"> 
+        <field name="name">remove_purchases_accounting</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form"/> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//group[@name='acc_purchase']" position="replace">
+                <group name="acc_purchase" string="Purchase" attrs="{'invisible':[('customer','=',True)]}">    
+                    <field name="property_supplier_payment_term_id"  attrs="{'invisible':[('customer','=',True)]}"/> 
+                    <field name="debit"  attrs="{'invisible':[('customer','=',True)]}"/> 
+                </group>
+            </xpath>               
+        </field> 
+    </record>
+
+
+
+  <record id="remove_individual_company_option" model="ir.ui.view"> 
+        <field name="name">remove_individual_company_option</field> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+
+           <xpath expr="//field[@name='company_type']" position="replace">
+                <field name="company_type" invisible= "1"/>
+                </xpath>
+        </field> 
+    </record>
+
+
+    <record id="remove_mobile_option" model="ir.ui.view"> 
+        <field name="name">remove_mobile_option</field> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+
+           <xpath expr="//field[@name='mobile']" position="replace">
+               <field name="mobile1"/>
+               <field name="mobile2"/>
+               <field name="phone1"/>
+               <field name="phone2"/>
+           </xpath>
+        </field> 
+    </record>
+
+
+  <record id="readonly_pricelist" model="ir.ui.view"> 
+        <field name="name">readonly_pricelist</field> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="product.view_partner_property_form"/>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+           <xpath expr="//field[@name='property_product_pricelist']" position="replace">
+                <field name="property_product_pricelist" readonly="1" />
+            </xpath>
+        </field> 
+    </record>
+  
+  <record id="customer_form_naseem_autos" model="ir.ui.view"> 
+        <field name="name">customer_form_naseem_autos</field> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="check_trans" invisible="1"/>
+                <field name="check_purchase" invisible="1"/>
+                <field name="check_clearing_agent" invisible="1"/>
+                <field name="check_forwarder" invisible="1"/>
+                <field name="check_supplier" invisible="1"/>
+            </xpath>
+        </field> 
+    </record>
+
+
+ <record id="address_form_view_extension" model="ir.ui.view"> 
+        <field name="name">address_form_view_extension</field> 
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="type">form</field> 
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[1]" position="replace">
+              
+            </xpath>
+            <xpath expr="//page[1]" position="before">
+                <page name="conatct_and_addresses" string="Contact and Addresses"  >
+                    <field name="contact_address" />
+                </page>
+            </xpath>
+
+        </field> 
+    </record>
+
+
+
+    <record id="customer_tree_view_extension" model="ir.ui.view">
+        <field name="name">customer_tree_view_extension</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='country_id']" position="after">
+                <field name="credit" />
+            </xpath>
+            <xpath expr="//field[@name='credit']" position="after">
+                <field name="debit" />
+            </xpath>
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="check_trans" invisible="1"/>
+            </xpath>
+
+        </field>
+    </record>
+
+
+<record id="add_dob_customer"   model="ir.ui.view"> 
+        <field name="name">add_dob_customer</field> 
+        <field name="model">res.partner</field> 
+        <field name="inherit_id" ref="base.view_partner_form"/> 
+        <field name="arch" type="xml"> 
+            <xpath expr="//field[@name='function']" position="after">
+                <field name="dob"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="forwarder" string="Forwarder" attrs="{'invisible': [('supplier','=',False)]}" widget="selection" domain="[('check_forwarder', '=', True)]"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="transporter"  attrs="{'invisible':['|',('customer','=',False)]}" widget="selection" domain="[('check_trans', '=', True)]"/>
+            </xpath>
+            <xpath expr="//field[@name='transporter']" position="after">
+                <field name="payment_term" attrs="{'invisible':['|',('check_trans','=',True),('check_clearing_agent','=',True)]}" widget="selection"/>
+            </xpath>
+            <xpath expr="//field[@name='payment_term']" position="after">
+                <field name="incoterm" attrs="{'invisible':['|',('check_trans','=',True),('check_clearing_agent','=',True)]}" widget="selection"/>
+            </xpath>
+            <xpath expr="//field[@name='parent_id']" position="replace">
+                <field name="parent_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='phone']" position="after">
+                <field name="clearing_agent" attrs="{'invisible': [('supplier','=',False)]}" widget="selection" domain="[('check_clearing_agent', '=', True)]"/>
+            </xpath>
+        </field> 
+    </record>
+
+
+
+                <record model="ir.actions.act_window" id="sales_transporter_configuration">
+                    <field name="name">Transporter</field>
+                    <field name="res_model">res.partner</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain" >[('check_trans', '=',True)]</field>
+                    <field name="context" eval="{'default_check_trans': 1, 'default_customer' : 0}"/> 
+                </record>
+            
+                <record model="ir.actions.act_window" id="purchase_clearing_agent_configuration">
+                    <field name="name">Clearing Agent</field>
+                    <field name="res_model">res.partner</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain" >[('check_clearing_agent', '=',True)]</field>
+                    <field name="context" eval="{'default_check_clearing_agent': 1, 'default_customer' : 0,'check_trans':0}"/> 
+                </record>
+
+
+
+                <record model="ir.actions.act_window" id="purchase_forwarder_configuration">
+                    <field name="name">Forwarder</field>
+                    <field name="res_model">res.partner</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain" >[('check_forwarder', '=',True)]</field>
+                    <field name="context" eval="{'default_check_forwarder':1 , 'default_check_clearing_agent': 0, 'default_customer' : 0,'check_trans':0}"/> 
+                </record>
+
+                <record model="ir.actions.act_window" id="purchase_supplier_configuration">
+                    <field name="name">Vendor</field>
+                    <field name="res_model">res.partner</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="domain" >[('check_supplier', '=',True)]</field>
+                    <field name="context" eval="{'default_check_supplier': 1, 'default_customer' : 0}"/> 
+                </record>
+
+
+                <menuitem name="Forwarder"
+                    id="forwarder_purchase_configuration_main"
+                    parent="purchase.menu_purchase_config"
+                    sequence="1"/>
+
+                <menuitem name="Forwarder"
+                    id="forwarder_purchase_configuration"
+                    parent="forwarder_purchase_configuration_main"
+                    action="purchase_forwarder_configuration"
+                    sequence="1"/>
+
+
+                <menuitem name="Clearing Agent"
+                    id="clearing_agent_purchase_configuration_main"
+                    parent="purchase.menu_purchase_config"
+                    sequence="1"/>
+
+                <menuitem name="Clearing Agent"
+                    id="clearing_agent_purchase_configuration"
+                    parent="clearing_agent_purchase_configuration_main"
+                    action="purchase_clearing_agent_configuration"
+                    sequence="1"/>
+
+
+                <menuitem name="Transporter"
+                    id="transporter_sales_configuration_main"
+                    parent="sales_team.menu_sale_config"
+                    sequence="1"/>
+
+                <menuitem name="Transporter"
+                    id="transporter_sales_configuration"
+                    parent="transporter_sales_configuration_main"
+                    action="sales_transporter_configuration"
+                    sequence="1"/>
+
+                <menuitem name="Vendors"
+                    id="supplier_purchase_configuration_main"
+                    parent="purchase.menu_purchase_config"
+                    sequence="1"/>
+
+                <menuitem name="Vendors"
+                    id="supplier_sales_configuration"
+                    parent="supplier_purchase_configuration_main"
+                    action="purchase_supplier_configuration"
+                    sequence="1"/>
+
+
+
+
+<record id="base.action_partner_supplier_form" model="ir.actions.act_window">
+            
+            <field name="domain">[('check_purchase','=',True)]</field>
+            <field name="context">{'search_default_supplier': 1,'default_customer': 0,'default_supplier': 1, 'default_check_purchase':1}</field>
+        </record>
+
+
+
+
+ <!--        <record id="customer_tree_view" model="ir.ui.view">
+            <field name="name">customer_tree_view</field>
+            <field name="model">res.partner</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">  
+                <field name="name"/>                   
+                <field name="mobile"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="credit"/>
+
+            </field>
+        </record> -->
+
+
+
+
+
+  <record id="res_partner_bank_extension_form"   model="ir.ui.view"> 
+        <field name="name">res_partner_bank_extension_form</field> 
+        <field name="model">res.partner.bank</field> 
+        <field name="inherit_id" ref="base.view_partner_bank_form"/> 
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='bank_id']" position="after">
+                <field name="ac_title"/>
+            </xpath>
+            <xpath expr="//field[@name='ac_title']" position="after">
+                <field name="branch_code"/>
+            </xpath>
+        </field> 
+    </record>
+
+        <record id="purchase.res_partner_view_purchase_account_buttons" model="ir.ui.view">
+            <!-- <field name="name">res.partner.view.purchase.account.buttons</field> -->
+            <!-- <field name="model">res.partner</field> -->
+            <!-- <field name="inherit_id" ref="base.view_partner_form" /> -->
+            <!-- <field name="priority" eval="20"/> -->
+            <!-- <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]"/> -->
+            <field name="arch" type="xml">
+                <div name="button_box" position="inside">
+                    <button class="oe_stat_button" name="%(purchase.act_res_partner_2_supplier_invoices)d" type="action"
+                        attrs="{'invisible': [('supplier', '=', False)]}" icon="fa-pencil-square-o" help="Vendor Bills">
+                        <field string="Supplier Bills." name="supplier_invoice_count" widget="statinfo"/>
+                    </button>
+                </div>
+            </field>
+        </record>
+
+        <record id="action_stock_history" model="ir.actions.act_window">
+            <field name="name">Stock History</field>
+            <field name="res_model">stock.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,graph,pivot</field>
+        </record>
+
+        <menuitem name="Stock History New"
+            id="stock_history_new"
+            parent="stock.menu_stock_inventory_control"
+            action="action_stock_history"
+            sequence="12"/>
+
+    <record id="account_view_extension" model="ir.ui.view">
+        <field name="name">account_view_extension</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='user_type_id']" position="after">
+                <field name="acct_type" />
+            </xpath>
+
+
+        </field>
+    </record>
+
+</odoo>

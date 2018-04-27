@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_funds_recovery" 
+            model="funds.flow.tree"
+            name="sugar_reports.funds_recovery"
+            file="sugar_reports.funds_recovery"
+            report_type="qweb-html"
+            string="Funds Recovery"/>
+
+        <record id="funds_recovery_wizard" model="ir.ui.view">
+            <field name="name">funds_recovery_wizard</field>
+            <field name="model">funds.recovery</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <div class="wizard">
+                            
+                        <group name="group_top">
+                            <group name="group_left">
+                                <field name="type_report"/>
+                                <field name="form"  attrs="{'invisible': [('type_report', '!=', 'confirmation')]}"/>
+                                <field name="to"  attrs="{'invisible': [('type_report', '!=', 'confirmation')]}"/>
+                            </group>
+
+                            <group name="group_left">
+                                <field name="parties_type"/>
+                                <field name="parties" attrs="{'invisible': [('parties_type', '=', 'all')]}" widget="many2many_tags"/>
+                            </group>
+                        </group>
+
+                        <footer style="height: 30px !important; border: none !important;">
+                            <button name="%(report_for_funds_recovery)d" type="action" string="Print" class="oe_highlight"/>
+                        </footer>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="funds_recovery_wizard_action" model="ir.actions.act_window">
+            <field name="name">Funds Recovery</field>
+            <field name="res_model">funds.recovery</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="funds_recovery_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="funds_recover_menu_item" name="Funds Recovery" action="funds_recovery_wizard_action" parent="sales_sugar.confirmation_level" />
+
+    </data>
+
+</openerp>

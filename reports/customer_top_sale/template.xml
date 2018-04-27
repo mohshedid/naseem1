@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_customer_top_sale" 
+            model="account.invoice"
+            name="customer_top_sale.customer_report"
+            file="customer_top_sale.customer_report"
+            report_type="qweb-html"
+            string="Customer Top Sale"/>
+            
+
+         <record id="customer_top_sale_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">customer_top_sale_report_wizard_form_view</field>
+            <field name="model">customer.top.sale</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="customer"/>
+                            <field name="sale_abv"  attrs="{'invisible':[('customer','!=','top_cust')]}"/>
+                            <field name="slect_custmr" domain="[('customer','=',True)]" attrs="{'invisible':[('customer','!=','spec_cust')]}"/>
+                            <field name="slect_cust" widget="many2many_tags" domain="[('customer','=',True)]" attrs="{'invisible':[('customer','!=','multi_cust')]}"/>
+
+                        </group>
+
+                        <group name="group_right">
+                            <field name="form"/>
+                            <field name="to"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="%(report_for_customer_top_sale)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="customer_top_sale_report_wizard" model="ir.actions.act_window">
+            <field name="name">Region Wise Report Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customer.top.sale</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_top_sale_report_wizard_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Top Sale (Customer Wise)" id="customer_wise_menu_item" parent="customer_profile.customer_wise_item" action="customer_top_sale_report_wizard" sequence="2"/>       
+
+    </data>
+</openerp>
+
+

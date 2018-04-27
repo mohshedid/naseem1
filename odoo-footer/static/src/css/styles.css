@@ -1,0 +1,11 @@
+.o_main_content:after {
+    content: 'pakistan India Afganistan';
+    display: block;
+    width: 100%;
+    padding: 5px 15px;
+    background: #000;
+    color: #fff;
+    text-transform: uppercase;
+    word-spacing: 450px;
+    font-size: 10px;
+}

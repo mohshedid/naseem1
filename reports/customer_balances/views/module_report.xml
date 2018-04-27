@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="module_report">
+
+            <t t-call="report.html_container">
+                <t t-call="report.external_layout">
+                    
+                    <div class="page">
+
+                        <style>
+                            .container{
+                                width: 100%;
+                                margin: 0px auto;
+                            }
+                            .center-container{
+                                width: 1000px;
+                                margin: 0px auto;
+                            }
+                            .heading{
+                                width: 1000px;
+                                margin: 0px auto;
+                                margin-bottom: 20px;
+                            }
+                            .heading h3{
+                                text-align: center;
+                                margin: 0px auto;
+                            }
+                            .heading p{
+                                text-align: center;
+                                margin: 0px auto;
+                            }
+                            .account{
+                                width: 80%;
+                                float: left;
+                                margin-top: 30px;
+                            }
+                            .invoice{
+                                width: 15%;
+                                float: right;
+                                margin-top: 30px;
+                            }
+                            .invoice p {
+                                margin: 0px auto;
+                            }
+                            table, th, td {
+                                border: 1px solid;
+                                text-align: center;
+                                border-collapse: collapse;
+                                padding: 4px;
+                                margin-top: 130px;
+                            }
+                            .time{
+                                width: 15%;
+                                float: right;
+                            }
+
+                        </style>
+
+                        <div class="container">
+
+                            <div class="center-container">
+
+                                <div class="heading">
+                                    <h3>CAR ACCESORIES</h3>
+                                    <P>Customer Balances</P>
+                                </div>
+
+                                <div class="account">
+                                    <P><b>All Csutomers</b></P>
+                                </div>
+
+                                <div class="invoice">
+
+                                    <p><b>Date:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"></span></p>
+
+                                    <p><b>Time:</b>&#032;<span t-esc="context_timestamp(datetime.datetime.now()).strftime('%H:%M')"></span></p>
+
+                                </div>
+                                
+                                <table width="100%">
+
+                                    <tr>
+                                        <th>Customer ID</th>
+                                        <th>Company</th>
+                                        <th>Contact</th>
+                                        <th>Mobile No</th>
+                                        <th>Last Sale Date</th>
+                                        <th>Last Sale Amount</th>
+                                        <th>Last Recd Date</th>
+                                        <th>Last Recd Amount</th>
+                                        <th>Balance</th>
+                                    </tr>
+
+                                    <t t-foreach="docs" t-as="o">
+
+                                        <tr>
+                                            <td>
+                                                <span t-esc="o.id"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="o.name"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="o.phone"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="o.mobile1"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="get_date(o.id)"></span>
+                                            </td>
+                                            <td>
+                                                <span t-esc="get_amt(o.id)"></span>
+                                            </td>
+                                            <td>
+                                               <span t-esc="get_part(o.id)"></span> 
+                                            </td>
+                                            <td>
+                                               <span t-esc="get_paid(o.id)"></span> 
+                                            </td>
+                                            <td>193,900.00</td>
+                                        </tr>
+
+                                    </t>
+                                    
+                                </table>
+
+                                
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </t>
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

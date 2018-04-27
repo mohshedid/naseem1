@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="product_profit">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+                
+                    <div class="page">
+
+                        <style>
+                            .clearfloat {
+                                clear: both;
+                                float: none;
+                            }
+                            .container {
+                                width: 100%;
+                            }
+                            .center-container {
+                                width: 1000px;
+                                margin: 0px auto;
+                            }
+                            .head {
+                                width: 100%;
+                                margin-bottom: 15px;
+                            }
+                            .head h3 {
+                                text-align: center;
+                                font-size: 25px;
+                                margin: 0px;
+                            }
+                            .head p {
+                                text-align: center;
+                                margin: 5px 0px 0px;
+                            }
+                            
+                            .head-info {
+                                width: 100%;
+                                float: left;
+                            }
+                            .info-col-01,
+                            .info-col-02 {
+                                width: 50%;
+                                float: left;
+                            }
+                            .info-col-02 {
+                                text-align: right;
+                            }
+                            .head-info p {
+                                width: 50%;
+                                float: left;
+                                margin: 2px 0px;
+                                font-size: 12px;
+                            }
+                            .head-info p span.solid {
+                                font-weight: 700;
+                            }
+                            .info-col-02 p {
+                                width: 100%;
+                                float: none;
+                            }
+                            table {
+                                width: 100%;
+                                border-spacing: 0px;
+                                border-top: 1px solid #000;
+                                margin: 20px 0px 0px;
+                            }
+                            table tr th {
+                                font-weight: 600;
+                                text-align: left;
+                            }
+                            table tr th,
+                            table tr td {
+                                font-size: 13px;
+                                padding: 5px 0px;
+                            }
+                            table tr.sub-total td {
+                                border-top: 1px solid #000;
+                                border-bottom: 1px solid #000;
+                                padding: 8px 0px;
+                            }
+                            table tr.sub-total td:first-child {
+                                border-top: none;
+                                text-align: right;
+                                padding: 0px 50px 0px 0px;
+                                font-weight: 600;
+                            }
+                            table tr.grand td {
+                                border-top: none;
+                            }
+                            table tr.first-row td {
+                                padding: 12px 0px 0px;
+                            }
+                            table tr.prod_info td {
+                                padding-bottom: 10px;
+                            }
+                        </style>
+
+                        <div class="container">
+
+                            <div class="center-container">
+
+                                <div class="head">
+                                    <h3>CAR ACCESSORIES</h3>
+                                    <p>Product Profit (On Invoice)</p>
+                                </div>
+                                
+                                <div class="head-info">
+
+                                    <div class="info-col-01">
+
+                                        <p>
+                                            <span class="solid">Date From:</span>
+                                            <span class="liquid" t-esc="form"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">To:</span> 
+                                            <span class="liquid" t-esc="to"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">Product From:</span>
+                                            <span class="liquid" t-esc="first_prod"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">To:</span> 
+                                            <span class="liquid" t-esc="last_prod"></span>
+                                        </p>
+                                        <p>
+                                            <span class="solid">Category From:</span>
+                                            <span class="liquid" t-esc="first_cat"></span>
+                                        </p>
+                                        
+                                        <p>
+                                            <span class="solid">To:</span>
+                                            <span class="liquid" t-esc="last_cat"></span>
+                                        </p>
+                                    </div>
+
+                                    <div class="info-col-02">
+
+
+                                        <p>
+                                            <span class="solid">Date:</span> 
+                                            <span class="liquid" t-esc="date_getter()"></span>
+                                        </p>
+
+                                        <p>
+                                            <span class="solid">Time:</span> 
+                                            <span class="liquid" t-esc="time_getter()"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <br class="clearfloat" />
+
+                                    <table>
+                                        <t t-set="grand_cost" t-value="0" />
+                                        <t t-set="grand_sale" t-value="0" />
+                                        <t t-set="grand_totalar" t-value="0" />
+                                        <t t-set="quantity" t-value="0" />
+                                        <t t-set="sale_price" t-value="0" />
+                                        <t t-set="cost_price" t-value="0" />
+
+                                        <t t-foreach="products" t-as="o">
+                                            <span t-esc="get_records(o)"></span>
+                                            
+                                            <tr class="first-row prod_info">
+                                                <td colspan="3">
+                                                    <span class="solid">Product ID:</span>
+                                                    <span class="liquid" t-esc="o.default_code"></span>
+                                                </td>
+                                                <td colspan="7">
+                                                    <span class="solid">Product Description:</span>
+                                                    <span class="liquid" t-esc="o.name"></span>
+                                                </td>
+                                            </tr>
+                                            
+                                            <tr class="prod_info">
+                                                <td colspan="3">
+                                                    <span class="solid">Category ID:</span>
+                                                    <span class="liquid" t-esc="o.categ_id.name"></span>
+                                                </td>
+                                                <td colspan="7">
+                                                    <span class="solid">Category Descrition:</span>
+                                                    <span class="liquid"></span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Inv#</th>
+                                                <th>Date</th>
+                                                <th>Company</th>
+                                                <th>Cost Price</th>
+                                                <th>Sale Price</th>
+                                                <th>Qty</th>
+                                                <th>Total Cost</th>
+                                                <th>Total Sale</th>
+                                                <th>Tax Amount</th>
+                                                <th>Profit</th>
+                                            </tr>
+                                            
+                                            <t t-set="total_cost_sub" t-value="0" />
+                                            <t t-set="total_sale_sub" t-value="0" />
+                                            <t t-set="total_total_sub" t-value="0" />
+                                            
+                                            <t t-foreach="active_invoices" t-as="data">
+
+                                                <tr>
+                                                    <td>
+                                                        <span t-esc="data.number"></span>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <span t-esc="data.date_invoice"></span>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <span t-esc="data.partner_id.name"></span>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        10
+                                                        <t t-set="cost_price" t-value="10" />
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <span t-esc="lines_data(data,'sale_price',o)"></span>
+                                                        <t t-set="sale_price" t-value="sale_price + lines_data(data,'sale_price',o)" />
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <span t-esc="lines_data(data,'quant',o)"></span>
+                                                        <t t-set="quantity" t-value="quantity + lines_data(data,'quant',o)" />
+                                                    </td>
+                                                    
+                                                    <td>
+                                                    
+                                                        <span t-esc="(lines_data(data,'quant',o)*10)"></span>
+                                                    
+                                                        <t t-set="total_cost" t-value="lines_data(data,'quant',o)*10" />
+                                                    
+                                                        <t t-set="total_cost_sub" t-value="total_cost_sub + (lines_data(data,'quant',o)*10)" />
+                                                    
+                                                    </td>
+
+                                                    <td>
+
+                                                        <span t-esc="(lines_data(data,'quant',o)*lines_data(data,'sale_price',o))"></span>
+                                                    
+                                                        <t t-set="total_sale" t-value="lines_data(data,'quant',o)*lines_data(data,'sale_price',o)" />
+                                                    
+                                                        <t t-set="total_sale_sub" t-value="total_sale_sub + (lines_data(data,'quant',o)*lines_data(data,'sale_price',o))" />
+                                                    
+                                                    </td>
+
+                                                    <td>0</td>
+                                                    <td>
+                                                        <span t-esc="total_sale - total_cost"></span>
+                                                    
+                                                        <t t-set="total_total_sub" t-value="total_total_sub + (total_sale - total_cost)" />
+                                                    </td>
+                                                </tr>
+
+                                            </t>
+                                            
+                                            <t t-if="active_invoices == []">
+
+                                                <tr>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                    <td> - </td>
+                                                </tr>
+
+                                            </t>
+
+                                            <tr class="sub-total">
+
+                                                <td colspan="6">Sub Total:</td>
+
+                                                <td>
+                                                    <span t-esc="total_cost_sub"></span>
+                                                    <t t-set="grand_cost" t-value="grand_cost + total_cost_sub" />
+                                                </td>
+
+                                                <td>
+                                                    <span t-esc="total_sale_sub"></span>
+                                                    <t t-set="grand_sale" t-value="grand_sale + total_sale_sub" />
+                                                </td>
+
+                                                <td>00</td>
+
+                                                <td>
+                                                    <span t-esc="total_total_sub"></span>
+                                                    <t t-set="grand_totalar" t-value="grand_totalar + total_total_sub" />
+                                                </td>
+
+                                            </tr>
+                                        </t>
+                                        <tr class="sub-total grand">
+                                            <td colspan="3">Grand Total:</td>
+                                            <td><span t-esc="cost_price"></span></td>
+                                            <td><span t-esc="sale_price"></span></td>
+                                            <td><span t-esc="quantity"></span></td>
+                                            <td><span t-esc="grand_cost"></span></td>
+                                            <td><span t-esc="grand_sale"></span></td>
+                                            <td>0</td>
+                                            <td><span t-esc="grand_totalar"></span></td>
+                                        </tr>
+                                    </table>
+
+                            </div>
+                        </div>
+
+                    </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

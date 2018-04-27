@@ -1,0 +1,540 @@
+<openerp>
+    <data>
+
+        <template id="assets_backend" name="custom assets" inherit_id="web.assets_backend"> 
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/vinsoft_customer/static/src/css/styles.css"/>
+            </xpath> 
+        </template>
+        <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%customer_form_naseem_bcube%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+            <!--========================[Form View-START]=====================-->
+ 
+                <record id="vinsoft_customer_form_view" model="ir.ui.view">
+                    <field name="name">vinsoft_customer_form_view</field>
+                    <field name="model">res.partner</field>
+                    <field name="type">form</field>
+                    <field name="arch" type="xml">
+
+                        <form string="Customer Form">
+
+                           <!--  <div class="name">
+
+                                <field name="name"/>
+
+                            </div> -->
+                                            
+
+                            <notebook> 
+
+
+                                <page string="Dato Generales">
+
+                                
+                                    <div class="page1">
+
+                                        <div class="rut">
+                                            <label for="rut" string="Rut" />
+                                            <field name="rut" placeholder="00.000.000-0"/>
+                                            <button name="customer_search" type="object" string="">
+                                            <i class="fa fa-search"></i></button>
+                                        </div>
+
+                                        <div class="business">
+                                            <label for="name" string="Razón Social"/>
+                                            <field name="name" />
+                                        </div>
+
+                                        <div class="state">
+                                            <label for="state" string="Estado"/>
+                                            <field name="state" />
+                                            <field name="active" invisible="1"/>
+                                            <field name="document_type_id" invisible="1" />
+                                            <field name="responsability_id" invisible="1"/>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="page2">
+
+                                        <div class="street">
+                                            <label for="street" string="Dirección"/>
+                                            <field name="street" />
+                                        </div>
+
+                                        <div class="commerical">
+                                            <label for="commerical_business" string="Giro Comercial"/>
+                                            <field name="commerical_business" />
+                                        </div>
+                                       
+                                    </div>
+
+                                    <div class="page3">
+
+                                        <div class="leftaligned">
+
+                                            <div class="uperleft">
+
+                                                <div class="comuna">
+                                                    <label for="comuna" string="Comuna"/>
+                                                    <field name="comuna" />
+                                                </div>
+
+                                                <div class="street2">
+                                                    <label for="street2" string="Provincia"/>
+                                                    <field name="street2" />
+                                                </div>
+
+                                                <div class="city">
+                                                    <label for="city" string="Región"/>
+                                                    <field name="city" />
+                                                </div>
+
+                                            </div>
+
+                                            <div class="uperleft">
+
+                                                <div class="comuna">
+                                                    <label for="phone" string="Teléfono"/>
+                                                    <field name="phone" />
+                                                </div>
+
+                                                <div class="street2">
+                                                    <label for="email" string="Mail"/>
+                                                    <field name="email" />
+                                                </div>
+
+                                                <div class="city">
+                                                    <label for="website" string="Página Web"/>
+                                                    <field name="website" />
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="rightaligned">
+
+                                            <h3>Classification</h3>
+
+                                            <div class="bools">
+                                                <field name="customer" />
+                                                <label for="customer" string="Cliente"/>
+                                            </div>
+
+                                            <div class="bools">
+                                                <field name="supplier" />
+                                                <label for="supplier" string="Proveedor"/>
+                                            </div>
+
+                                            <div class="bools">
+                                                <field name="others" />
+                                                <label for="others" string="Otros"/>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+              
+                                </page>
+
+
+                                <page string="inf.Comerical">
+
+                                    <div class="page4">
+
+                                        <h3>Sales</h3>
+
+                                        <div class="fstpayment">
+                                            <label for="property_payment_term_id" string="Condiciones de Venta"/>
+                                            <field name="property_payment_term_id" />
+                                        </div>
+
+                                        <div class="payment">
+                                            <label for="user_id" string="Vendedor"/>
+                                            <field name="user_id" />
+                                        </div>
+
+                                        <div class="payment">
+                                            <label for="property_product_pricelist" string="Listado de Precios Asociada"/>
+                                            <field name="property_product_pricelist" />
+                                        </div>
+
+                                        <div class="sndpayment">
+                                            <label for="property_account_receivable_id" string="Cuenta para Ventas"/>
+                                            <field name="property_account_receivable_id" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="page5">
+
+                                        <div class="mte">
+                                            <label for="mail_dte" string="Mail Recepción DTE"/>
+                                            <field name="mail_dte" />
+                                        </div>
+
+                                    </div>
+
+                                    <div class="page6">
+
+                                        <h3>Observaciones</h3>
+                                        <field name="comment" />
+
+                                    </div>
+
+                                </page>
+
+
+                                <page string="Contactos">
+
+                                    <div class="tree_view">
+
+                                        <field name="contact_address" nolabel='1'>
+
+                                            <tree editable="bottom">
+                                                <field name="customer_name" string="Nombre"/>
+                                                <field name="job_position" string="Cargo"/>
+                                                <field name="phone" string="Teléfono"/>
+                                                <field name="email" string="Email"/>
+                                            </tree>
+
+                                        </field>
+
+                                    </div>
+
+                                </page>
+
+
+                                <page string="Cotizaciones">
+
+                                    <div class="page7">
+
+                                        <div class="datefrom">
+                                            <label for="sale_date_from" string="Fecha Desde"/>
+                                            <field name="sale_date_from"/>
+                                        </div>
+
+                                        <div class="dateto">
+                                            <label for="sale_date_to" string="Fecha Hasta"/>
+                                            <field name="sale_date_to"/>
+                                        </div>
+
+                                        <div class="buttonsale">
+                                            <button name="sale_search" type="object" string="Buscar" class="oe_highlight" />
+                                        </div>
+
+                                    </div>
+                                    <span class="clearfloat"></span>
+
+                                    <div class="tabalos">
+
+                                        <div class="thesuperclassone">
+
+                                            <div class="salestate">
+                                                <span>Tipo</span>
+                                            </div>
+
+                                            <div class="salename">
+                                                <span>Número</span>
+                                            </div>
+
+                                            <div class="saledate">
+                                                <span>Fecha Emisión</span>
+                                            </div>
+
+                                            <div class="saleamount">
+                                                <span style="border-right: 1px solid #ddd !important;">Monto</span>
+                                            </div>
+                                            <span class="clearfloat"></span>
+
+                                        </div>
+
+                                        <div class="thesuperwrapper">
+
+                                            <div class="thesuperclass">
+
+                                                <div class="salestate">
+                                                    <field name="sale_state"/>
+                                                </div>
+
+                                                <div class="salename">
+                                                    <field name="sale_name"/>
+                                                </div>
+
+                                                <div class="saledate">
+                                                    <field name="sale_date_order"/>
+                                                </div>
+
+                                                <div class="saleamount">
+                                                    <field name="sale_amount_total"/>
+                                                </div>
+                                                <span class="clearfloat"></span>
+
+                                            </div>
+
+                                            <div class="tree_view">
+
+                                                <field name="customer_sales" nolabel='1'>
+
+                                                    <tree editable="bottom">
+                                                        <field name="state" string="Tipo" />
+                                                        <field name="name" string="Número" />
+                                                        <field name="date_order" string="Fecha Emisión" />
+                                                        <field name="amount_total" string="Monto" />
+                                                        <field name="partner_onchange" invisible="1" />
+                                                    </tree>
+
+                                                </field>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </page>
+
+
+                                <page string="Ventas">
+
+                                    <div class="page7">
+
+                                        <div class="datefrom">
+                                            <label for="invoice_date_from" string="Fecha Desde"/>
+                                            <field name="invoice_date_from"/>
+                                        </div>
+
+                                        <div class="dateto">
+                                            <label for="invoice_date_to" string="Fecha Hasta"/>
+                                            <field name="invoice_date_to"/>
+                                        </div>
+
+                                        <div class="buttonsale">
+                                            <button name="invoice_search" type="object" string="Buscar" class="oe_highlight" />
+                                        </div>
+
+                                    </div>
+                                    <span class="clearfloat"></span>
+
+                                    
+                                    <div class="pagingclass">
+                                        
+                                        <div class="sub-pages-one">
+                                            
+                                            <div class="invoicestate">
+                                                <span>Tipo</span>
+                                            </div>
+
+                                            <div class="invoicename">
+                                                <span>Número</span>
+                                            </div>
+
+                                            <div class="invoicedate">
+                                                <span>Fecha Emisión</span>
+                                            </div>
+
+                                            <div class="invamount">
+                                                <span>Monto</span>
+                                            </div>
+
+                                            <div class="invamt">
+                                                <span style="border-right: 1px solid #ddd !important;">Saldo</span>
+                                            </div>
+                                            <span class="clearfloat"></span>
+
+                                        </div>
+                                        
+                                        <div class="sub-pages">
+                                            
+                                            <div class="invoicestate">
+                                                <field name="invoice_state"/>
+                                            </div>
+
+                                            <div class="invoicename">
+                                                <field name="invoice_number"/>
+                                            </div>
+
+                                            <div class="invoicedate">
+                                                <field name="invoice_date_invoice"/>
+                                            </div>
+
+                                            <div class="invamount">
+                                                <field name="invoice_residual"/>
+                                            </div>
+
+                                            <div class="invamt">
+                                                <field name="invoice_amount_total"/>
+                                            </div>
+                                            <span class="clearfloat"></span>
+
+                                        </div>
+
+                                        <div class="tree_view">
+
+                                            <field name="customer_invoice" nolabel='1'>
+
+                                                <tree editable="bottom">
+                                                    <field name="state" string="Tipo"/>
+                                                    <field name="number" string="Número"/>
+                                                    <field name="date_invoice" string="Fecha Emisión"/>
+                                                    <field name="residual" string="Monto"/>
+                                                    <field name="amount_total" string="Saldo"/>
+                                                    <field name="partner_onchange" invisible="1"/>
+                                                </tree>
+
+                                            </field>
+                                            
+                                        </div>
+                                    </div>
+
+                                </page>
+
+
+                            </notebook>
+
+                        </form>
+
+                    </field>
+
+                </record>
+
+                <record id="customer_sequence" model="ir.sequence">
+                    <field name="name">customer_sequence</field>
+                    <field name="code">customer.seq</field>
+                    <field name="prefix">S-</field>
+                    <field name="padding">4</field>
+             
+                </record>
+
+            <!--************************[Form View-ENDS]**********************-->
+
+             <!--========================[Search View-START]===================-->
+
+                <record id="vinsoft_customer_tree_view" model="ir.ui.view"> 
+                    <field name="name">vinsoft_customer_tree_view</field> 
+                    <field name="model">res.partner</field> 
+                    <field name="type">tree</field> 
+                    <field name="arch" type="xml"> 
+                        <tree> 
+                 
+                            <field name="name"/>
+     
+                        </tree> 
+                    </field> 
+            
+                </record>
+
+                
+            <!--************************[Search View-ENDS]********************-->
+
+            <!--========================[Action-START]========================-->
+                <record model="ir.actions.act_window" id="action_customer_vinsoft">
+                    <field name="name">Ficha de Cliente</field>
+                    <field name="res_model">res.partner</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="view_ids" eval="[(5, 0, 0),
+                    (0, 0, {'view_mode': 'tree', 'view_id': ref('vinsoft_customer_tree_view')}),
+                    (0, 0, {'view_mode': 'form', 'view_id': ref('vinsoft_customer_form_view')})]"/>
+
+                </record>
+
+            <!--************************[Action-ENDS]*************************-->
+
+            <!--========================[Menu-START]==========================-->
+    
+                <menuitem name="Customer Form" id="customer_id_vinsoft" parent="account.menu_finance_receivables" action="action_customer_vinsoft" sequence="101"/>
+
+
+            <!--************************[Menu-ENDS]***************************-->
+        <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+
+                <record id="sale_form_view"   model="ir.ui.view"> 
+                    <field name="name">sale_form_view</field> 
+                    <field name="model">sale.order</field> 
+                    <field name="inherit_id" ref="sale.view_order_form"/> 
+                    <field name="arch" type="xml">
+                        <xpath expr="//field[@name='partner_id']" position="after">  
+                          <field name="partner_onchange" invisible="1"/>   
+                        </xpath>
+                    </field> 
+                </record>
+
+
+                <record id="invoice_form_view"   model="ir.ui.view"> 
+                    <field name="name">invoice_form_view</field> 
+                    <field name="model">account.invoice</field> 
+                    <field name="inherit_id" ref="account.invoice_form"/> 
+                    <field name="arch" type="xml">
+                        <xpath expr="//field[@name='partner_id']" position="after">  
+                          <field name="partner_onchange" invisible="1"/>   
+                        </xpath>
+                    </field> 
+                </record>
+
+
+         <!--************************[Menu-ENDS]***************************-->
+        <!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+
+                <record id="customer_search_view" model="ir.ui.view"> 
+                    <field name="name">customer_search_view</field> 
+                    <field name="model">customer.search</field> 
+                    <field name="arch" type="xml"> 
+                        <form>
+                            <sheet>
+                                <group>
+                                    <group name="right">
+                                        <field name="rut" options="{'no_open': True, 'no_create': True}"/>
+                                    </group>
+                                    <group name="left">
+                                        <field name="name" options="{'no_open': True, 'no_create': True}"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                            <footer>
+                                <button name="get_customer" type="object" string="Insertar" class="oe_highlight"/>
+                            </footer>
+                        </form>
+                    </field>
+                </record>
+
+
+
+                <record id="ruth_form_view" model="ir.ui.view"> 
+                    <field name="name">ruth_form_view</field> 
+                    <field name="model">ruth</field> 
+                    <field name="arch" type="xml"> 
+                        <form>
+                            <sheet>
+                                <group>
+                                    <group name="right">
+                                        <field name="name"/>
+                                    </group>
+                                    <group name="left">
+                                        <field name="number" />
+                                        <field name="rec_new_name" invisible="1"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+
+                <record model="ir.actions.act_window" id="action_ruth">
+                    <field name="name">Ruth</field>
+                    <field name="res_model">ruth</field>
+                    <field name="view_type">form</field>
+                    <field name="view_mode">tree,form</field>
+                </record>
+
+                <!-- <menuitem name="Ruth" id="ruth_vinsoft" parent="account.menu_finance_receivables" action="action_ruth" sequence="102"/> -->
+
+       
+            
+    </data>
+</openerp>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+        <template id="report_invoice">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="style" t-value="o.style or res_company.default_style or user.env.ref('customized_invoice.default_style_for_all_reports')"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_0_document'" t-call="customized_invoice.INVOICE_0_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_1_document'" t-call="customized_invoice.INVOICE_1_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_2_document'" t-call="customized_invoice.INVOICE_2_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_3_document'" t-call="customized_invoice.INVOICE_3_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_4_document'" t-call="customized_invoice.INVOICE_4_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_5_document'" t-call="customized_invoice.INVOICE_5_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_6_document'" t-call="customized_invoice.INVOICE_6_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_7_document'" t-call="customized_invoice.INVOICE_7_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_8_document'" t-call="customized_invoice.INVOICE_8_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_9_document'" t-call="customized_invoice.INVOICE_9_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_10_document'" t-call="customized_invoice.INVOICE_10_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_11_document'" t-call="customized_invoice.INVOICE_11_document" t-lang="o.partner_id.lang"/>
+                    <t t-if="not style" t-call="account.report_invoice_document" t-lang="o.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+        <template id="report_duplicate">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="style" t-value="o.style or res_company.default_style or user.env.ref('customized_invoice.default_style_for_all_reports')"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_0_document'" t-call="customized_invoice.INVOICE_0_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_1_document'" t-call="customized_invoice.INVOICE_1_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_2_document'" t-call="customized_invoice.INVOICE_2_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_3_document'" t-call="customized_invoice.INVOICE_3_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_4_document'" t-call="customized_invoice.INVOICE_4_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_5_document'" t-call="customized_invoice.INVOICE_5_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_6_document'" t-call="customized_invoice.INVOICE_6_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_7_document'" t-call="customized_invoice.INVOICE_7_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_8_document'" t-call="customized_invoice.INVOICE_8_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_9_document'" t-call="customized_invoice.INVOICE_9_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_10_document'" t-call="customized_invoice.INVOICE_10_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="style.template_inv.key =='customized_invoice.INVOICE_11_document'" t-call="customized_invoice.INVOICE_11_duplicate" t-lang="o.partner_id.lang"/>
+                    <t t-if="not style" t-call='account.account_invoice_report_duplicate' t-lang="o.partner_id.lang"/>
+             </t>
+            </t>
+        </template>
+</data>
+</openerp>

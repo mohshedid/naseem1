@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+
+    <data>   
+
+        <template id="profile_product">
+
+            <t t-call="report.html_container">
+
+                <t t-call="report.external_layout">
+                
+                        <div class="page">
+
+                            <style>
+                                .center-container {
+                                    width: 1450px;
+                                    margin: 0px auto;
+                                }
+                                .report_header {
+                                    width: 100%;
+                                    float: left;
+                                }
+                                .head {
+                                    width: 90%;
+                                    float: left;
+                                    text-align: center;
+                                }
+                                .head h3 {
+                                    margin: 0px;
+                                    font-size: 20px;
+                                }
+                                .head h4 {
+                                    margin: 10px 0px 10px;
+                                    font-size: 20px;
+                                    font-weight: normal;
+                                }
+                                .date {
+                                    width: 10%;
+                                    float: left;
+                                    text-align: right;
+                                }
+                                .date p {
+                                    margin: 5px 0px;
+                                }
+                                table {
+                                    width: 100%;
+                                    margin: 10px 0px 0px;
+                                    border: 2px solid #545454;
+                                    border-spacing: 0px;
+                                }       
+                                table tr td,
+                                table tr th {
+                                    padding: 10px;
+                                    border-bottom: 2px solid #545454;
+                                    text-align: left;
+                                }
+                                table tr th {
+                                    border-right: 2px solid #545454;
+                                }
+                                table tr th:last-child {
+                                    border-right: none;
+                                }
+                                table tr:last-child td {
+                                    border-bottom: none;
+                                }
+                                .warehouse table {
+                                    width: 723px;
+                                    margin: 1px 2px 10px 0px;
+                                    float: left;
+                                }
+                                .warehouse .warehouses {
+                                    width: 725px;
+                                    margin: 1px 0px 10px;
+                                    border-bottom: 2px solid #545454;
+                                }
+                            </style>
+
+                            <div class="center-container">
+
+                                <div class="report_header">
+                                    <div class="head">
+                                        <h3>CAR ACCESSORIES</h3>
+                                        <h4>Product Profile</h4>
+                                    </div>
+                                    
+                                    <div class="date">
+                                        <p>Date: <span t-esc="date_getter()"></span></p>
+                                        <p>Time: <span t-esc="time_getter()"></span></p>
+                                    </div>
+                                </div>
+                                
+                                <table cell-spacing="0">
+                                    <tr>
+                                        <th>Product Name: <span t-esc="product"></span></th>
+                                        <th>Ware Houses</th>
+                                        <th>Category Profile</th>
+                                        <th>Amount: <span t-esc="amount"></span></th>
+                                    </tr>
+                                </table>
+
+                                <div class="warehouse">
+
+                                    <table>
+                                        <tr >
+                                            <td>SALE PRICE</td>
+                                            <td>List Price</td>
+                                            <td>LEVEL-1</td>
+                                            <td>LEVEL-2</td>
+                                            <td>LEVEL-3</td>
+                                        
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><span t-esc="amount"></span></td>
+                                            <td><span t-esc="level1"></span></td>
+                                            <td><span t-esc="level2"></span></td>
+                                            <td><span t-esc="level3"></span></td>
+                                        </tr>
+                                    </table>
+
+                                    <table class="warehouses">
+                                        <tr >
+                                            <td>Flat#3</td>
+                                            <td>0.00</td>
+                                            <td>Shop</td>
+                                            <td>2.00</td>
+                                            <td>Sheranwala Godown</td>
+                                            <td>0.00</td>
+                                        
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td >Saggian Godown</td>
+                                            <td>157.00</td>
+                                            <td>Pakistan General Go</td>
+                                            <td>0.00</td>
+                                            <td>Flat#5</td>
+                                            <td>0.00</td>
+                                        </tr>
+                                    </table>
+
+                                </div>
+
+                                <table cell-spacing="0">
+                                    <tr>
+                                        <th>S#</th>
+                                        <th>Company</th>
+                                        <th>Mobile1</th>
+                                        <th>Mobile2</th>
+                                        <th>Old</th>
+                                        <t t-foreach="reporting_months_names" t-as="data">
+                                            <th><span t-esc="data"></span></th>
+                                        </t>
+                                        <th>Tot Qty</th>
+                                    </tr>
+                                    <span t-esc="recording()"></span>
+                                    <t t-set="sr_no" t-value="0"/>
+                                    <t t-foreach="customers" t-as="o">
+                                        <tr>
+                                            <td>
+                                                <t t-set="sr_no" t-value="sr_no + 1"/>
+                                                <span t-esc="sr_no"></span>
+                                            </td>
+                                            <td><span t-esc="o.name"></span></td>
+                                            <td><span t-esc="getdata(o,'mobile')"></span></td>
+                                            <td><span t-esc="getdata(o,'mobile2')"></span></td>
+                                            <td><span t-esc="olddata(o)"></span></td>
+
+                                            <t t-set="total_of_row" t-value="0" />
+                                            <t t-foreach="reporting_months_names" t-as="data">
+                                                <td><span t-esc="getamount(o,data)"></span></td>
+                                                <t t-set="total_of_row" t-value="total_of_row + getamount(o,data)" />
+                                            </t>
+                                            
+                                            <td><span t-esc="(total_of_row + olddata(o))"></span></td>
+                                        </tr>
+                                    </t>
+
+                                </table>
+                                
+                            </div>
+
+                        </div><!--end of page -->
+
+                </t>
+                
+            </t>
+
+        </template>
+
+    </data>
+
+</openerp>

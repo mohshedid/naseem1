@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_product_stock_checking" 
+            model="stock.location"
+            name="stock_checking_report.customer_report"
+            file="stock_checking_report.customer_report"
+            report_type="qweb-html"
+            string=" "/>
+            
+
+         <record id="stock_checking_form_view" model="ir.ui.view">
+            <field name="name">stock_checking_form_view</field>
+            <field name="model">stock.check</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="location"/>
+                            <field name="slect_loc" attrs="{'invisible':[('location','!=','multi_loc')]}"/>
+                            
+                        </group>
+
+                        <group name="group_right">
+
+                             <field name="date"/>
+
+                        </group>
+
+                    </group>
+
+                    <footer>
+                        <button name="%(report_for_product_stock_checking)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="stock_checking_report_wizard" model="ir.actions.act_window">
+            <field name="name">Stock Checking Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stock.check</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="stock_checking_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Stock Checking Report" id="product_valuation_summ_menu_item" parent="customer_profile.customer_wise_item" action="stock_checking_report_wizard" sequence="9"/>       
+
+    </data>
+</openerp>
+
+

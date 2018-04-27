@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_customer_receipt" 
+            model="customer.payment.bcube"
+            name="customer_recepit.module_report"
+            file="customer_recepit.module_report"
+            report_type="qweb-html"
+            string="Customer Receipt"/> 
+    </data>
+</openerp>

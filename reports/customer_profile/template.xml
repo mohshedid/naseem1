@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <report
+            id="report_for_customer_detail" 
+            model="res.partner"
+            name="customer_profile.customer_report"
+            file="customer_profile.customer_report"
+            report_type="qweb-html"
+            string="Customer Detail"/>
+            
+
+         <record id="customer_wise_report_wizard_form_view" model="ir.ui.view">
+            <field name="name">customer_wise_report_wizard_form_view</field>
+            <field name="model">customer.prof</field>
+            <field name="arch" type="xml">
+                <form string="Report">
+                    <group name="group_top">
+                        <group name="group_left"> 
+
+                            <field name="customer"/>
+                        </group>
+                        <group name="group_right">
+                            <field name="date"/>
+
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="%(report_for_customer_detail)d" type="action" string="Print" class="oe_highlight"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="customer_wise_report_wizard" model="ir.actions.act_window">
+            <field name="name">Region Wise Report Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">customer.prof</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="customer_wise_report_wizard_form_view"/>
+            <field name="target">new</field> 
+        </record>
+
+        <menuitem name="Sales Report" id="customer_wise_item" parent="sales_team.menu_base_partner"/>
+
+        <menuitem name="Customer Profile" id="customer_wise_menu_item" parent="customer_wise_item" action="customer_wise_report_wizard" sequence="1"/>       
+
+    </data>
+</openerp>
+
+
