@@ -30,9 +30,20 @@ class GeneratePartnerLedger(models.Model):
 		('posted', 'Actual Ledger'),
 		('all', 'Virtual Ledger'),
 		],default='posted',string="Target Moves")
-	partner = fields.Many2one('res.partner',string="Partner")
+	partner = fields.Many2one('res.partner',string="Partner",required=True)
 	dollar = fields.Boolean(string="Need a Dollar Report")
 	pdc = fields.Boolean('Balance With PDC')
+	check = fields.Boolean()
+
+
+	@api.onchange('partner')
+	def check_cust(self):
+		if self.partner:
+			if self.partner.customer == True:
+				self.check = True
+			if self.partner.supplier == True:
+				self.check = False
+
 	
 
 class AccountMoveLine(models.Model):

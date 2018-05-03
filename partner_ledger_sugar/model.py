@@ -95,7 +95,7 @@ class PartnerLedgerReport(models.AbstractModel):
 
             opening_bal = debits - credits
 
-        pdc = self.env['pdc_bcube.pdc_bcube'].search([('customer','=',record_wizard.partner.id)])
+        pdc = self.env['pdc_bcube.pdc_bcube'].search([('customer','=',record_wizard.partner.id),('stages','=','in_hand')])
 
         def pdc_check():
             num = 0

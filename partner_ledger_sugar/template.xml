@@ -24,7 +24,9 @@
 
                             <field name="partner"/>
                             <field name="form"/>
-                            <field name="dollar"/>
+                            <field name="dollar" attrs="{'invisible':[('check','=',True)]}"/>
+                            <field name="pdc" attrs="{'invisible':[('check','=',False)]}"/>
+                            <field name="check" invisible="1"/>
 
                         </group>
 
@@ -32,7 +34,6 @@
 
                             <field name="entry_type" />
                             <field name="to"/>
-                            <field name="pdc"/>
                             
 
                         </group>
